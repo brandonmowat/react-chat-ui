@@ -4,6 +4,23 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import ChatBubble from './ChatBubble'
 
+const styles = {
+  recipient: {
+    marginTop: 10,
+    marginBottom: 10,
+    position: 'relative'
+  },
+
+  img: {
+    borderRadius: 100,
+    bottom: 0,
+    left: 0,
+    position: 'absolute',
+    width: 36,
+    zIndex: 100,
+  }
+}
+
 export default class ChatFeed extends Component {
 
   constructor(props) {
@@ -15,7 +32,6 @@ export default class ChatFeed extends Component {
 
   componentDidUpdate() {
     console.log('ChatFeed update');
-
   }
 
   _scrollToBottom() {
@@ -27,6 +43,7 @@ export default class ChatFeed extends Component {
     ReactDOM.findDOMNode(chat).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
   }
 
+  // Determine whether to render a group of messages or a single message
   _renderGroup(messages, index) {
     var group = []
 
@@ -35,25 +52,26 @@ export default class ChatFeed extends Component {
     }
 
     var message_nodes = group.reverse().map((curr, index) => {
-      return <ChatBubble>{curr.message}</ChatBubble>
+      return <ChatBubble recipient={curr.type}>{curr.message}</ChatBubble>
     })
     return (
-      <div key={Math.random().toString(36)} className="recipient">
-        <img src="../assets/me.jpg"/>
+      <div key={Math.random().toString(36)} style={styles.recipient}>
+        <img src="../assets/me.jpg" style={styles.img}/>
         {message_nodes}
       </div>
     )
   }
 
+  // Render the message list as chat bubbles
   _renderMessages(messages) {
     var message_nodes = messages.map((curr, index) => {
 
       if (!(messages[index-1] ? messages[index-1].type : false) && curr.type && !(messages[index+1] ? messages[index+1].type : false)) {
         console.log("Single message");
         return (
-          <div key={Math.random().toString(36)} className="recipient">
-            <img src="../assets/me.jpg"/>
-            <ChatBubble>{curr.message}</ChatBubble>
+          <div key={Math.random().toString(36)} style={styles.recipient}>
+            <img src="../assets/me.jpg" style={styles.img}/>
+            <ChatBubble recipient={1}>{curr.message}</ChatBubble>
           </div>
         )
       }
@@ -62,15 +80,15 @@ export default class ChatFeed extends Component {
       }
 
       else if (!curr.type) {
-        return (<div key={Math.random().toString(36)}><ChatBubble>{curr.message}</ChatBubble></div>)
+        return (<div key={Math.random().toString(36)}><ChatBubble recipient={0}>{curr.message}</ChatBubble></div>)
       }
 
     })
     if (this.props.is_typing) {
       message_nodes.push(
-        <div key={Math.random().toString(36)} className="recipient">
-          <img src="../assets/me.jpg"/>
-          <ChatBubble>...</ChatBubble>
+        <div key={Math.random().toString(36)} style={styles.recipient}>
+          <img src="../assets/me.jpg" style={styles.img}/>
+          <ChatBubble recipient={1}>...</ChatBubble>
         </div>
       )
     }
@@ -78,9 +96,9 @@ export default class ChatFeed extends Component {
   }
 
   render() {
-    // window.setTimeout(() => {
-    //   this._scrollToBottom()
-    // },10)
+    window.setTimeout(() => {
+      this._scrollToBottom()
+    },10)
 
     return (
       <div className="chat-history">

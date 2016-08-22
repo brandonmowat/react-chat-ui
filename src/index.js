@@ -1,4 +1,4 @@
 'use strict';
 
-export ChatBubble from './ChatBubble.js';
-export ChatFeed from './ChatFeed.js';
+export ChatBubble from './ChatBubble';
+export ChatFeed from './ChatFeed';

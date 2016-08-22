@@ -1,0 +1,54 @@
+@import './variables';
+
+.chatbubble {
+  background-color: $primary;
+  border-radius: 1.3em;
+  display: block;
+  float: right;
+  margin: 1px 0;
+  max-width: 425px;
+  padding: 8px 14px;
+}
+
+.recipient {
+  margin: 10px 0;
+  position: relative;
+
+  img {
+    border-radius: 100px;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    width: 36px;
+    z-index: 100;
+  }
+
+  > .chatbubble {
+    background: $message-bubble-color;
+    clear: both;
+    float: left;
+    margin-left: 45px;
+  }
+
+  p {
+    color: $gray;
+  }
+
+}
+
+p {
+  color: $white;
+  font-size: 16px;
+  font-weight: 300;
+  margin: 0;
+}
+
+a {
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+strong {
+  font-weight: 400;
+  text-decoration: underline;
+}

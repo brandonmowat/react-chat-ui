@@ -2,6 +2,34 @@
 
 import React, { Component } from 'react'
 
+const styles = {
+  chatbubble: {
+    backgroundColor: "#03b4f4",
+    borderRadius: 20,
+    display: 'block',
+    float: 'right',
+    marginTop: 1,
+    marginBottom: 1,
+    maxWidth: 425,
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 14,
+    paddingRight: 14
+  },
+  recipientChatbubble : {
+    clear: 'both',
+    float: 'left',
+    marginLeft: 45,
+    backgroundColor: '#ccc'
+  },
+  p: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '300',
+    margin: 0,
+  }
+}
+
 export default class ChatBubble extends Component {
   constructor(props) {
     super()
@@ -57,10 +85,18 @@ export default class ChatBubble extends Component {
   }
 
   render() {
-    return (
-      <div className="chatbubble">
-        <p>{this._parse_for_styles(this.state.message)}</p>
-      </div>
-    )
+    if (this.props.recipient) {
+        return (
+          <div style={Object.assign({}, styles.chatbubble, styles.recipientChatbubble)}>
+            <p style={styles.p}>{this._parse_for_styles(this.state.message)}</p>
+          </div>
+        )
+    } else {
+      return (
+        <div style={styles.chatbubble}>
+          <p style={styles.p}>{this._parse_for_styles(this.state.message)}</p>
+        </div>
+      )
+    }
   }
 }
