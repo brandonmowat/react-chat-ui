@@ -56,7 +56,7 @@ export default class ChatFeed extends Component {
     })
     return (
       <div key={Math.random().toString(36)} style={styles.recipient}>
-        <img src="../assets/me.jpg" style={styles.img}/>
+        <img src={} style={styles.img}/>
         {message_nodes}
       </div>
     )
@@ -70,7 +70,7 @@ export default class ChatFeed extends Component {
         console.log("Single message");
         return (
           <div key={Math.random().toString(36)} style={styles.recipient}>
-            <img src="../assets/me.jpg" style={styles.img}/>
+            <img src="" style={styles.img}/>
             <ChatBubble recipient={1}>{curr.message}</ChatBubble>
           </div>
         )
@@ -87,7 +87,7 @@ export default class ChatFeed extends Component {
     if (this.props.is_typing) {
       message_nodes.push(
         <div key={Math.random().toString(36)} style={styles.recipient}>
-          <img src="../assets/me.jpg" style={styles.img}/>
+          <img src="" style={styles.img}/>
           <ChatBubble recipient={1}>...</ChatBubble>
         </div>
       )
