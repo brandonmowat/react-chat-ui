@@ -26,8 +26,9 @@ export default class ChatFeed extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      messages: []
+      messages: [],
     }
+    console.log("Feed",this.props);
   }
 
   componentDidUpdate() {
@@ -52,11 +53,10 @@ export default class ChatFeed extends Component {
     }
 
     var message_nodes = group.reverse().map((curr, index) => {
-      return <ChatBubble recipient={curr.type}>{curr.message}</ChatBubble>
+      return <ChatBubble recipient={curr.type} bubbleStyles={this.props.bubbleStyles}>{curr.message}</ChatBubble>
     })
     return (
       <div key={Math.random().toString(36)} style={styles.recipient}>
-        <img src={} style={styles.img}/>
         {message_nodes}
       </div>
     )
@@ -70,8 +70,7 @@ export default class ChatFeed extends Component {
         console.log("Single message");
         return (
           <div key={Math.random().toString(36)} style={styles.recipient}>
-            <img src="" style={styles.img}/>
-            <ChatBubble recipient={1}>{curr.message}</ChatBubble>
+            <ChatBubble recipient={1} bubbleStyles={this.props.bubbleStyles?this.props.bubbleStyles:{}}>{curr.message}</ChatBubble>
           </div>
         )
       }
@@ -80,15 +79,14 @@ export default class ChatFeed extends Component {
       }
 
       else if (!curr.type) {
-        return (<div key={Math.random().toString(36)}><ChatBubble recipient={0}>{curr.message}</ChatBubble></div>)
+        return (<div key={Math.random().toString(36)}><ChatBubble recipient={0} bubbleStyles={this.props.bubbleStyles?this.props.bubbleStyles:{}}>{curr.message}</ChatBubble></div>)
       }
 
     })
     if (this.props.is_typing) {
       message_nodes.push(
         <div key={Math.random().toString(36)} style={styles.recipient}>
-          <img src="" style={styles.img}/>
-          <ChatBubble recipient={1}>...</ChatBubble>
+          <ChatBubble recipient={1} bubbleStyles={this.props.bubbleStyles?this.props.bubbleStyles:{}}>...</ChatBubble>
         </div>
       )
     }

@@ -34,13 +34,27 @@ export default class ChatBubble extends Component {
   constructor(props) {
     super()
     this.state = {
-      message: ''
+      message: '',
+      bubbleStyles: {
+        text: {},
+        chatbubble: {}
+      },
     }
+    console.log("bubble",this.props);
+
   }
 
   componentDidMount() {
     //this._parse_for_links(this.props.children)
-    this.setState({message: this.props.children})
+    this.setState({
+      message: this.props.children,
+      bubbleStyles: this.props.bubbleStyles?
+        {
+          text: this.props.bubbleStyles.text?this.props.bubbleStyles.text:{},
+          chatbubble: this.props.bubbleStyles.chatbubble?this.props.bubbleStyles.chatbubble:{}
+        }
+        : {text:{},chatbubble:{}}
+    })
   }
 
   _parse_for_styles(message) {
@@ -87,14 +101,14 @@ export default class ChatBubble extends Component {
   render() {
     if (this.props.recipient) {
         return (
-          <div style={Object.assign({}, styles.chatbubble, styles.recipientChatbubble)}>
-            <p style={styles.p}>{this._parse_for_styles(this.state.message)}</p>
+          <div style={Object.assign({}, styles.chatbubble, styles.recipientChatbubble, this.state.bubbleStyles.chatbubble)}>
+            <p style={Object.assign({},styles.p, this.state.bubbleStyles.text)}>{this._parse_for_styles(this.state.message)}</p>
           </div>
         )
     } else {
       return (
-        <div style={styles.chatbubble}>
-          <p style={styles.p}>{this._parse_for_styles(this.state.message)}</p>
+        <div style={Object.assign({},styles.chatbubble, this.state.bubbleStyles.chatbubble)}>
+          <p style={Object.assign({},styles.p, this.state.bubbleStyles.text)}>{this._parse_for_styles(this.state.message)}</p>
         </div>
       )
     }
