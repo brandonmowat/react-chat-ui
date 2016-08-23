@@ -7,7 +7,7 @@ A library of React components for building chat UI's.
 This project is still in the VERY early stages of development. If you encounter a bug or have a feature request, please create an issue and/or tweet at me [here](http://twitter.com/brandonmowat).
 
 ### Installation
-`npm install react-chat-ui`
+`npm install react-chat-ui --save`
 
 ### Basic Usage
 ```javascript
