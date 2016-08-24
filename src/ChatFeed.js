@@ -8,7 +8,7 @@ const styles = {
 
   chatbubbleWrapper: {
     overflow: 'auto'
-  }
+  },
 
   recipient: {
     marginTop: 10,
