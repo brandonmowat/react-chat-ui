@@ -7,12 +7,9 @@ import ChatBubble from './ChatBubble'
 const styles = {
 
   chatbubbleWrapper: {
-    overflow: 'auto'
-  },
-
-  recipient: {
     marginTop: 10,
     marginBottom: 10,
+    overflow: 'auto',
     position: 'relative'
   },
 
@@ -61,7 +58,7 @@ export default class ChatFeed extends Component {
       return <ChatBubble recipient={curr.type} bubbleStyles={this.props.bubbleStyles}>{curr.message}</ChatBubble>
     })
     return (
-      <div key={Math.random().toString(36)} style={Object.assign({}, styles.recipient, styles.chatbubbleWrapper)}>
+      <div key={Math.random().toString(36)} style={styles.chatbubbleWrapper}>
         {message_nodes}
       </div>
     )
@@ -74,7 +71,7 @@ export default class ChatFeed extends Component {
       if (!(messages[index-1] ? messages[index-1].type : false) && curr.type && !(messages[index+1] ? messages[index+1].type : false)) {
         console.log("Single message");
         return (
-          <div key={Math.random().toString(36)} style={Object.assign({}, styles.recipient, styles.chatbubbleWrapper)}>
+          <div key={Math.random().toString(36)} style={styles.chatbubbleWrapper}>
             <ChatBubble recipient={1} bubbleStyles={this.props.bubbleStyles?this.props.bubbleStyles:{}}>{curr.message}</ChatBubble>
           </div>
         )
@@ -85,7 +82,7 @@ export default class ChatFeed extends Component {
 
       else if (!curr.type) {
         return (
-          <div key={Math.random().toString(36)} style={Object.assign({}, styles.recipient, styles.chatbubbleWrapper)}>
+          <div key={Math.random().toString(36)} style={styles.chatbubbleWrapper}>
             <ChatBubble recipient={0} bubbleStyles={this.props.bubbleStyles?this.props.bubbleStyles:{}}>
               {curr.message}
             </ChatBubble>
@@ -96,7 +93,7 @@ export default class ChatFeed extends Component {
     })
     if (this.props.is_typing) {
       message_nodes.push(
-        <div key={Math.random().toString(36)} style={Object.assign({},styles.recipient, styles.chatbubbleWrapper)}>
+        <div key={Math.random().toString(36)} style={Object.assign({}, styles.recipient, styles.chatbubbleWrapper)}>
           <ChatBubble recipient={1} bubbleStyles={this.props.bubbleStyles?this.props.bubbleStyles:{}}>...</ChatBubble>
         </div>
       )
@@ -113,10 +110,6 @@ export default class ChatFeed extends Component {
       <div className="chat-history">
         <div ref="chat" className="outer">
           <div className="inner">
-            <div className="intro">
-              <p style={{color:"#000000"}}>You're chatting with a little bot I made. <br></br>It's like me – but a slightly more human.</p>
-              <p style={{marginTop: 20}}>🤖</p>
-            </div>
             {this._renderMessages(this.props.messages)}
           </div>
         </div>
