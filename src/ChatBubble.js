@@ -37,7 +37,8 @@ export default class ChatBubble extends Component {
       message: '',
       bubbleStyles: {
         text: {},
-        chatbubble: {}
+        chatbubble: {},
+        userBubble: {}
       },
     }
     console.log("bubble",this.props);
@@ -51,7 +52,8 @@ export default class ChatBubble extends Component {
       bubbleStyles: this.props.bubbleStyles?
         {
           text: this.props.bubbleStyles.text?this.props.bubbleStyles.text:{},
-          chatbubble: this.props.bubbleStyles.chatbubble?this.props.bubbleStyles.chatbubble:{}
+          chatbubble: this.props.bubbleStyles.chatbubble?this.props.bubbleStyles.chatbubble:{},
+          userBubble: this.props.bubbleStyles.userBubble?this.props.bubbleStyles.userBubble:{}
         }
         : {text:{},chatbubble:{}}
     })
@@ -107,7 +109,7 @@ export default class ChatBubble extends Component {
         )
     } else {
       return (
-        <div style={Object.assign({},styles.chatbubble, this.state.bubbleStyles.chatbubble)}>
+        <div style={Object.assign({},styles.chatbubble, this.state.bubbleStyles.chatbubble, this.state.bubbleStyles.userBubble)}>
           <p style={Object.assign({},styles.p, this.state.bubbleStyles.text)}>{this._parse_for_styles(this.state.message)}</p>
         </div>
       )
