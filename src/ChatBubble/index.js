@@ -6,6 +6,7 @@ const styles = {
   chatbubble: {
     backgroundColor: "#03b4f4",
     borderRadius: 20,
+    clear: 'both',
     display: 'block',
     float: 'right',
     marginTop: 1,
@@ -17,7 +18,6 @@ const styles = {
     paddingRight: 14
   },
   recipientChatbubble : {
-    clear: 'both',
     float: 'left',
     marginLeft: 45,
     backgroundColor: '#ccc'

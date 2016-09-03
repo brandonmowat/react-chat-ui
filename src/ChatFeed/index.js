@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import ChatBubble from './ChatBubble'
+import ChatBubble from '../ChatBubble/index.js'
 
 const styles = {
 
@@ -30,7 +30,6 @@ export default class ChatFeed extends Component {
     this.state = {
       messages: [],
     }
-    console.log("Feed",this.props);
   }
 
   componentDidUpdate() {
@@ -46,16 +45,17 @@ export default class ChatFeed extends Component {
     ReactDOM.findDOMNode(chat).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
   }
 
-  // Determine whether to render a group of messages or a single message
-  _renderGroup(messages, index) {
+  // Render Our Messages
+  _renderGroup(messages, index, type) {
     var group = []
 
-    for (var i = index; messages[i] ? messages[i].type : false; i--) {
+    for (var i = index; messages[i]?(messages[i].type == type):false; i--) {
       group.push(messages[i])
     }
+    console.log(group);
 
     var message_nodes = group.reverse().map((curr, index) => {
-      return <ChatBubble recipient={curr.type} bubbleStyles={this.props.bubbleStyles}>{curr.message}</ChatBubble>
+      return <ChatBubble key={Math.random().toString(36)} recipient={curr.type} bubbleStyles={this.props.bubbleStyles}>{curr.message}</ChatBubble>
     })
     return (
       <div key={Math.random().toString(36)} style={styles.chatbubbleWrapper}>
@@ -64,33 +64,22 @@ export default class ChatFeed extends Component {
     )
   }
 
-  // Render the message list as chat bubbles
   _renderMessages(messages) {
+    // map messages
     var message_nodes = messages.map((curr, index) => {
 
-      if (!(messages[index-1] ? messages[index-1].type : false) && curr.type && !(messages[index+1] ? messages[index+1].type : false)) {
-        console.log("Single message");
-        return (
-          <div key={Math.random().toString(36)} style={styles.chatbubbleWrapper}>
-            <ChatBubble recipient={1} bubbleStyles={this.props.bubbleStyles?this.props.bubbleStyles:{}}>{curr.message}</ChatBubble>
-          </div>
-        )
-      }
-      else if (curr.type && (messages[index-1] ? messages[index-1].type : false) && !(messages[index+1] ? messages[index+1].type : false)) {
-        return this._renderGroup(messages, index)
+      // Find diff in message type or no more messages
+      if (
+        (messages[index+1]?false:true) ||
+        (messages[index+1].type != curr.type)
+      ) {
+        // Render group
+        return this._renderGroup(messages, index, curr.type);
       }
 
-      else if (!curr.type) {
-        return (
-          <div key={Math.random().toString(36)} style={styles.chatbubbleWrapper}>
-            <ChatBubble recipient={0} bubbleStyles={this.props.bubbleStyles?this.props.bubbleStyles:{}}>
-              {curr.message}
-            </ChatBubble>
-          </div>
-        )
-      }
+    });
 
-    })
+    // Other end is typing...
     if (this.props.is_typing) {
       message_nodes.push(
         <div key={Math.random().toString(36)} style={Object.assign({}, styles.recipient, styles.chatbubbleWrapper)}>
@@ -98,7 +87,12 @@ export default class ChatFeed extends Component {
         </div>
       )
     }
+
+    // return nodes
+    console.log();
     return message_nodes
+
+
   }
 
   render() {
