@@ -1,0 +1,49 @@
+<html>
+
+<head>
+
+<style>
+  html,
+  body {
+    font-family: -apple-system;
+    margin: 0;
+  }
+  input {
+    border: none;
+    border-top: 1px solid #ddd;
+    font-size: 16px;
+    padding: 30px;
+    width: 100%;
+  }
+  input:focus {
+    outline: none;
+  }
+
+  .chat-history {
+    display: block;
+    max-height: 400px;
+  }
+
+  .outer {
+    display: block;
+    height: 50%;
+    overflow-y: scroll;
+    position: relative;
+  }
+
+  .inner {
+    margin: 0 auto;
+  }
+
+  .inner > div {
+    overflow: auto;
+  }
+</style>
+
+</head>
+
+<body>
+  <div id="chat-ui"></div>
+  <script src="./bundle.js"></script>
+</body>
+</html>
