@@ -1,3 +1,7 @@
+// Copyright 2016 Brandon Mowat
+// Written, developed, and designed by Brandon Mowat for the purpose of helping
+// other developers make chat interfaces.
+
 'use strict';
 
 import React, { Component } from 'react'
@@ -37,7 +41,6 @@ export default class ChatFeed extends Component {
   }
 
   _scrollToBottom() {
-    console.log("scroll to bottom");
     const {chat} = this.refs;
     const scrollHeight = chat.scrollHeight;
     const height = chat.clientHeight;
@@ -45,7 +48,14 @@ export default class ChatFeed extends Component {
     ReactDOM.findDOMNode(chat).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
   }
 
-  // Render Our Messages
+  /**
+    * Parses and collects messages of one type to be grouped together.
+    *
+    * @param {messages} - a list of message objects
+    * @param {index} - the index of the end of the message grou
+    * @param {type} - the type of group (user or recipient)
+    * @return {message_nodes} - a JSX wrapped group of messages
+    */
   _renderGroup(messages, index, type) {
     var group = []
 
@@ -64,8 +74,14 @@ export default class ChatFeed extends Component {
     )
   }
 
+  /**
+    * Determines what type of message/messages to render.
+    *
+    * @param {messages} - a list of message objects
+    * @return {message_nodes} - a list of message JSX objects to be rendered in
+    *   our UI.
+    */
   _renderMessages(messages) {
-    // map messages
     var message_nodes = messages.map((curr, index) => {
 
       // Find diff in message type or no more messages
@@ -73,7 +89,6 @@ export default class ChatFeed extends Component {
         (messages[index+1]?false:true) ||
         (messages[index+1].type != curr.type)
       ) {
-        // Render group
         return this._renderGroup(messages, index, curr.type);
       }
 
@@ -89,9 +104,7 @@ export default class ChatFeed extends Component {
     }
 
     // return nodes
-    console.log();
     return message_nodes
-
 
   }
 
