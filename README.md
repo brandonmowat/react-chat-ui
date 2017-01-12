@@ -24,6 +24,7 @@ render() {
     <ChatFeed
       messages={this.state.messages} // Boolean: list of message objects
       is_typing={this.state.is_typing} // Boolean: is the recipient typing
+      bubblesCentered={false} // Boolean: should bubbles be centered in the feed (default is false)
       bubbleStyles={{ // JSON: Custom bubble styles
         text: {
           fontSize: 30,

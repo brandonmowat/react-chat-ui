@@ -34,7 +34,7 @@ class Chat extends React.Component {
       <div>
         <ChatFeed
           messages={this.state.messages} // Boolean: list of message objects
-          is_typing={this.state.is_typing} // Boolean: is the recipient typing
+          isTyping={this.state.is_typing} // Boolean: is the recipient typing
           bubbleStyles={{ // JSON: Custom bubble styles
             text: {
               fontSize: 18,

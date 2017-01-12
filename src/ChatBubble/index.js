@@ -7,20 +7,25 @@ const styles = {
     backgroundColor: "#03b4f4",
     borderRadius: 20,
     clear: 'both',
-    display: 'block',
-    float: 'right',
     marginTop: 1,
+    marginRight: 'auto',
     marginBottom: 1,
+    marginLeft: 'auto',
     maxWidth: 425,
     paddingTop: 8,
     paddingBottom: 8,
     paddingLeft: 14,
-    paddingRight: 14
+    paddingRight: 14,
+    width: '-webkit-fit-content'
+  },
+  chatbubbleOrientationNormal: {
+    float: 'right'
   },
   recipientChatbubble : {
-    float: 'left',
-    marginLeft: 45,
     backgroundColor: '#ccc'
+  },
+  recipientChatbubbleOrientationNormal: {
+    float: 'left'
   },
   p: {
     color: '#FFFFFF',
@@ -41,11 +46,10 @@ export default class ChatBubble extends Component {
         userBubble: {}
       },
     }
-    console.log("bubble",this.props);
-
   }
 
   componentDidMount() {
+    console.log("bubble",this.props);
     //this._parse_for_links(this.props.children)
     this.setState({
       message: this.props.children,
@@ -101,15 +105,26 @@ export default class ChatBubble extends Component {
   }
 
   render() {
+    console.log("new vers");
     if (this.props.recipient) {
         return (
-          <div style={Object.assign({}, styles.chatbubble, styles.recipientChatbubble, this.state.bubbleStyles.chatbubble)}>
+          <div style={Object.assign({},
+            styles.chatbubble,
+            styles.recipientChatbubble,
+            (this.props.bubblesCentered?{}:styles.recipientChatbubbleOrientationNormal),
+            this.state.bubbleStyles.chatbubble
+          )}>
             <p style={Object.assign({},styles.p, this.state.bubbleStyles.text)}>{this._parse_for_styles(this.state.message)}</p>
           </div>
         )
     } else {
       return (
-        <div style={Object.assign({},styles.chatbubble, this.state.bubbleStyles.chatbubble, this.state.bubbleStyles.userBubble)}>
+        <div style={Object.assign({},
+          styles.chatbubble,
+          (this.props.bubblesCentered?{}:styles.chatbubbleOrientationNormal),
+          this.state.bubbleStyles.chatbubble,
+          this.state.bubbleStyles.userBubble
+        )}>
           <p style={Object.assign({},styles.p, this.state.bubbleStyles.text)}>{this._parse_for_styles(this.state.message)}</p>
         </div>
       )

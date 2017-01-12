@@ -65,7 +65,7 @@ export default class ChatFeed extends Component {
     console.log(group);
 
     var message_nodes = group.reverse().map((curr, index) => {
-      return <ChatBubble key={Math.random().toString(36)} recipient={curr.type} bubbleStyles={this.props.bubbleStyles}>{curr.message}</ChatBubble>
+      return <ChatBubble key={Math.random().toString(36)} recipient={curr.type} bubblesCentered={this.props.bubblesCentered?true:false} bubbleStyles={this.props.bubbleStyles}>{curr.message}</ChatBubble>
     })
     return (
       <div key={Math.random().toString(36)} style={styles.chatbubbleWrapper}>
@@ -108,6 +108,10 @@ export default class ChatFeed extends Component {
 
   }
 
+
+  /**
+  * render : renders our chatfeed
+  */
   render() {
     window.setTimeout(() => {
       this._scrollToBottom()
