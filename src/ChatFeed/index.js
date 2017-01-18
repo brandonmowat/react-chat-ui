@@ -1,31 +1,13 @@
 // Copyright 2016 Brandon Mowat
 // Written, developed, and designed by Brandon Mowat for the purpose of helping
 // other developers make chat interfaces.
-
 'use strict';
 
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+
 import ChatBubble from '../ChatBubble/index.js'
-
-const styles = {
-
-  chatbubbleWrapper: {
-    marginTop: 10,
-    marginBottom: 10,
-    overflow: 'auto',
-    position: 'relative'
-  },
-
-  img: {
-    borderRadius: 100,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-    width: 36,
-    zIndex: 100,
-  }
-}
+import ChatInput from '../ChatInput/index.js'
 
 export default class ChatFeed extends Component {
 
@@ -95,7 +77,7 @@ export default class ChatFeed extends Component {
     });
 
     // Other end is typing...
-    if (this.props.is_typing) {
+    if (this.props.isTyping) {
       message_nodes.push(
         <div key={Math.random().toString(36)} style={Object.assign({}, styles.recipient, styles.chatbubbleWrapper)}>
           <ChatBubble recipient={1} bubbleStyles={this.props.bubbleStyles?this.props.bubbleStyles:{}}>...</ChatBubble>
@@ -108,7 +90,6 @@ export default class ChatFeed extends Component {
 
   }
 
-
   /**
   * render : renders our chatfeed
   */
@@ -117,15 +98,51 @@ export default class ChatFeed extends Component {
       this._scrollToBottom()
     },10)
 
+    var inputField = this.props.hasInputField ? <ChatInput></ChatInput> : null
+
     return (
-      <div className="chat-history">
-        <div ref="chat" className="outer">
-          <div className="inner">
+      <div id="chat-panel" style={styles.chatPanel}>
+        <div ref="chat" className="chat-history" style={styles.chatHistory}>
+          <div className="chat-messages" >
             {this._renderMessages(this.props.messages)}
           </div>
         </div>
+        {inputField}
       </div>
     )
   }
+}
 
+const styles = {
+  chatPanel: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1
+  },
+  chatHistory: {
+    flex: 1,
+    overflow: 'scroll'
+  },
+  chatbubbleWrapper: {
+    marginTop: 10,
+    marginBottom: 10,
+    overflow: 'auto',
+    position: 'relative'
+  },
+  img: {
+    borderRadius: 100,
+    bottom: 0,
+    left: 0,
+    position: 'absolute',
+    width: 36,
+    zIndex: 100,
+  }
+}
+
+ChatFeed.propTypes =  {
+  isTyping: React.PropTypes.bool,
+  hasInputField: React.PropTypes.bool,
+  bubblesCentered: React.PropTypes.bool,
+  bubbleStyles: React.PropTypes.object,
+  messages: React.PropTypes.array.isRequired
 }
