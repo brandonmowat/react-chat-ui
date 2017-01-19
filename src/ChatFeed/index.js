@@ -44,7 +44,6 @@ export default class ChatFeed extends Component {
     for (var i = index; messages[i]?(messages[i].type == type):false; i--) {
       group.push(messages[i])
     }
-    console.log(group);
 
     var message_nodes = group.reverse().map((curr, index) => {
       return <ChatBubble key={Math.random().toString(36)} recipient={curr.type} bubblesCentered={this.props.bubblesCentered?true:false} bubbleStyles={this.props.bubbleStyles}>{curr.message}</ChatBubble>

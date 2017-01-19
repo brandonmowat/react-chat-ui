@@ -49,8 +49,6 @@ export default class ChatBubble extends Component {
   }
 
   componentDidMount() {
-    console.log("bubble",this.props);
-    //this._parse_for_links(this.props.children)
     this.setState({
       message: this.props.children,
       bubbleStyles: this.props.bubbleStyles?
@@ -89,7 +87,6 @@ export default class ChatBubble extends Component {
     var i, j, str, last;
     if (message.search(/<a href=/) !== -1 && (i = message.search(/<a href=/)) && (j = message.search(/a>/))) {
       last = message.slice(j+5, -1)
-      console.log(last);
       return (<p>
         {message.slice(0, i)}
         <a target="_blank"
@@ -105,7 +102,6 @@ export default class ChatBubble extends Component {
   }
 
   render() {
-    console.log("new vers");
     if (this.props.recipient) {
         return (
           <div style={Object.assign({},
