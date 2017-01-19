@@ -35,15 +35,17 @@ class Chat extends React.Component {
         <ChatFeed
           messages={this.state.messages} // Boolean: list of message objects
           isTyping={this.state.is_typing} // Boolean: is the recipient typing
+          hasInputField={false} // Boolean: use our input, or use your own
+          bubblesCentered={false} //Boolean should the bubbles be centered in the feed?
           bubbleStyles={{ // JSON: Custom bubble styles
             text: {
-              fontSize: 18,
+              fontSize: 18
             },
             chatbubble: {
-              maxWidth: 600,
+              maxWidth: 600
             },
             userBubble: {
-              backgroundColor: '#0084FF',
+              backgroundColor: '#0084FF'
             }
           }}
         />

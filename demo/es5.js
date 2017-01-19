@@ -61,6 +61,8 @@ var Chat = function (_React$Component) {
         _react2.default.createElement(_lib.ChatFeed, {
           messages: this.state.messages // Boolean: list of message objects
           , isTyping: this.state.is_typing // Boolean: is the recipient typing
+          , hasInputField: false // Boolean: use our input, or use your own
+          , bubblesCentered: false //Boolean should the bubbles be centered in the feed?
           , bubbleStyles: { // JSON: Custom bubble styles
             text: {
               fontSize: 18
