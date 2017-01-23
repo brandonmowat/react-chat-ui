@@ -62,7 +62,7 @@ var Chat = function (_React$Component) {
         _react2.default.createElement(_lib.ChatFeed, {
           messages: this.state.messages // Boolean: list of message objects
           , isTyping: this.state.is_typing // Boolean: is the recipient typing
-          , hasInputField: false // Boolean: use our input, or use your own
+          , hasInputField: true // Boolean: use our input, or use your own
           , bubblesCentered: false //Boolean should the bubbles be centered in the feed?
           , bubbleStyles: { // JSON: Custom bubble styles
             text: {
@@ -75,12 +75,7 @@ var Chat = function (_React$Component) {
               backgroundColor: '#0084FF'
             }
           }
-        }),
-        _react2.default.createElement(
-          'form',
-          { onSubmit: this._onMessageSubmit.bind(this) },
-          _react2.default.createElement('input', { ref: 'message', placeholder: 'Type a message...', className: 'message-input' })
-        )
+        })
       );
     }
   }]);
@@ -527,12 +522,14 @@ var styles = {
     flex: 1
   },
   inputStyle: {
-    width: '100%',
-    border: '2px solid #ccc',
-    borderRadius: '6px',
-    padding: '10px',
-    fontSize: '16px',
-    alignSelf: 'flex-end'
+    border: 'none',
+    borderTopWidth: '1',
+    borderTopStyle: 'solid',
+    borderTopColor: '#ddd',
+    fontSize: '16',
+    outline: 'none',
+    padding: '30',
+    width: '100%'
   }
 };
 },{"react":181,"react-dom":30}],5:[function(require,module,exports){
