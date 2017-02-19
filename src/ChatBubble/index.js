@@ -39,7 +39,7 @@ export default class ChatBubble extends Component {
   constructor(props) {
     super()
     this.state = {
-      message: '',
+      message: undefined,
       bubbleStyles: {
         text: {},
         chatbubble: {},
@@ -50,7 +50,7 @@ export default class ChatBubble extends Component {
 
   componentDidMount() {
     this.setState({
-      message: this.props.children,
+      message: this.props.message,
       bubbleStyles: this.props.bubbleStyles?
         {
           text: this.props.bubbleStyles.text?this.props.bubbleStyles.text:{},
@@ -102,7 +102,7 @@ export default class ChatBubble extends Component {
   }
 
   render() {
-    if (this.props.recipient) {
+    if (this.props.message.id) {
         return (
           <div style={Object.assign({},
             styles.chatbubble,
@@ -110,7 +110,7 @@ export default class ChatBubble extends Component {
             (this.props.bubblesCentered?{}:styles.recipientChatbubbleOrientationNormal),
             this.state.bubbleStyles.chatbubble
           )}>
-            <p style={Object.assign({},styles.p, this.state.bubbleStyles.text)}>{this._parse_for_styles(this.state.message)}</p>
+            <p style={Object.assign({},styles.p, this.state.bubbleStyles.text)}>{this.props.message.message}</p>
           </div>
         )
     } else {
@@ -121,7 +121,7 @@ export default class ChatBubble extends Component {
           this.state.bubbleStyles.chatbubble,
           this.state.bubbleStyles.userBubble
         )}>
-          <p style={Object.assign({},styles.p, this.state.bubbleStyles.text)}>{this._parse_for_styles(this.state.message)}</p>
+          <p style={Object.assign({},styles.p, this.state.bubbleStyles.text)}>{this.props.message.message}</p>
         </div>
       )
     }

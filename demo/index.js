@@ -1,14 +1,14 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { ChatFeed } from '../lib'
+import { ChatFeed, Message } from '../lib'
 
 class Chat extends React.Component {
   constructor() {
     super()
     this.state = {
       messages : [
-        {type:1, message: "Hey there you!"}, // Gray bubble
-        {type:1, message: "What have you been up to?"}
+        (new Message(1, "test")),
+        (new Message(1, "wow"))
       ],
       is_typing: false
     }
@@ -16,13 +16,14 @@ class Chat extends React.Component {
 
   _pushMessage(recipient, message) {
     var prevState = this.state
-    prevState.messages.push({type: recipient, message: message})
+    prevState.messages.push(new Message(recipient, message))
     this.setState(this.state)
   }
 
   _onMessageSubmit(e) {
     var input = this.refs.message;
     e.preventDefault();
+    console.log("submit!");
     if (!input.value) {return false;}
     this._pushMessage(0, input.value)
     input.value = '';

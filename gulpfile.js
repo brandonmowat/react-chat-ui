@@ -15,4 +15,5 @@ gulp.task('compile', function() {
 // configure which files to watch and what tasks to use on file changes
 gulp.task('watch', function() {
   gulp.watch('src/**/*.js', ['compile']);
+  //gulp.watch('demo/**/*.js', ['build-demo']);
 });

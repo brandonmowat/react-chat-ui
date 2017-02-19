@@ -54,6 +54,7 @@ Like so:
 //...
 this.state = {
   messages : [
+    // To be deprecated and use Message objects instead.
     {type:1, message: "I'm the recipient! (The person you're talking to)"}, // Gray bubble
     {type:0, message: "I'm the user!"}, // Blue bubble
   ],
@@ -61,4 +62,10 @@ this.state = {
 }
 //...
 
+```
+
+### Development
+
+```sh
+browserify demo/es5.js -o demo/bundle.js
 ```

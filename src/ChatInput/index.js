@@ -10,7 +10,7 @@ export default class ChatInput extends Component {
 
   render() {
     return (
-      <div className="chat-input" styles={styles.chatInput}>
+      <div className="chat-input" style={styles.chatInput}>
         <input type="text" style={this.props.inputStyles || styles.inputStyle} placeholder={this.props.inputPlaceholder || 'Message'}></input>
       </div>
     )

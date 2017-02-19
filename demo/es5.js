@@ -27,8 +27,7 @@ var Chat = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this));
 
     _this.state = {
-      messages: [{ type: 1, message: "Hey there you!" }, // Gray bubble
-      { type: 1, message: "What have you been up to?" }],
+      messages: [new _lib.Message(1, "test"), new _lib.Message(1, "wow")],
       is_typing: false
     };
     return _this;
@@ -38,7 +37,7 @@ var Chat = function (_React$Component) {
     key: '_pushMessage',
     value: function _pushMessage(recipient, message) {
       var prevState = this.state;
-      prevState.messages.push({ type: recipient, message: message });
+      prevState.messages.push(new _lib.Message(recipient, message));
       this.setState(this.state);
     }
   }, {
@@ -46,6 +45,7 @@ var Chat = function (_React$Component) {
     value: function _onMessageSubmit(e) {
       var input = this.refs.message;
       e.preventDefault();
+      console.log("submit!");
       if (!input.value) {
         return false;
       }
@@ -61,7 +61,7 @@ var Chat = function (_React$Component) {
         _react2.default.createElement(_lib.ChatFeed, {
           messages: this.state.messages // Boolean: list of message objects
           , isTyping: this.state.is_typing // Boolean: is the recipient typing
-          , hasInputField: true // Boolean: use our input, or use your own
+          , hasInputField: false // Boolean: use our input, or use your own
           , bubblesCentered: false //Boolean should the bubbles be centered in the feed?
           , bubbleStyles: { // JSON: Custom bubble styles
             text: {
@@ -74,7 +74,12 @@ var Chat = function (_React$Component) {
               backgroundColor: '#0084FF'
             }
           }
-        })
+        }),
+        _react2.default.createElement(
+          'form',
+          { onSubmit: this._onMessageSubmit.bind(this) },
+          _react2.default.createElement('input', { ref: 'message', placeholder: 'Type a message...', className: 'message-input' })
+        )
       );
     }
   }]);
