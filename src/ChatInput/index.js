@@ -10,7 +10,7 @@ export default class ChatInput extends Component {
 
   render() {
     return (
-      <div className="chat-input" styles={styles.chatInput}>
+      <div className="chat-input" style={styles.chatInput}>
         <input type="text" style={this.props.inputStyles || styles.inputStyle} placeholder={this.props.inputPlaceholder || 'Message'}></input>
       </div>
     )
@@ -22,11 +22,13 @@ const styles = {
     flex: 1
   },
   inputStyle: {
-    width: '100%',
-    border: '2px solid #ccc',
-    borderRadius: '6px',
-    padding: '10px',
-    fontSize: '16px',
-    alignSelf: 'flex-end'
+    border: 'none',
+    borderTopWidth: '1',
+    borderTopStyle: 'solid',
+    borderTopColor: '#ddd',
+    fontSize: '16',
+    outline: 'none',
+    padding: '30',
+    width: '100%'
   }
 }
