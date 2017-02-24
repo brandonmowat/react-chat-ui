@@ -11,7 +11,7 @@ This project is still in the VERY early stages of development. If you encounter 
 
 ### Basic Usage
 ```javascript
-import { ChatFeed } from 'react-chat-ui'
+import { ChatFeed, Message } from 'react-chat-ui'
 
 // Your code stuff...
 
@@ -55,8 +55,8 @@ Like so:
 this.state = {
   messages : [
     // To be deprecated and use Message objects instead.
-    {type:1, message: "I'm the recipient! (The person you're talking to)"}, // Gray bubble
-    {type:0, message: "I'm the user!"}, // Blue bubble
+    (new Message(1, "I'm the recipient! (The person you're talking to)")), // Gray bubble
+    (new Message(0, "I'm you -- the blue bubble!")) // Blue bubble
   ],
   //...
 }
