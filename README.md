@@ -3,6 +3,8 @@
 # 🙊  react-chat-ui
 A library of React components for building chat UI's.
 
+[![NPM](https://nodei.co/npm/react-chat-ui.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/react-chat-ui/)
+
 ### !!Use at own risk!!
 This project is still in the VERY early stages of development. If you encounter a bug or have a feature request, please create an issue and/or tweet at me [here](http://twitter.com/brandonmowat).
 
