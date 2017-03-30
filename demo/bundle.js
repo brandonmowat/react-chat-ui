@@ -175,6 +175,9 @@ var ChatBubble = function (_Component) {
         } : { text: {}, chatbubble: {} }
       });
     }
+
+    // IPR
+
   }, {
     key: '_parse_for_styles',
     value: function _parse_for_styles(message) {
@@ -205,6 +208,9 @@ var ChatBubble = function (_Component) {
       }
       return message;
     }
+
+    // IPR
+
   }, {
     key: '_parse_for_links',
     value: function _parse_for_links(message) {

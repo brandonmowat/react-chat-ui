@@ -5,7 +5,7 @@
   "repository": "brandonmowat/react-chat-ui",
   "main": "./lib/index.js",
   "scripts": {
-    "build-demo": "babel --presets es2015,stage-0 ./demo/index.js -o ./demo/es5.js",
+    "build-demo": "babel --presets es2015,stage-0 ./demo/index.js -o ./demo/es5.js && browserify demo/es5.js -o demo/bundle.js",
     "compile": "babel --presets es2015,stage-0,react -d lib/ src/",
     "prepublish": "npm run compile",
     "test": "echo \"Error: no test specified\" && exit 1",

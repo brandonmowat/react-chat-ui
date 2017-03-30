@@ -61,6 +61,7 @@ export default class ChatBubble extends Component {
     })
   }
 
+  // IPR
   _parse_for_styles(message) {
     if (typeof(message) === "string") {
       var bolded_start = message.search(/__(\w+\s?)+__/);
@@ -83,6 +84,7 @@ export default class ChatBubble extends Component {
     return message
   }
 
+  // IPR
   _parse_for_links(message) {
     var i, j, str, last;
     if (message.search(/<a href=/) !== -1 && (i = message.search(/<a href=/)) && (j = message.search(/a>/))) {
