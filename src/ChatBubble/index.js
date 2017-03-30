@@ -39,27 +39,18 @@ export default class ChatBubble extends Component {
   constructor(props) {
     super()
     this.state = {
-      message: undefined,
-      bubbleStyles: {
-        text: {},
-        chatbubble: {},
-        userBubble: {}
-      },
+      message: props.message,
+      bubbleStyles: props.bubbleStyles?
+        {
+          text: props.bubbleStyles.text?props.bubbleStyles.text:{},
+          chatbubble: props.bubbleStyles.chatbubble?props.bubbleStyles.chatbubble:{},
+          userBubble: props.bubbleStyles.userBubble?props.bubbleStyles.userBubble:{}
+        }
+        : {text:{},chatbubble:{}}
     }
   }
 
-  componentDidMount() {
-    this.setState({
-      message: this.props.message,
-      bubbleStyles: this.props.bubbleStyles?
-        {
-          text: this.props.bubbleStyles.text?this.props.bubbleStyles.text:{},
-          chatbubble: this.props.bubbleStyles.chatbubble?this.props.bubbleStyles.chatbubble:{},
-          userBubble: this.props.bubbleStyles.userBubble?this.props.bubbleStyles.userBubble:{}
-        }
-        : {text:{},chatbubble:{}}
-    })
-  }
+  componentDidMount() {}
 
   // IPR
   _parse_for_styles(message) {
