@@ -24,9 +24,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var styles = {
   button: {
     backgroundColor: '#fff',
+    borderColor: '#1D2129',
     borderStyle: 'solid',
     borderRadius: 20,
     borderWidth: 2,
+    color: '#1D2129',
     fontSize: 18,
     fontWeight: '300',
     paddingTop: 8,
@@ -88,7 +90,7 @@ var Chat = function (_React$Component) {
         null,
         _react2.default.createElement(_lib.ChatFeed, {
           messages: this.state.messages // Boolean: list of message objects
-          , isTyping: this.state.is_typing // Boolean: is the recipient typing
+          , isTyping: false // Boolean: is the recipient typing
           , hasInputField: false // Boolean: use our input, or use your own
           , bubblesCentered: false //Boolean should the bubbles be centered in the feed?
           , bubbleStyles: { // JSON: Custom bubble styles
