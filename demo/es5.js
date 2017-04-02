@@ -1,5 +1,7 @@
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -18,6 +20,26 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var styles = {
+  button: {
+    backgroundColor: '#fff',
+    borderStyle: 'solid',
+    borderRadius: 20,
+    borderWidth: 2,
+    fontSize: 18,
+    fontWeight: '300',
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 16,
+    paddingRight: 16
+  },
+  selected: {
+    color: '#fff',
+    backgroundColor: '#0084FF',
+    borderColor: '#0084FF'
+  }
+};
+
 var Chat = function (_React$Component) {
   _inherits(Chat, _React$Component);
 
@@ -27,13 +49,18 @@ var Chat = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this));
 
     _this.state = {
-      messages: [new _lib.Message(1, "test"), new _lib.Message(1, "wow")],
-      is_typing: false
+      messages: [new _lib.Message(1, "Hey guys!"), new _lib.Message(1, "It's me, Mark."), new _lib.Message(2, "Hey! Evan here. react-chat-ui is pretty dooope.")],
+      curr_user: 0
     };
     return _this;
   }
 
   _createClass(Chat, [{
+    key: '_onPress',
+    value: function _onPress(user) {
+      this.setState({ curr_user: user });
+    }
+  }, {
     key: '_pushMessage',
     value: function _pushMessage(recipient, message) {
       var prevState = this.state;
@@ -49,7 +76,7 @@ var Chat = function (_React$Component) {
       if (!input.value) {
         return false;
       }
-      this._pushMessage(0, input.value);
+      this._pushMessage(this.state.curr_user, input.value);
       input.value = '';
     }
   }, {
@@ -79,6 +106,25 @@ var Chat = function (_React$Component) {
           'form',
           { onSubmit: this._onMessageSubmit.bind(this) },
           _react2.default.createElement('input', { ref: 'message', placeholder: 'Type a message...', className: 'message-input' })
+        ),
+        _react2.default.createElement(
+          'div',
+          { style: { display: 'flex', justifyContent: 'space-around' } },
+          _react2.default.createElement(
+            'button',
+            { style: _extends({}, styles.button, this.state.curr_user === 0 ? styles.selected : {}), onClick: this._onPress.bind(this, 0) },
+            'You'
+          ),
+          _react2.default.createElement(
+            'button',
+            { style: _extends({}, styles.button, this.state.curr_user === 1 ? styles.selected : {}), onClick: this._onPress.bind(this, 1) },
+            'Mark'
+          ),
+          _react2.default.createElement(
+            'button',
+            { style: _extends({}, styles.button, this.state.curr_user === 2 ? styles.selected : {}), onClick: this._onPress.bind(this, 2) },
+            'Evan'
+          )
         )
       );
     }

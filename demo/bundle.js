@@ -1,6 +1,8 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -19,6 +21,26 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var styles = {
+  button: {
+    backgroundColor: '#fff',
+    borderStyle: 'solid',
+    borderRadius: 20,
+    borderWidth: 2,
+    fontSize: 18,
+    fontWeight: '300',
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 16,
+    paddingRight: 16
+  },
+  selected: {
+    color: '#fff',
+    backgroundColor: '#0084FF',
+    borderColor: '#0084FF'
+  }
+};
+
 var Chat = function (_React$Component) {
   _inherits(Chat, _React$Component);
 
@@ -28,13 +50,18 @@ var Chat = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this));
 
     _this.state = {
-      messages: [new _lib.Message(1, "test"), new _lib.Message(1, "wow")],
-      is_typing: false
+      messages: [new _lib.Message(1, "Hey guys!"), new _lib.Message(1, "It's me, Mark."), new _lib.Message(2, "Hey! Evan here. react-chat-ui is pretty dooope.")],
+      curr_user: 0
     };
     return _this;
   }
 
   _createClass(Chat, [{
+    key: '_onPress',
+    value: function _onPress(user) {
+      this.setState({ curr_user: user });
+    }
+  }, {
     key: '_pushMessage',
     value: function _pushMessage(recipient, message) {
       var prevState = this.state;
@@ -50,7 +77,7 @@ var Chat = function (_React$Component) {
       if (!input.value) {
         return false;
       }
-      this._pushMessage(0, input.value);
+      this._pushMessage(this.state.curr_user, input.value);
       input.value = '';
     }
   }, {
@@ -80,6 +107,25 @@ var Chat = function (_React$Component) {
           'form',
           { onSubmit: this._onMessageSubmit.bind(this) },
           _react2.default.createElement('input', { ref: 'message', placeholder: 'Type a message...', className: 'message-input' })
+        ),
+        _react2.default.createElement(
+          'div',
+          { style: { display: 'flex', justifyContent: 'space-around' } },
+          _react2.default.createElement(
+            'button',
+            { style: _extends({}, styles.button, this.state.curr_user === 0 ? styles.selected : {}), onClick: this._onPress.bind(this, 0) },
+            'You'
+          ),
+          _react2.default.createElement(
+            'button',
+            { style: _extends({}, styles.button, this.state.curr_user === 1 ? styles.selected : {}), onClick: this._onPress.bind(this, 1) },
+            'Mark'
+          ),
+          _react2.default.createElement(
+            'button',
+            { style: _extends({}, styles.button, this.state.curr_user === 2 ? styles.selected : {}), onClick: this._onPress.bind(this, 2) },
+            'Evan'
+          )
         )
       );
     }
@@ -113,7 +159,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var styles = {
   chatbubble: {
-    backgroundColor: "#03b4f4",
+    backgroundColor: "#0084FF",
     borderRadius: 20,
     clear: 'both',
     marginTop: 1,
@@ -153,28 +199,19 @@ var ChatBubble = function (_Component) {
     var _this = _possibleConstructorReturn(this, (ChatBubble.__proto__ || Object.getPrototypeOf(ChatBubble)).call(this));
 
     _this.state = {
-      message: undefined,
-      bubbleStyles: {
-        text: {},
-        chatbubble: {},
-        userBubble: {}
-      }
+      message: props.message,
+      bubbleStyles: props.bubbleStyles ? {
+        text: props.bubbleStyles.text ? props.bubbleStyles.text : {},
+        chatbubble: props.bubbleStyles.chatbubble ? props.bubbleStyles.chatbubble : {},
+        userBubble: props.bubbleStyles.userBubble ? props.bubbleStyles.userBubble : {}
+      } : { text: {}, chatbubble: {} }
     };
     return _this;
   }
 
   _createClass(ChatBubble, [{
     key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.setState({
-        message: this.props.message,
-        bubbleStyles: this.props.bubbleStyles ? {
-          text: this.props.bubbleStyles.text ? this.props.bubbleStyles.text : {},
-          chatbubble: this.props.bubbleStyles.chatbubble ? this.props.bubbleStyles.chatbubble : {},
-          userBubble: this.props.bubbleStyles.userBubble ? this.props.bubbleStyles.userBubble : {}
-        } : { text: {}, chatbubble: {} }
-      });
-    }
+    value: function componentDidMount() {}
 
     // IPR
 
@@ -317,7 +354,7 @@ var ChatFeed = function (_Component) {
     var _this = _possibleConstructorReturn(this, (ChatFeed.__proto__ || Object.getPrototypeOf(ChatFeed)).call(this, props));
 
     _this.state = {
-      messages: []
+      messages: props.messages || []
     };
     return _this;
   }
@@ -342,7 +379,7 @@ var ChatFeed = function (_Component) {
       * Parses and collects messages of one type to be grouped together.
       *
       * @param {messages} - a list of Message objects
-      * @param {index} - the index of the end of the message grou
+      * @param {index} - the index of the end of the message group
       * @param {type} - the type of group (user or recipient)
       * @return {message_nodes} - a JSX wrapped group of messages
       */

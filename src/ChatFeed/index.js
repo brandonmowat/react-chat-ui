@@ -15,7 +15,7 @@ export default class ChatFeed extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      messages: [],
+      messages: props.messages || [],
     }
   }
 
@@ -35,7 +35,7 @@ export default class ChatFeed extends Component {
     * Parses and collects messages of one type to be grouped together.
     *
     * @param {messages} - a list of Message objects
-    * @param {index} - the index of the end of the message grou
+    * @param {index} - the index of the end of the message group
     * @param {type} - the type of group (user or recipient)
     * @return {message_nodes} - a JSX wrapped group of messages
     */

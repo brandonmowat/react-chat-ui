@@ -2,16 +2,41 @@ import React from 'react'
 import { render } from 'react-dom'
 import { ChatFeed, Message } from '../lib'
 
+const styles = {
+  button: {
+    backgroundColor: '#fff',
+    borderStyle: 'solid',
+    borderRadius: 20,
+    borderWidth: 2,
+    fontSize: 18,
+    fontWeight: '300',
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 16,
+    paddingRight: 16,
+  },
+  selected: {
+    color: '#fff',
+    backgroundColor: '#0084FF',
+    borderColor: '#0084FF',
+  }
+}
+
 class Chat extends React.Component {
   constructor() {
     super()
     this.state = {
       messages : [
-        (new Message(1, "test")),
-        (new Message(1, "wow"))
+        (new Message(1, "Hey guys!")),
+        (new Message(1, "It's me, Mark.")),
+        (new Message(2, "Hey! Evan here. react-chat-ui is pretty dooope."))
       ],
-      is_typing: false
+      curr_user: 0
     }
+  }
+
+  _onPress(user) {
+    this.setState({curr_user: user});
   }
 
   _pushMessage(recipient, message) {
@@ -25,9 +50,8 @@ class Chat extends React.Component {
     e.preventDefault();
     console.log("submit!");
     if (!input.value) {return false;}
-    this._pushMessage(0, input.value)
+    this._pushMessage(this.state.curr_user, input.value)
     input.value = '';
-
   }
 
   render() {
@@ -51,9 +75,15 @@ class Chat extends React.Component {
           }}
         />
 
-      <form onSubmit={this._onMessageSubmit.bind(this)}>
-        <input ref="message" placeholder="Type a message..." className="message-input" />
-      </form>
+        <form onSubmit={this._onMessageSubmit.bind(this)}>
+          <input ref="message" placeholder="Type a message..." className="message-input" />
+        </form>
+
+        <div style={{display: 'flex', justifyContent: 'space-around'}}>
+          <button style={{...styles.button, ...((this.state.curr_user === 0) ? styles.selected : {})}} onClick={this._onPress.bind(this, 0)}>You</button>
+          <button style={{...styles.button, ...((this.state.curr_user === 1) ? styles.selected : {})}} onClick={this._onPress.bind(this, 1)}>Mark</button>
+          <button style={{...styles.button, ...((this.state.curr_user === 2) ? styles.selected : {})}} onClick={this._onPress.bind(this, 2)}>Evan</button>
+        </div>
       </div>
     )
   }

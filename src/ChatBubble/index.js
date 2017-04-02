@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 
 const styles = {
   chatbubble: {
-    backgroundColor: "#03b4f4",
+    backgroundColor: "#0084FF",
     borderRadius: 20,
     clear: 'both',
     marginTop: 1,
