@@ -95,6 +95,7 @@ export default class ChatBubble extends Component {
   }
 
   render() {
+    //console.log(this.props.message);
     if (this.props.message.id) {
         return (
           <div style={Object.assign({},

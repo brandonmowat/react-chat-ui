@@ -20,7 +20,7 @@ export default class ChatFeed extends Component {
   }
 
   componentDidUpdate() {
-    console.log('ChatFeed update');
+    //console.log('ChatFeed update');
   }
 
   _scrollToBottom() {
@@ -49,7 +49,7 @@ export default class ChatFeed extends Component {
     var message_nodes = group.reverse().map((curr, index) => {
       return <ChatBubble
                 key={Math.random().toString(36)}
-                message={new Message(curr.id, curr.message)}
+                message={curr}
                 bubblesCentered={this.props.bubblesCentered?true:false}
                 bubbleStyles={this.props.bubbleStyles}/>
     })
@@ -124,7 +124,6 @@ const styles = {
     flex: 1
   },
   chatHistory: {
-    flex: 1,
     overflow: 'scroll'
   },
   chatbubbleWrapper: {

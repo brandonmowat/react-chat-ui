@@ -52,7 +52,7 @@ var Chat = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this));
 
     _this.state = {
-      messages: [new _lib.Message(1, "Hey guys!"), new _lib.Message(1, "It's me, Mark."), new _lib.Message(2, "Hey! Evan here. react-chat-ui is pretty dooope.")],
+      messages: [new _lib.Message({ id: 1, message: "Hey guys!" }), new _lib.Message({ id: 2, message: "Hey! Evan here. react-chat-ui is pretty dooope." })],
       curr_user: 0
     };
     return _this;
@@ -67,7 +67,7 @@ var Chat = function (_React$Component) {
     key: '_pushMessage',
     value: function _pushMessage(recipient, message) {
       var prevState = this.state;
-      prevState.messages.push(new _lib.Message(recipient, message));
+      prevState.messages.push(new _lib.Message({ id: recipient, message: message }));
       this.setState(this.state);
     }
   }, {
@@ -85,6 +85,7 @@ var Chat = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      console.log(this.state.messages);
       return _react2.default.createElement(
         'div',
         null,
@@ -279,6 +280,7 @@ var ChatBubble = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      console.log(this.props.message);
       if (this.props.message.id) {
         return _react2.default.createElement(
           'div',
@@ -400,7 +402,7 @@ var ChatFeed = function (_Component) {
       var message_nodes = group.reverse().map(function (curr, index) {
         return _react2.default.createElement(_index2.default, {
           key: Math.random().toString(36),
-          message: new _index6.default(curr.id, curr.message),
+          message: curr,
           bubblesCentered: _this2.props.bubblesCentered ? true : false,
           bubbleStyles: _this2.props.bubbleStyles });
       });
@@ -490,7 +492,6 @@ var styles = {
     flex: 1
   },
   chatHistory: {
-    flex: 1,
     overflow: 'scroll'
   },
   chatbubbleWrapper: {
@@ -595,12 +596,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 * A statndardized message object for use
 * in rendering messages in the chat feed.
 */
-var Message = function Message(id, message, senderName) {
+var Message =
+/**
+  * Message object for organizing and storing current message data.
+  *
+  * @param {Object} messageData - a JSON object containing all the data for a message.
+  * @param {number} messageData.id - id for grouping messages (0 for blue)
+  * @param {(string|html)} messageData.message - the content of the message to
+  *   be rendered in the bubble
+  * @param {string} [messageData.senderName] - the name of the sender of the
+  *   message
+  */
+function Message(messageData) {
   _classCallCheck(this, Message);
 
-  this.id = id; // id of the sender (0 is reserved for "blue bubble")
-  this.message = message;
-  this.senderName = senderName || undefined;
+  this.id = messageData.id; // id of the sender (0 is reserved for "blue bubble")
+  this.message = messageData.message;
+  this.senderName = messageData.senderName || undefined;
 };
 
 exports.default = Message;

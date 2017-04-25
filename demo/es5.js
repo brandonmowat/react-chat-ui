@@ -51,7 +51,7 @@ var Chat = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this));
 
     _this.state = {
-      messages: [new _lib.Message(1, "Hey guys!"), new _lib.Message(1, "It's me, Mark."), new _lib.Message(2, "Hey! Evan here. react-chat-ui is pretty dooope.")],
+      messages: [new _lib.Message({ id: 1, message: "Hey guys!" }), new _lib.Message({ id: 2, message: "Hey! Evan here. react-chat-ui is pretty dooope." })],
       curr_user: 0
     };
     return _this;
@@ -66,7 +66,7 @@ var Chat = function (_React$Component) {
     key: '_pushMessage',
     value: function _pushMessage(recipient, message) {
       var prevState = this.state;
-      prevState.messages.push(new _lib.Message(recipient, message));
+      prevState.messages.push(new _lib.Message({ id: recipient, message: message }));
       this.setState(this.state);
     }
   }, {
@@ -84,6 +84,7 @@ var Chat = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      console.log(this.state.messages);
       return _react2.default.createElement(
         'div',
         null,

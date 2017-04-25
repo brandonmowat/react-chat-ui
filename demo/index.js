@@ -29,9 +29,8 @@ class Chat extends React.Component {
     super()
     this.state = {
       messages : [
-        (new Message(1, "Hey guys!")),
-        (new Message(1, "It's me, Mark.")),
-        (new Message(2, "Hey! Evan here. react-chat-ui is pretty dooope."))
+        (new Message({id: 1, message: "Hey guys!"})),
+        (new Message({id: 2, message: "Hey! Evan here. react-chat-ui is pretty dooope."}))
       ],
       curr_user: 0
     }
@@ -43,20 +42,20 @@ class Chat extends React.Component {
 
   _pushMessage(recipient, message) {
     var prevState = this.state
-    prevState.messages.push(new Message(recipient, message))
+    prevState.messages.push(new Message({id: recipient, message: message}));
     this.setState(this.state)
   }
 
   _onMessageSubmit(e) {
     var input = this.refs.message;
     e.preventDefault();
-    console.log("submit!");
     if (!input.value) {return false;}
     this._pushMessage(this.state.curr_user, input.value)
     input.value = '';
   }
 
   render() {
+    //console.log(this.state.messages);
     return(
       <div>
         <ChatFeed
