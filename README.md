@@ -62,8 +62,8 @@ Like so:
 this.state = {
   messages : [
     // To be deprecated and use Message objects instead.
-    (new Message(1, "I'm the recipient! (The person you're talking to)")), // Gray bubble
-    (new Message(0, "I'm you -- the blue bubble!")) // Blue bubble
+    (new Message({ id: 1, message: "I'm the recipient! (The person you're talking to)" })), // Gray bubble
+    (new Message({ id: 0, message: "I'm you -- the blue bubble!" })) // Blue bubble
   ],
   //...
 }
