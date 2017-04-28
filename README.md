@@ -61,7 +61,6 @@ Like so:
 //...
 this.state = {
   messages : [
-    // To be deprecated and use Message objects instead.
     (new Message({ id: 1, message: "I'm the recipient! (The person you're talking to)" })), // Gray bubble
     (new Message({ id: 0, message: "I'm you -- the blue bubble!" })) // Blue bubble
   ],
@@ -71,8 +70,13 @@ this.state = {
 
 ```
 
+### TODO
+- documentation
+- documentation
+- documentation
+
 ### Development
 
 ```sh
-browserify demo/es5.js -o demo/bundle.js
+npm run dev
 ```
