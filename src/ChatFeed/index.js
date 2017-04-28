@@ -84,7 +84,7 @@ export default class ChatFeed extends Component {
     if (this.props.isTyping) {
       message_nodes.push(
         <div key={Math.random().toString(36)} style={Object.assign({}, styles.recipient, styles.chatbubbleWrapper)}>
-          <ChatBubble message={new Message(1, "...")} bubbleStyles={this.props.bubbleStyles?this.props.bubbleStyles:{}}/>
+          <ChatBubble message={new Message({id:1, message:"..."})} bubbleStyles={this.props.bubbleStyles?this.props.bubbleStyles:{}}/>
         </div>
       )
     }
