@@ -10,8 +10,7 @@ A library of React components for building chat UI's.
 - SUPER easy to use
 - Multiple user grouping (try it out in the demo)
 
-### !!Use at own risk!!
-This project is still in the VERY early stages of development. If you encounter a bug or have a feature request, please create an issue and/or tweet at me [here](http://twitter.com/brandonmowat).
+Keep in mind that this project is still in the early stages of development. If you encounter a bug or have a feature request, please create an issue and/or tweet at me [here](http://twitter.com/brandonmowat).
 
 ### Installation
 `npm install react-chat-ui --save`
