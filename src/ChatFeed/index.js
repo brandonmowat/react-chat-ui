@@ -1,21 +1,21 @@
 // Copyright 2016 Brandon Mowat
 // Written, developed, and designed by Brandon Mowat for the purpose of helping
 // other developers make chat interfaces.
-"use strict";
+'use strict'
 
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 
-import ChatBubble from "../ChatBubble/index.js";
-import ChatInput from "../ChatInput/index.js";
-import Message from "../Message/index.js";
+import ChatBubble from '../ChatBubble/index.js'
+import ChatInput from '../ChatInput/index.js'
+import Message from '../Message/index.js'
 
 export default class ChatFeed extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      messages: props.messages || []
-    };
+      messages: props.messages || [],
+    }
   }
 
   componentDidUpdate() {
@@ -23,11 +23,11 @@ export default class ChatFeed extends Component {
   }
 
   _scrollToBottom() {
-    const { chat } = this.refs;
-    const scrollHeight = chat.scrollHeight;
-    const height = chat.clientHeight;
-    const maxScrollTop = scrollHeight - height;
-    ReactDOM.findDOMNode(chat).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+    const { chat } = this.refs
+    const scrollHeight = chat.scrollHeight
+    const height = chat.clientHeight
+    const maxScrollTop = scrollHeight - height
+    ReactDOM.findDOMNode(chat).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0
   }
 
   /**
@@ -39,10 +39,10 @@ export default class ChatFeed extends Component {
     * @return {message_nodes} - a JSX wrapped group of messages
     */
   _renderGroup(messages, index, id) {
-    var group = [];
+    var group = []
 
     for (var i = index; messages[i] ? messages[i].id == id : false; i--) {
-      group.push(messages[i]);
+      group.push(messages[i])
     }
 
     var message_nodes = group.reverse().map((curr, index) => {
@@ -53,13 +53,13 @@ export default class ChatFeed extends Component {
           bubblesCentered={this.props.bubblesCentered ? true : false}
           bubbleStyles={this.props.bubbleStyles}
         />
-      );
-    });
+      )
+    })
     return (
       <div key={Math.random().toString(36)} style={styles.chatbubbleWrapper}>
         {message_nodes}
       </div>
-    );
+    )
   }
 
   /**
@@ -76,9 +76,9 @@ export default class ChatFeed extends Component {
         (messages[index + 1] ? false : true) ||
         messages[index + 1].id != curr.id
       ) {
-        return this._renderGroup(messages, index, curr.id);
+        return this._renderGroup(messages, index, curr.id)
       }
-    });
+    })
 
     // Other end is typing...
     if (this.props.isTyping) {
@@ -88,17 +88,17 @@ export default class ChatFeed extends Component {
           style={Object.assign({}, styles.recipient, styles.chatbubbleWrapper)}
         >
           <ChatBubble
-            message={new Message(1, "...")}
+            message={new Message({ id: 1, message: '...' })}
             bubbleStyles={
               this.props.bubbleStyles ? this.props.bubbleStyles : {}
             }
           />
         </div>
-      );
+      )
     }
 
     // return nodes
-    return message_nodes;
+    return message_nodes
   }
 
   /**
@@ -106,10 +106,10 @@ export default class ChatFeed extends Component {
   */
   render() {
     window.setTimeout(() => {
-      this._scrollToBottom();
-    }, 10);
+      this._scrollToBottom()
+    }, 10)
 
-    var inputField = this.props.hasInputField ? <ChatInput /> : null;
+    var inputField = this.props.hasInputField ? <ChatInput /> : null
 
     return (
       <div id="chat-panel" style={styles.chatPanel}>
@@ -120,39 +120,39 @@ export default class ChatFeed extends Component {
         </div>
         {inputField}
       </div>
-    );
+    )
   }
 }
 
 const styles = {
   chatPanel: {
-    display: "flex",
-    flexDirection: "column",
-    flex: 1
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
   },
   chatHistory: {
-    overflow: "scroll"
+    overflow: 'scroll',
   },
   chatbubbleWrapper: {
     marginTop: 10,
     marginBottom: 10,
-    overflow: "auto",
-    position: "relative"
+    overflow: 'auto',
+    position: 'relative',
   },
   img: {
     borderRadius: 100,
     bottom: 0,
     left: 0,
-    position: "absolute",
+    position: 'absolute',
     width: 36,
-    zIndex: 100
-  }
-};
+    zIndex: 100,
+  },
+}
 
 ChatFeed.propTypes = {
   isTyping: React.PropTypes.bool,
   hasInputField: React.PropTypes.bool,
   bubblesCentered: React.PropTypes.bool,
   bubbleStyles: React.PropTypes.object,
-  messages: React.PropTypes.array.isRequired
-};
+  messages: React.PropTypes.array.isRequired,
+}
