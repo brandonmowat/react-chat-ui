@@ -75,7 +75,6 @@ var Chat = function (_React$Component) {
     value: function _onMessageSubmit(e) {
       var input = this.refs.message;
       e.preventDefault();
-      console.log("submit!");
       if (!input.value) {
         return false;
       }
@@ -85,7 +84,7 @@ var Chat = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log(this.state.messages);
+      //console.log(this.state.messages);
       return _react2.default.createElement(
         'div',
         null,
@@ -146,6 +145,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -162,7 +163,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var styles = {
   chatbubble: {
-    backgroundColor: "#0084FF",
+    backgroundColor: '#0084FF',
     borderRadius: 20,
     clear: 'both',
     marginTop: 1,
@@ -221,7 +222,7 @@ var ChatBubble = function (_Component) {
   }, {
     key: '_parse_for_styles',
     value: function _parse_for_styles(message) {
-      if (typeof message === "string") {
+      if (typeof message === 'string') {
         var bolded_start = message.search(/__(\w+\s?)+__/);
         var bolded_end = message.slice(bolded_start + 2).search(/__/);
         var bolded = message.slice(bolded_start + 2, bolded_start + bolded_end + 2);
@@ -263,8 +264,10 @@ var ChatBubble = function (_Component) {
           message.slice(0, i),
           _react2.default.createElement(
             'a',
-            { target: '_blank',
-              href: message.slice(i + 9, message.search(/'>|">/)) },
+            {
+              target: '_blank',
+              href: message.slice(i + 9, message.search(/'>|">/))
+            },
             message.slice(message.search(/'>|">/) + 2, j - 2)
           ),
           message.slice(j + 2)
@@ -280,11 +283,12 @@ var ChatBubble = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log(this.props.message);
       if (this.props.message.id) {
         return _react2.default.createElement(
           'div',
-          { style: Object.assign({}, styles.chatbubble, styles.recipientChatbubble, this.props.bubblesCentered ? {} : styles.recipientChatbubbleOrientationNormal, this.state.bubbleStyles.chatbubble) },
+          {
+            style: _extends({}, styles.chatbubble, styles.recipientChatbubble, this.state.bubbleStyles.chatbubble, this.props.bubblesCentered || styles.recipientChatbubbleOrientationNormal)
+          },
           _react2.default.createElement(
             'p',
             { style: Object.assign({}, styles.p, this.state.bubbleStyles.text) },
@@ -294,10 +298,12 @@ var ChatBubble = function (_Component) {
       } else {
         return _react2.default.createElement(
           'div',
-          { style: Object.assign({}, styles.chatbubble, this.props.bubblesCentered ? {} : styles.chatbubbleOrientationNormal, this.state.bubbleStyles.chatbubble, this.state.bubbleStyles.userBubble) },
+          {
+            style: _extends({}, styles.chatbubble, this.state.bubbleStyles.chatbubble, this.state.bubbleStyles.userBubble, this.props.bubblesCentered || styles.chatbubbleOrientationNormal)
+          },
           _react2.default.createElement(
             'p',
-            { style: Object.assign({}, styles.p, this.state.bubbleStyles.text) },
+            { style: _extends({}, styles.p, this.state.bubbleStyles.text) },
             this.props.message.message
           )
         );
@@ -366,7 +372,7 @@ var ChatFeed = function (_Component) {
   _createClass(ChatFeed, [{
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      console.log('ChatFeed update');
+      //console.log('ChatFeed update');
     }
   }, {
     key: '_scrollToBottom',
@@ -404,7 +410,8 @@ var ChatFeed = function (_Component) {
           key: Math.random().toString(36),
           message: curr,
           bubblesCentered: _this2.props.bubblesCentered ? true : false,
-          bubbleStyles: _this2.props.bubbleStyles });
+          bubbleStyles: _this2.props.bubbleStyles
+        });
       });
       return _react2.default.createElement(
         'div',
@@ -427,7 +434,6 @@ var ChatFeed = function (_Component) {
       var _this3 = this;
 
       var message_nodes = messages.map(function (curr, index) {
-
         // Find diff in message type or no more messages
         if ((messages[index + 1] ? false : true) || messages[index + 1].id != curr.id) {
           return _this3._renderGroup(messages, index, curr.id);
@@ -438,8 +444,14 @@ var ChatFeed = function (_Component) {
       if (this.props.isTyping) {
         message_nodes.push(_react2.default.createElement(
           'div',
-          { key: Math.random().toString(36), style: Object.assign({}, styles.recipient, styles.chatbubbleWrapper) },
-          _react2.default.createElement(_index2.default, { message: new _index6.default(1, "..."), bubbleStyles: this.props.bubbleStyles ? this.props.bubbleStyles : {} })
+          {
+            key: Math.random().toString(36),
+            style: Object.assign({}, styles.recipient, styles.chatbubbleWrapper)
+          },
+          _react2.default.createElement(_index2.default, {
+            message: new _index6.default({ id: 1, message: '...' }),
+            bubbleStyles: this.props.bubbleStyles ? this.props.bubbleStyles : {}
+          })
         ));
       }
 
@@ -489,11 +501,10 @@ var styles = {
   chatPanel: {
     display: 'flex',
     flexDirection: 'column',
-    flex: 1
+    flex: 1,
+    overflow: 'hidden'
   },
-  chatHistory: {
-    overflow: 'scroll'
-  },
+  chatHistory: { overflow: 'auto' },
   chatbubbleWrapper: {
     marginTop: 10,
     marginBottom: 10,
@@ -518,7 +529,7 @@ ChatFeed.propTypes = {
   messages: _react2.default.PropTypes.array.isRequired
 };
 },{"../ChatBubble/index.js":2,"../ChatInput/index.js":4,"../Message/index.js":5,"react":182,"react-dom":31}],4:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -526,11 +537,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = require('react-dom');
+var _reactDom = require("react-dom");
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -552,12 +563,16 @@ var ChatInput = function (_Component) {
   }
 
   _createClass(ChatInput, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       return _react2.default.createElement(
-        'div',
-        { className: 'chat-input', style: styles.chatInput },
-        _react2.default.createElement('input', { type: 'text', style: this.props.inputStyles || styles.inputStyle, placeholder: this.props.inputPlaceholder || 'Message' })
+        "div",
+        { className: "chat-input", style: styles.chatInput },
+        _react2.default.createElement("input", {
+          type: "text",
+          style: this.props.inputStyles || styles.inputStyle,
+          placeholder: this.props.inputPlaceholder || "Message"
+        })
       );
     }
   }]);
@@ -573,14 +588,14 @@ var styles = {
     flex: 1
   },
   inputStyle: {
-    border: 'none',
-    borderTopWidth: '1',
-    borderTopStyle: 'solid',
-    borderTopColor: '#ddd',
-    fontSize: '16',
-    outline: 'none',
-    padding: '30',
-    width: '100%'
+    border: "none",
+    borderTopWidth: "1",
+    borderTopStyle: "solid",
+    borderTopColor: "#ddd",
+    fontSize: "16",
+    outline: "none",
+    padding: "30",
+    width: "100%"
   }
 };
 },{"react":182,"react-dom":31}],5:[function(require,module,exports){

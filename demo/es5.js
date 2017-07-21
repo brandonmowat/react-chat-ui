@@ -74,7 +74,6 @@ var Chat = function (_React$Component) {
     value: function _onMessageSubmit(e) {
       var input = this.refs.message;
       e.preventDefault();
-      console.log("submit!");
       if (!input.value) {
         return false;
       }
@@ -84,7 +83,7 @@ var Chat = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log(this.state.messages);
+      //console.log(this.state.messages);
       return _react2.default.createElement(
         'div',
         null,

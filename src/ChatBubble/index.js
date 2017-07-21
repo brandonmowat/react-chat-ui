@@ -120,19 +120,16 @@ export default class ChatBubble extends Component {
   }
 
   render() {
-    //console.log(this.props.message);
     if (this.props.message.id) {
       return (
         <div
-          style={[
-            {
-              ...styles.chatbubble,
-              ...styles.recipientChatbubble,
-              ...this.state.bubbleStyles.chatbubble,
-            },
-            this.props.bubblesCentered ||
-              styles.recipientChatbubbleOrientationNormal,
-          ]}
+          style={{
+            ...styles.chatbubble,
+            ...styles.recipientChatbubble,
+            ...this.state.bubbleStyles.chatbubble,
+            ...(this.props.bubblesCentered ||
+              styles.recipientChatbubbleOrientationNormal),
+          }}
         >
           <p style={Object.assign({}, styles.p, this.state.bubbleStyles.text)}>
             {this.props.message.message}
@@ -142,14 +139,13 @@ export default class ChatBubble extends Component {
     } else {
       return (
         <div
-          style={[
-            {
-              ...styles.chatbubble,
-              ...this.state.bubbleStyles.chatbubble,
-              ...this.state.bubbleStyles.userBubble,
-            },
-            this.props.bubblesCentered || styles.chatbubbleOrientationNormal,
-          ]}
+          style={{
+            ...styles.chatbubble,
+            ...this.state.bubbleStyles.chatbubble,
+            ...this.state.bubbleStyles.userBubble,
+            ...(this.props.bubblesCentered ||
+              styles.chatbubbleOrientationNormal),
+          }}
         >
           <p style={{ ...styles.p, ...this.state.bubbleStyles.text }}>
             {this.props.message.message}

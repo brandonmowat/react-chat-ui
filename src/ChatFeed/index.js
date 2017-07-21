@@ -129,10 +129,9 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     flex: 1,
+    overflow: 'hidden',
   },
-  chatHistory: {
-    overflow: 'scroll',
-  },
+  chatHistory: { overflow: 'auto' },
   chatbubbleWrapper: {
     marginTop: 10,
     marginBottom: 10,
