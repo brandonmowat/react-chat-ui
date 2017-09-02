@@ -38,20 +38,6 @@ const styles = {
 export default class ChatBubble extends Component {
   constructor(props) {
     super()
-    this.state = {
-      message: props.message,
-      bubbleStyles: props.bubbleStyles
-        ? {
-            text: props.bubbleStyles.text ? props.bubbleStyles.text : {},
-            chatbubble: props.bubbleStyles.chatbubble
-              ? props.bubbleStyles.chatbubble
-              : {},
-            userBubble: props.bubbleStyles.userBubble
-              ? props.bubbleStyles.userBubble
-              : {},
-          }
-        : { text: {}, chatbubble: {} },
-    }
   }
 
   componentDidMount() {}
@@ -70,20 +56,14 @@ export default class ChatBubble extends Component {
         return (
           <span>
             {this._parse_for_styles(message.slice(0, bolded_start))}
-            <strong>
-              {bolded}
-            </strong>
+            <strong>{bolded}</strong>
             {this._parse_for_styles(
               message.slice(bolded_start + bolded_end + 4)
             )}
           </span>
         )
       } else {
-        return (
-          <span>
-            {message}
-          </span>
-        )
+        return <span>{message}</span>
       }
     }
     return message
@@ -111,27 +91,25 @@ export default class ChatBubble extends Component {
         </p>
       )
     } else {
-      return (
-        <p>
-          {message}
-        </p>
-      )
+      return <p>{message}</p>
     }
   }
 
   render() {
+    const { message, bubbleStyles, bubblesCentered } = this.props
+    const { userBubble, chatbubble, text } = bubbleStyles
+    console.log('centered?', bubblesCentered)
     if (this.props.message.id) {
       return (
         <div
           style={{
             ...styles.chatbubble,
             ...styles.recipientChatbubble,
-            ...this.state.bubbleStyles.chatbubble,
-            ...(this.props.bubblesCentered ||
-              styles.recipientChatbubbleOrientationNormal),
+            ...chatbubble,
+            ...(bubblesCentered || styles.recipientChatbubbleOrientationNormal),
           }}
         >
-          <p style={Object.assign({}, styles.p, this.state.bubbleStyles.text)}>
+          <p style={Object.assign({}, styles.p, text)}>
             {this.props.message.message}
           </p>
         </div>
@@ -141,15 +119,12 @@ export default class ChatBubble extends Component {
         <div
           style={{
             ...styles.chatbubble,
-            ...this.state.bubbleStyles.chatbubble,
-            ...this.state.bubbleStyles.userBubble,
-            ...(this.props.bubblesCentered ||
-              styles.chatbubbleOrientationNormal),
+            ...chatbubble,
+            ...userBubble,
+            ...(bubblesCentered || styles.chatbubbleOrientationNormal),
           }}
         >
-          <p style={{ ...styles.p, ...this.state.bubbleStyles.text }}>
-            {this.props.message.message}
-          </p>
+          <p style={{ ...styles.p, ...text }}>{this.props.message.message}</p>
         </div>
       )
     }

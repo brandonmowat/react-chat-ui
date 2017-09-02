@@ -39,6 +39,7 @@ export default class ChatFeed extends Component {
     * @return {message_nodes} - a JSX wrapped group of messages
     */
   _renderGroup(messages, index, id) {
+    const { bubblesCentered, bubbleStyles } = this.props
     var group = []
 
     for (var i = index; messages[i] ? messages[i].id == id : false; i--) {
@@ -50,8 +51,8 @@ export default class ChatFeed extends Component {
         <ChatBubble
           key={Math.random().toString(36)}
           message={curr}
-          bubblesCentered={this.props.bubblesCentered ? true : false}
-          bubbleStyles={this.props.bubbleStyles}
+          bubblesCentered={bubblesCentered}
+          bubbleStyles
         />
       )
     })
@@ -70,6 +71,8 @@ export default class ChatFeed extends Component {
     *   our UI.
     */
   _renderMessages(messages) {
+    const { bubbleStyles } = this.props
+
     var message_nodes = messages.map((curr, index) => {
       // Find diff in message type or no more messages
       if (
@@ -89,9 +92,7 @@ export default class ChatFeed extends Component {
         >
           <ChatBubble
             message={new Message({ id: 1, message: '...' })}
-            bubbleStyles={
-              this.props.bubbleStyles ? this.props.bubbleStyles : {}
-            }
+            bubbleStyles
           />
         </div>
       )

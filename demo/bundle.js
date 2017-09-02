@@ -200,17 +200,7 @@ var ChatBubble = function (_Component) {
   function ChatBubble(props) {
     _classCallCheck(this, ChatBubble);
 
-    var _this = _possibleConstructorReturn(this, (ChatBubble.__proto__ || Object.getPrototypeOf(ChatBubble)).call(this));
-
-    _this.state = {
-      message: props.message,
-      bubbleStyles: props.bubbleStyles ? {
-        text: props.bubbleStyles.text ? props.bubbleStyles.text : {},
-        chatbubble: props.bubbleStyles.chatbubble ? props.bubbleStyles.chatbubble : {},
-        userBubble: props.bubbleStyles.userBubble ? props.bubbleStyles.userBubble : {}
-      } : { text: {}, chatbubble: {} }
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (ChatBubble.__proto__ || Object.getPrototypeOf(ChatBubble)).call(this));
   }
 
   _createClass(ChatBubble, [{
@@ -283,15 +273,24 @@ var ChatBubble = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _props = this.props,
+          message = _props.message,
+          bubbleStyles = _props.bubbleStyles,
+          bubblesCentered = _props.bubblesCentered;
+      var userBubble = bubbleStyles.userBubble,
+          chatbubble = bubbleStyles.chatbubble,
+          text = bubbleStyles.text;
+
+      console.log('centered?', bubblesCentered);
       if (this.props.message.id) {
         return _react2.default.createElement(
           'div',
           {
-            style: _extends({}, styles.chatbubble, styles.recipientChatbubble, this.state.bubbleStyles.chatbubble, this.props.bubblesCentered || styles.recipientChatbubbleOrientationNormal)
+            style: _extends({}, styles.chatbubble, styles.recipientChatbubble, chatbubble, bubblesCentered || styles.recipientChatbubbleOrientationNormal)
           },
           _react2.default.createElement(
             'p',
-            { style: Object.assign({}, styles.p, this.state.bubbleStyles.text) },
+            { style: Object.assign({}, styles.p, text) },
             this.props.message.message
           )
         );
@@ -299,11 +298,11 @@ var ChatBubble = function (_Component) {
         return _react2.default.createElement(
           'div',
           {
-            style: _extends({}, styles.chatbubble, this.state.bubbleStyles.chatbubble, this.state.bubbleStyles.userBubble, this.props.bubblesCentered || styles.chatbubbleOrientationNormal)
+            style: _extends({}, styles.chatbubble, chatbubble, userBubble, bubblesCentered || styles.chatbubbleOrientationNormal)
           },
           _react2.default.createElement(
             'p',
-            { style: _extends({}, styles.p, this.state.bubbleStyles.text) },
+            { style: _extends({}, styles.p, text) },
             this.props.message.message
           )
         );
@@ -397,7 +396,9 @@ var ChatFeed = function (_Component) {
   }, {
     key: '_renderGroup',
     value: function _renderGroup(messages, index, id) {
-      var _this2 = this;
+      var _props = this.props,
+          bubblesCentered = _props.bubblesCentered,
+          bubbleStyles = _props.bubbleStyles;
 
       var group = [];
 
@@ -409,8 +410,8 @@ var ChatFeed = function (_Component) {
         return _react2.default.createElement(_index2.default, {
           key: Math.random().toString(36),
           message: curr,
-          bubblesCentered: _this2.props.bubblesCentered ? true : false,
-          bubbleStyles: _this2.props.bubbleStyles
+          bubblesCentered: bubblesCentered,
+          bubbleStyles: true
         });
       });
       return _react2.default.createElement(
@@ -431,12 +432,15 @@ var ChatFeed = function (_Component) {
   }, {
     key: '_renderMessages',
     value: function _renderMessages(messages) {
-      var _this3 = this;
+      var _this2 = this;
+
+      var bubbleStyles = this.props.bubbleStyles;
+
 
       var message_nodes = messages.map(function (curr, index) {
         // Find diff in message type or no more messages
         if ((messages[index + 1] ? false : true) || messages[index + 1].id != curr.id) {
-          return _this3._renderGroup(messages, index, curr.id);
+          return _this2._renderGroup(messages, index, curr.id);
         }
       });
 
@@ -450,7 +454,7 @@ var ChatFeed = function (_Component) {
           },
           _react2.default.createElement(_index2.default, {
             message: new _index6.default({ id: 1, message: '...' }),
-            bubbleStyles: this.props.bubbleStyles ? this.props.bubbleStyles : {}
+            bubbleStyles: true
           })
         ));
       }
@@ -466,10 +470,10 @@ var ChatFeed = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
+      var _this3 = this;
 
       window.setTimeout(function () {
-        _this4._scrollToBottom();
+        _this3._scrollToBottom();
       }, 10);
 
       var inputField = this.props.hasInputField ? _react2.default.createElement(_index4.default, null) : null;
@@ -21131,6 +21135,10 @@ process.off = noop;
 process.removeListener = noop;
 process.removeAllListeners = noop;
 process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
