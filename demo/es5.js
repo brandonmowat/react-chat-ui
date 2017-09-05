@@ -51,7 +51,7 @@ var Chat = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this));
 
     _this.state = {
-      messages: [new _lib.Message({ id: 1, message: "Hey guys!" }), new _lib.Message({ id: 2, message: "Hey! Evan here. react-chat-ui is pretty dooope." })],
+      messages: [new _lib.Message({ id: 1, message: 'Hey guys!' }), new _lib.Message({ id: 2, message: 'Hey! Evan here. react-chat-ui is pretty dooope.' })],
       curr_user: 0
     };
     return _this;
@@ -83,7 +83,7 @@ var Chat = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      //console.log(this.state.messages);
+      // console.log(this.state.messages);
       return _react2.default.createElement(
         'div',
         null,
@@ -91,10 +91,11 @@ var Chat = function (_React$Component) {
           messages: this.state.messages // Boolean: list of message objects
           , isTyping: false // Boolean: is the recipient typing
           , hasInputField: false // Boolean: use our input, or use your own
-          , bubblesCentered: false //Boolean should the bubbles be centered in the feed?
-          , bubbleStyles: { // JSON: Custom bubble styles
+          , bubblesCentered: false // Boolean should the bubbles be centered in the feed?
+          , bubbleStyles: {
+            // JSON: Custom bubble styles
             text: {
-              fontSize: 18
+              fontSize: 16
             },
             chatbubble: {
               maxWidth: 600
@@ -114,17 +115,26 @@ var Chat = function (_React$Component) {
           { style: { display: 'flex', justifyContent: 'space-around' } },
           _react2.default.createElement(
             'button',
-            { style: _extends({}, styles.button, this.state.curr_user === 0 ? styles.selected : {}), onClick: this._onPress.bind(this, 0) },
+            {
+              style: _extends({}, styles.button, this.state.curr_user === 0 ? styles.selected : {}),
+              onClick: this._onPress.bind(this, 0)
+            },
             'You'
           ),
           _react2.default.createElement(
             'button',
-            { style: _extends({}, styles.button, this.state.curr_user === 1 ? styles.selected : {}), onClick: this._onPress.bind(this, 1) },
+            {
+              style: _extends({}, styles.button, this.state.curr_user === 1 ? styles.selected : {}),
+              onClick: this._onPress.bind(this, 1)
+            },
             'Mark'
           ),
           _react2.default.createElement(
             'button',
-            { style: _extends({}, styles.button, this.state.curr_user === 2 ? styles.selected : {}), onClick: this._onPress.bind(this, 2) },
+            {
+              style: _extends({}, styles.button, this.state.curr_user === 2 ? styles.selected : {}),
+              onClick: this._onPress.bind(this, 2)
+            },
             'Evan'
           )
         )
