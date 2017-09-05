@@ -1,38 +1,43 @@
-"use strict";
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+const styles = {
+  chatInput: {
+    flex: 1,
+  },
+  inputStyle: {
+    border: 'none',
+    borderTopWidth: '1',
+    borderTopStyle: 'solid',
+    borderTopColor: '#ddd',
+    fontSize: '16',
+    outline: 'none',
+    padding: '30',
+    width: '100%',
+  },
+};
 
-export default class ChatInput extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+export default class ChatInput extends PureComponent {
   render() {
+    const { inputStyles, inputPlaceholder } = this.props;
     return (
       <div className="chat-input" style={styles.chatInput}>
         <input
           type="text"
-          style={this.props.inputStyles || styles.inputStyle}
-          placeholder={this.props.inputPlaceholder || "Message"}
+          style={inputStyles || styles.inputStyle}
+          placeholder={inputPlaceholder}
         />
       </div>
     );
   }
 }
 
-const styles = {
-  chatInput: {
-    flex: 1
-  },
-  inputStyle: {
-    border: "none",
-    borderTopWidth: "1",
-    borderTopStyle: "solid",
-    borderTopColor: "#ddd",
-    fontSize: "16",
-    outline: "none",
-    padding: "30",
-    width: "100%"
-  }
+ChatInput.propTypes = {
+  inputStyles: PropTypes.object,
+  inputPlaceholder: PropTypes.string,
+};
+
+ChatInput.defaultProps = {
+  inputStyles: {},
+  inputPlaceholder: 'Start typing...',
 };
