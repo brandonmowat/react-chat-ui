@@ -29,31 +29,36 @@ class Chat extends React.Component {
     super();
     this.state = {
       messages: [
-        new Message({ id: 1, message: 'Hey guys!' }),
-        new Message({ id: 2, message: 'Hey! Evan here. react-chat-ui is pretty dooope.' }),
+        new Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }),
+        new Message({
+          id: 2,
+          message: 'Hey! Evan here. react-chat-ui is pretty dooope.',
+          senderName: 'Evan',
+        }),
       ],
       curr_user: 0,
     };
   }
 
-  _onPress(user) {
+  onPress(user) {
     this.setState({ curr_user: user });
   }
 
-  _pushMessage(recipient, message) {
-    const prevState = this.state;
-    prevState.messages.push(new Message({ id: recipient, message }));
-    this.setState(this.state);
-  }
-
-  _onMessageSubmit(e) {
-    const input = this.refs.message;
+  onMessageSubmit(e) {
+    const input = this.message;
     e.preventDefault();
     if (!input.value) {
       return false;
     }
-    this._pushMessage(this.state.curr_user, input.value);
+    this.pushMessage(this.state.curr_user, input.value);
     input.value = '';
+    return true;
+  }
+
+  pushMessage(recipient, message) {
+    const prevState = this.state;
+    prevState.messages.push(new Message({ id: recipient, message }));
+    this.setState(this.state);
   }
 
   render() {
@@ -79,26 +84,32 @@ class Chat extends React.Component {
           }}
         />
 
-        <form onSubmit={this._onMessageSubmit.bind(this)}>
-          <input ref="message" placeholder="Type a message..." className="message-input" />
+        <form onSubmit={() => this.onMessageSubmit()}>
+          <input
+            ref={(m) => {
+              this.message = m;
+            }}
+            placeholder="Type a message..."
+            className="message-input"
+          />
         </form>
 
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
           <button
             style={{ ...styles.button, ...(this.state.curr_user === 0 ? styles.selected : {}) }}
-            onClick={this._onPress.bind(this, 0)}
+            onClick={() => this.onPress(0)}
           >
             You
           </button>
           <button
             style={{ ...styles.button, ...(this.state.curr_user === 1 ? styles.selected : {}) }}
-            onClick={this._onPress.bind(this, 1)}
+            onClick={() => this.onPress(1)}
           >
             Mark
           </button>
           <button
             style={{ ...styles.button, ...(this.state.curr_user === 2 ? styles.selected : {}) }}
-            onClick={this._onPress.bind(this, 2)}
+            onClick={() => this.onPress(2)}
           >
             Evan
           </button>

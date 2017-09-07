@@ -8,30 +8,7 @@ import PropTypes from 'prop-types';
 import ChatBubble from '../ChatBubble';
 import ChatInput from '../ChatInput';
 import Message from '../Message';
-
-const styles = {
-  chatPanel: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: 1,
-    overflow: 'hidden',
-  },
-  chatHistory: { overflow: 'auto' },
-  chatbubbleWrapper: {
-    marginTop: 10,
-    marginBottom: 10,
-    overflow: 'auto',
-    position: 'relative',
-  },
-  img: {
-    borderRadius: 100,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-    width: 36,
-    zIndex: 100,
-  },
-};
+import styles from './styles';
 
 export default class ChatFeed extends Component {
   constructor(props) {
