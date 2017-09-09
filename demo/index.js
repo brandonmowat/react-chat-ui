@@ -84,7 +84,7 @@ class Chat extends React.Component {
           }}
         />
 
-        <form onSubmit={() => this.onMessageSubmit()}>
+        <form onSubmit={e => this.onMessageSubmit(e)}>
           <input
             ref={(m) => {
               this.message = m;
