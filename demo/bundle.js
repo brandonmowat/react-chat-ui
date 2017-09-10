@@ -43,6 +43,12 @@ var styles = {
   }
 };
 
+var users = {
+  0: 'You',
+  1: 'Mark',
+  2: 'Evan'
+};
+
 var Chat = function (_React$Component) {
   _inherits(Chat, _React$Component);
 
@@ -83,7 +89,7 @@ var Chat = function (_React$Component) {
     key: 'pushMessage',
     value: function pushMessage(recipient, message) {
       var prevState = this.state;
-      prevState.messages.push(new _lib.Message({ id: recipient, message: message }));
+      prevState.messages.push(new _lib.Message({ id: recipient, message: message, senderName: users[recipient] }));
       this.setState(this.state);
     }
   }, {
@@ -97,7 +103,8 @@ var Chat = function (_React$Component) {
         null,
         _react2.default.createElement(_lib.ChatFeed, {
           messages: this.state.messages // Boolean: list of message objects
-          , isTyping: false // Boolean: is the recipient typing
+          , showSenderName: true,
+          isTyping: false // Boolean: is the recipient typing
           , hasInputField: false // Boolean: use our input, or use your own
           , bubblesCentered: false // Boolean should the bubbles be centered in the feed?
           , bubbleStyles: {
@@ -262,11 +269,6 @@ var ChatBubble = function (_Component) {
         {
           style: _extends({}, _styles2.default.chatbubbleWrapper, bubblesCentered || _styles2.default.recipientChatbubbleOrientationNormal)
         },
-        message.senderName && _react2.default.createElement(
-          'h5',
-          { style: _styles2.default.bubbleHeader },
-          message.senderName
-        ),
         _react2.default.createElement(
           'div',
           {
@@ -345,12 +347,6 @@ exports.default = {
     fontSize: 16,
     fontWeight: '300',
     margin: 0
-  },
-  bubbleHeader: {
-    margin: 0,
-    fontSize: 14,
-    fontWeight: '400',
-    color: '#999'
   }
 };
 },{}],4:[function(require,module,exports){
@@ -440,13 +436,16 @@ var ChatFeed = function (_Component) {
     value: function renderGroup(messages, index, id) {
       var _props = this.props,
           bubblesCentered = _props.bubblesCentered,
-          bubbleStyles = _props.bubbleStyles;
+          bubbleStyles = _props.bubbleStyles,
+          showSenderName = _props.showSenderName;
 
       var group = [];
 
       for (var i = index; messages[i] ? messages[i].id === id : false; i -= 1) {
         group.push(messages[i]);
       }
+
+      var sampleMessage = group[0];
 
       var messageNodes = group.reverse().map(function (curr) {
         return _react2.default.createElement(_ChatBubble2.default, {
@@ -459,6 +458,11 @@ var ChatFeed = function (_Component) {
       return _react2.default.createElement(
         'div',
         { key: Math.random().toString(36), style: _styles2.default.chatbubbleWrapper },
+        showSenderName && sampleMessage.senderName !== '' && sampleMessage.id !== 0 && _react2.default.createElement(
+          'h5',
+          { style: _styles2.default.bubbleGroupHeader },
+          sampleMessage.senderName
+        ),
         messageNodes
       );
     }
@@ -550,6 +554,7 @@ exports.default = ChatFeed;
 
 ChatFeed.propTypes = {
   isTyping: _propTypes2.default.bool,
+  showSenderName: _propTypes2.default.bool,
   hasInputField: _propTypes2.default.bool,
   bubblesCentered: _propTypes2.default.bool,
   bubbleStyles: _propTypes2.default.object,
@@ -558,6 +563,7 @@ ChatFeed.propTypes = {
 
 ChatFeed.defaultProps = {
   isTyping: false,
+  showSenderName: false,
   hasInputField: false,
   bubblesCentered: false,
   bubbleStyles: {},
@@ -590,6 +596,12 @@ exports.default = {
     position: 'absolute',
     width: 36,
     zIndex: 100
+  },
+  bubbleGroupHeader: {
+    margin: 0,
+    fontSize: 14,
+    fontWeight: '400',
+    color: '#999'
   }
 };
 },{}],6:[function(require,module,exports){

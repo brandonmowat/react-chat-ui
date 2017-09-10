@@ -42,6 +42,12 @@ var styles = {
   }
 };
 
+var users = {
+  0: 'You',
+  1: 'Mark',
+  2: 'Evan'
+};
+
 var Chat = function (_React$Component) {
   _inherits(Chat, _React$Component);
 
@@ -82,7 +88,7 @@ var Chat = function (_React$Component) {
     key: 'pushMessage',
     value: function pushMessage(recipient, message) {
       var prevState = this.state;
-      prevState.messages.push(new _lib.Message({ id: recipient, message: message }));
+      prevState.messages.push(new _lib.Message({ id: recipient, message: message, senderName: users[recipient] }));
       this.setState(this.state);
     }
   }, {
@@ -96,7 +102,8 @@ var Chat = function (_React$Component) {
         null,
         _react2.default.createElement(_lib.ChatFeed, {
           messages: this.state.messages // Boolean: list of message objects
-          , isTyping: false // Boolean: is the recipient typing
+          , showSenderName: true,
+          isTyping: false // Boolean: is the recipient typing
           , hasInputField: false // Boolean: use our input, or use your own
           , bubblesCentered: false // Boolean should the bubbles be centered in the feed?
           , bubbleStyles: {

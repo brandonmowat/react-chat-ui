@@ -24,6 +24,12 @@ const styles = {
   },
 };
 
+const users = {
+  0: 'You',
+  1: 'Mark',
+  2: 'Evan',
+};
+
 class Chat extends React.Component {
   constructor() {
     super();
@@ -57,7 +63,7 @@ class Chat extends React.Component {
 
   pushMessage(recipient, message) {
     const prevState = this.state;
-    prevState.messages.push(new Message({ id: recipient, message }));
+    prevState.messages.push(new Message({ id: recipient, message, senderName: users[recipient] }));
     this.setState(this.state);
   }
 
@@ -67,6 +73,7 @@ class Chat extends React.Component {
       <div>
         <ChatFeed
           messages={this.state.messages} // Boolean: list of message objects
+          showSenderName
           isTyping={false} // Boolean: is the recipient typing
           hasInputField={false} // Boolean: use our input, or use your own
           bubblesCentered={false} // Boolean should the bubbles be centered in the feed?

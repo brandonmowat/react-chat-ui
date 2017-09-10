@@ -40,7 +40,6 @@ export default class ChatBubble extends Component {
           ...(bubblesCentered || styles.recipientChatbubbleOrientationNormal),
         }}
       >
-        {message.senderName && <h5 style={styles.bubbleHeader}>{message.senderName}</h5>}
         <div
           style={{
             ...styles.chatbubble,

@@ -20,4 +20,10 @@ export default {
     width: 36,
     zIndex: 100,
   },
+  bubbleGroupHeader: {
+    margin: 0,
+    fontSize: 14,
+    fontWeight: '400',
+    color: '#999',
+  },
 };
