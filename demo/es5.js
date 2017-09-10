@@ -42,6 +42,12 @@ var styles = {
   }
 };
 
+var users = {
+  0: 'You',
+  1: 'Mark',
+  2: 'Evan'
+};
+
 var Chat = function (_React$Component) {
   _inherits(Chat, _React$Component);
 
@@ -51,45 +57,53 @@ var Chat = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this));
 
     _this.state = {
-      messages: [new _lib.Message({ id: 1, message: 'Hey guys!' }), new _lib.Message({ id: 2, message: 'Hey! Evan here. react-chat-ui is pretty dooope.' })],
+      messages: [new _lib.Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({
+        id: 2,
+        message: 'Hey! Evan here. react-chat-ui is pretty dooope.',
+        senderName: 'Evan'
+      })],
       curr_user: 0
     };
     return _this;
   }
 
   _createClass(Chat, [{
-    key: '_onPress',
-    value: function _onPress(user) {
+    key: 'onPress',
+    value: function onPress(user) {
       this.setState({ curr_user: user });
     }
   }, {
-    key: '_pushMessage',
-    value: function _pushMessage(recipient, message) {
-      var prevState = this.state;
-      prevState.messages.push(new _lib.Message({ id: recipient, message: message }));
-      this.setState(this.state);
-    }
-  }, {
-    key: '_onMessageSubmit',
-    value: function _onMessageSubmit(e) {
-      var input = this.refs.message;
+    key: 'onMessageSubmit',
+    value: function onMessageSubmit(e) {
+      var input = this.message;
       e.preventDefault();
       if (!input.value) {
         return false;
       }
-      this._pushMessage(this.state.curr_user, input.value);
+      this.pushMessage(this.state.curr_user, input.value);
       input.value = '';
+      return true;
+    }
+  }, {
+    key: 'pushMessage',
+    value: function pushMessage(recipient, message) {
+      var prevState = this.state;
+      prevState.messages.push(new _lib.Message({ id: recipient, message: message, senderName: users[recipient] }));
+      this.setState(this.state);
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       // console.log(this.state.messages);
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(_lib.ChatFeed, {
           messages: this.state.messages // Boolean: list of message objects
-          , isTyping: false // Boolean: is the recipient typing
+          , showSenderName: true,
+          isTyping: false // Boolean: is the recipient typing
           , hasInputField: false // Boolean: use our input, or use your own
           , bubblesCentered: false // Boolean should the bubbles be centered in the feed?
           , bubbleStyles: {
@@ -107,8 +121,16 @@ var Chat = function (_React$Component) {
         }),
         _react2.default.createElement(
           'form',
-          { onSubmit: this._onMessageSubmit.bind(this) },
-          _react2.default.createElement('input', { ref: 'message', placeholder: 'Type a message...', className: 'message-input' })
+          { onSubmit: function onSubmit(e) {
+              return _this2.onMessageSubmit(e);
+            } },
+          _react2.default.createElement('input', {
+            ref: function ref(m) {
+              _this2.message = m;
+            },
+            placeholder: 'Type a message...',
+            className: 'message-input'
+          })
         ),
         _react2.default.createElement(
           'div',
@@ -117,7 +139,9 @@ var Chat = function (_React$Component) {
             'button',
             {
               style: _extends({}, styles.button, this.state.curr_user === 0 ? styles.selected : {}),
-              onClick: this._onPress.bind(this, 0)
+              onClick: function onClick() {
+                return _this2.onPress(0);
+              }
             },
             'You'
           ),
@@ -125,7 +149,9 @@ var Chat = function (_React$Component) {
             'button',
             {
               style: _extends({}, styles.button, this.state.curr_user === 1 ? styles.selected : {}),
-              onClick: this._onPress.bind(this, 1)
+              onClick: function onClick() {
+                return _this2.onPress(1);
+              }
             },
             'Mark'
           ),
@@ -133,7 +159,9 @@ var Chat = function (_React$Component) {
             'button',
             {
               style: _extends({}, styles.button, this.state.curr_user === 2 ? styles.selected : {}),
-              onClick: this._onPress.bind(this, 2)
+              onClick: function onClick() {
+                return _this2.onPress(2);
+              }
             },
             'Evan'
           )

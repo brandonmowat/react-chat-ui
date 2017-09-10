@@ -8,30 +8,7 @@ import PropTypes from 'prop-types';
 import ChatBubble from '../ChatBubble';
 import ChatInput from '../ChatInput';
 import Message from '../Message';
-
-const styles = {
-  chatPanel: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: 1,
-    overflow: 'hidden',
-  },
-  chatHistory: { overflow: 'auto' },
-  chatbubbleWrapper: {
-    marginTop: 10,
-    marginBottom: 10,
-    overflow: 'auto',
-    position: 'relative',
-  },
-  img: {
-    borderRadius: 100,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-    width: 36,
-    zIndex: 100,
-  },
-};
+import styles from './styles';
 
 export default class ChatFeed extends Component {
   constructor(props) {
@@ -61,12 +38,14 @@ export default class ChatFeed extends Component {
     * @return {messageNodes} - a JSX wrapped group of messages
     */
   renderGroup(messages, index, id) {
-    const { bubblesCentered, bubbleStyles } = this.props;
+    const { bubblesCentered, bubbleStyles, showSenderName } = this.props;
     const group = [];
 
     for (let i = index; messages[i] ? messages[i].id === id : false; i -= 1) {
       group.push(messages[i]);
     }
+
+    const sampleMessage = group[0];
 
     const messageNodes = group
       .reverse()
@@ -80,6 +59,11 @@ export default class ChatFeed extends Component {
       ));
     return (
       <div key={Math.random().toString(36)} style={styles.chatbubbleWrapper}>
+        {showSenderName &&
+          (sampleMessage.senderName !== '' &&
+            (sampleMessage.id !== 0 && (
+              <h5 style={styles.bubbleGroupHeader}>{sampleMessage.senderName}</h5>
+            )))}
         {messageNodes}
       </div>
     );
@@ -147,6 +131,7 @@ export default class ChatFeed extends Component {
 
 ChatFeed.propTypes = {
   isTyping: PropTypes.bool,
+  showSenderName: PropTypes.bool,
   hasInputField: PropTypes.bool,
   bubblesCentered: PropTypes.bool,
   bubbleStyles: PropTypes.object,
@@ -155,6 +140,7 @@ ChatFeed.propTypes = {
 
 ChatFeed.defaultProps = {
   isTyping: false,
+  showSenderName: false,
   hasInputField: false,
   bubblesCentered: false,
   bubbleStyles: {},
