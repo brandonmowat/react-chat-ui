@@ -68,7 +68,6 @@ class Chat extends React.Component {
   }
 
   render() {
-    // console.log(this.state.messages);
     return (
       <div>
         <ChatFeed
