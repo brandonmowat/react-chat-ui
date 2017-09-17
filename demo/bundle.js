@@ -89,7 +89,8 @@ var Chat = function (_React$Component) {
     key: 'pushMessage',
     value: function pushMessage(recipient, message) {
       var prevState = this.state;
-      prevState.messages.push(new _lib.Message({ id: recipient, message: message, senderName: users[recipient] }));
+      var newMessage = new _lib.Message({ id: recipient, message: message, senderName: users[recipient] });
+      prevState.messages.push(newMessage);
       this.setState(this.state);
     }
   }, {
@@ -97,17 +98,13 @@ var Chat = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      // console.log(this.state.messages);
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(_lib.ChatFeed, {
           messages: this.state.messages // Boolean: list of message objects
           , showSenderName: true,
-          isTyping: false // Boolean: is the recipient typing
-          , hasInputField: false // Boolean: use our input, or use your own
-          , bubblesCentered: false // Boolean should the bubbles be centered in the feed?
-          , bubbleStyles: {
+          bubbleStyles: {
             // JSON: Custom bubble styles
             text: {
               fontSize: 16
@@ -397,15 +394,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var ChatFeed = function (_Component) {
   _inherits(ChatFeed, _Component);
 
-  function ChatFeed(props) {
+  function ChatFeed() {
     _classCallCheck(this, ChatFeed);
 
-    var _this = _possibleConstructorReturn(this, (ChatFeed.__proto__ || Object.getPrototypeOf(ChatFeed)).call(this, props));
-
-    _this.state = {
-      messages: props.messages || []
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (ChatFeed.__proto__ || Object.getPrototypeOf(ChatFeed)).apply(this, arguments));
   }
 
   _createClass(ChatFeed, [{
@@ -425,6 +417,7 @@ var ChatFeed = function (_Component) {
     /**
       * Parses and collects messages of one type to be grouped together.
       *
+      * @param {key} - a unique key for the group
       * @param {messages} - a list of Message objects
       * @param {index} - the index of the end of the message group
       * @param {type} - the type of group (user or recipient)
@@ -433,7 +426,7 @@ var ChatFeed = function (_Component) {
 
   }, {
     key: 'renderGroup',
-    value: function renderGroup(messages, index, id) {
+    value: function renderGroup(key, messages, index, id) {
       var _props = this.props,
           bubblesCentered = _props.bubblesCentered,
           bubbleStyles = _props.bubbleStyles,
@@ -447,17 +440,17 @@ var ChatFeed = function (_Component) {
 
       var sampleMessage = group[0];
 
-      var messageNodes = group.reverse().map(function (curr) {
+      var messageNodes = group.reverse().map(function (curr, i) {
         return _react2.default.createElement(_ChatBubble2.default, {
-          key: Math.random().toString(36),
-          message: curr,
+          key: i // HACK: fix this pls
+          , message: curr,
           bubblesCentered: bubblesCentered,
           bubbleStyles: bubbleStyles
         });
       });
       return _react2.default.createElement(
         'div',
-        { key: Math.random().toString(36), style: _styles2.default.chatbubbleWrapper },
+        { key: key, style: _styles2.default.chatbubbleWrapper },
         showSenderName && sampleMessage.senderName !== '' && sampleMessage.id !== 0 && _react2.default.createElement(
           'h5',
           { style: _styles2.default.bubbleGroupHeader },
@@ -488,7 +481,7 @@ var ChatFeed = function (_Component) {
       var messageNodes = messages.map(function (curr, index) {
         // Find diff in message type or no more messages
         if (!messages[index + 1] || messages[index + 1].id !== curr.id) {
-          return _this2.renderGroup(messages, index, curr.id);
+          return _this2.renderGroup(index, messages, index, curr.id);
         }
         return null;
       });
@@ -521,7 +514,7 @@ var ChatFeed = function (_Component) {
     value: function render() {
       var _this3 = this;
 
-      var inputField = this.props.hasInputField ? _react2.default.createElement(_ChatInput2.default, null) : null;
+      var inputField = this.props.hasInputField && _react2.default.createElement(_ChatInput2.default, null);
 
       return _react2.default.createElement(
         'div',
@@ -558,7 +551,7 @@ ChatFeed.propTypes = {
   hasInputField: _propTypes2.default.bool,
   bubblesCentered: _propTypes2.default.bool,
   bubbleStyles: _propTypes2.default.object,
-  messages: _propTypes2.default.arrayOf(_Message2.default)
+  messages: _propTypes2.default.array
 };
 
 ChatFeed.defaultProps = {

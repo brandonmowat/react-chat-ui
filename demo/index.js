@@ -63,20 +63,17 @@ class Chat extends React.Component {
 
   pushMessage(recipient, message) {
     const prevState = this.state;
-    prevState.messages.push(new Message({ id: recipient, message, senderName: users[recipient] }));
+    const newMessage = new Message({ id: recipient, message, senderName: users[recipient] });
+    prevState.messages.push(newMessage);
     this.setState(this.state);
   }
 
   render() {
-    // console.log(this.state.messages);
     return (
       <div>
         <ChatFeed
           messages={this.state.messages} // Boolean: list of message objects
           showSenderName
-          isTyping={false} // Boolean: is the recipient typing
-          hasInputField={false} // Boolean: use our input, or use your own
-          bubblesCentered={false} // Boolean should the bubbles be centered in the feed?
           bubbleStyles={{
             // JSON: Custom bubble styles
             text: {

@@ -11,13 +11,6 @@ import Message from '../Message';
 import styles from './styles';
 
 export default class ChatFeed extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      messages: props.messages || [],
-    };
-  }
-
   componentDidUpdate() {
     this.scrollToBottom();
   }
@@ -32,12 +25,13 @@ export default class ChatFeed extends Component {
   /**
     * Parses and collects messages of one type to be grouped together.
     *
+    * @param {key} - a unique key for the group
     * @param {messages} - a list of Message objects
     * @param {index} - the index of the end of the message group
     * @param {type} - the type of group (user or recipient)
     * @return {messageNodes} - a JSX wrapped group of messages
     */
-  renderGroup(messages, index, id) {
+  renderGroup(key, messages, index, id) {
     const { bubblesCentered, bubbleStyles, showSenderName } = this.props;
     const group = [];
 
@@ -47,18 +41,16 @@ export default class ChatFeed extends Component {
 
     const sampleMessage = group[0];
 
-    const messageNodes = group
-      .reverse()
-      .map(curr => (
-        <ChatBubble
-          key={Math.random().toString(36)}
-          message={curr}
-          bubblesCentered={bubblesCentered}
-          bubbleStyles={bubbleStyles}
-        />
-      ));
+    const messageNodes = group.reverse().map((curr, i) => (
+      <ChatBubble
+        key={i} // HACK: fix this pls
+        message={curr}
+        bubblesCentered={bubblesCentered}
+        bubbleStyles={bubbleStyles}
+      />
+    ));
     return (
-      <div key={Math.random().toString(36)} style={styles.chatbubbleWrapper}>
+      <div key={key} style={styles.chatbubbleWrapper}>
         {showSenderName &&
           (sampleMessage.senderName !== '' &&
             (sampleMessage.id !== 0 && (
@@ -82,7 +74,7 @@ export default class ChatFeed extends Component {
     const messageNodes = messages.map((curr, index) => {
       // Find diff in message type or no more messages
       if (!messages[index + 1] || messages[index + 1].id !== curr.id) {
-        return this.renderGroup(messages, index, curr.id);
+        return this.renderGroup(index, messages, index, curr.id);
       }
       return null;
     });
@@ -110,7 +102,7 @@ export default class ChatFeed extends Component {
   * render : renders our chatfeed
   */
   render() {
-    const inputField = this.props.hasInputField ? <ChatInput /> : null;
+    const inputField = this.props.hasInputField && <ChatInput />;
 
     return (
       <div id="chat-panel" style={styles.chatPanel}>
@@ -135,7 +127,7 @@ ChatFeed.propTypes = {
   hasInputField: PropTypes.bool,
   bubblesCentered: PropTypes.bool,
   bubbleStyles: PropTypes.object,
-  messages: PropTypes.arrayOf(Message),
+  messages: PropTypes.array,
 };
 
 ChatFeed.defaultProps = {
