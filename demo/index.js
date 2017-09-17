@@ -68,15 +68,11 @@ class Chat extends React.Component {
   }
 
   render() {
-    // console.log(this.state.messages);
     return (
       <div>
         <ChatFeed
           messages={this.state.messages} // Boolean: list of message objects
           showSenderName
-          isTyping={false} // Boolean: is the recipient typing
-          hasInputField={false} // Boolean: use our input, or use your own
-          bubblesCentered={false} // Boolean should the bubbles be centered in the feed?
           bubbleStyles={{
             // JSON: Custom bubble styles
             text: {
