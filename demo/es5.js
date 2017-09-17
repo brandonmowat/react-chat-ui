@@ -88,7 +88,8 @@ var Chat = function (_React$Component) {
     key: 'pushMessage',
     value: function pushMessage(recipient, message) {
       var prevState = this.state;
-      prevState.messages.push(new _lib.Message({ id: recipient, message: message, senderName: users[recipient] }));
+      var newMessage = new _lib.Message({ id: recipient, message: message, senderName: users[recipient] });
+      prevState.messages.push(newMessage);
       this.setState(this.state);
     }
   }, {

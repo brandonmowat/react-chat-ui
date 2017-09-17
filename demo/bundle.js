@@ -89,7 +89,8 @@ var Chat = function (_React$Component) {
     key: 'pushMessage',
     value: function pushMessage(recipient, message) {
       var prevState = this.state;
-      prevState.messages.push(new _lib.Message({ id: recipient, message: message, senderName: users[recipient] }));
+      var newMessage = new _lib.Message({ id: recipient, message: message, senderName: users[recipient] });
+      prevState.messages.push(newMessage);
       this.setState(this.state);
     }
   }, {
@@ -372,10 +373,6 @@ var _ChatInput = require('../ChatInput');
 
 var _ChatInput2 = _interopRequireDefault(_ChatInput);
 
-var _Message = require('../Message');
-
-var _Message2 = _interopRequireDefault(_Message);
-
 var _styles = require('./styles');
 
 var _styles2 = _interopRequireDefault(_styles);
@@ -426,6 +423,7 @@ var ChatFeed = function (_Component) {
   }, {
     key: 'renderGroup',
     value: function renderGroup(key, messages, index, id) {
+      console.log(key, messages, index, id);
       var _props = this.props,
           bubblesCentered = _props.bubblesCentered,
           bubbleStyles = _props.bubbleStyles,
@@ -472,6 +470,7 @@ var ChatFeed = function (_Component) {
     value: function renderMessages(messages) {
       var _this2 = this;
 
+      console.log(messages);
       var _props2 = this.props,
           isTyping = _props2.isTyping,
           bubbleStyles = _props2.bubbleStyles;
@@ -494,7 +493,7 @@ var ChatFeed = function (_Component) {
             style: _extends({}, _styles2.default.recipient, _styles2.default.chatbubbleWrapper)
           },
           _react2.default.createElement(_ChatBubble2.default, {
-            message: new _Message2.default({ id: 1, message: '...' }),
+            message: new Message({ id: 1, message: '...' }),
             bubbleStyles: bubbleStyles
           })
         ));
@@ -550,7 +549,7 @@ ChatFeed.propTypes = {
   hasInputField: _propTypes2.default.bool,
   bubblesCentered: _propTypes2.default.bool,
   bubbleStyles: _propTypes2.default.object,
-  messages: _propTypes2.default.arrayOf(_Message2.default)
+  messages: _propTypes2.default.array
 };
 
 ChatFeed.defaultProps = {
@@ -561,7 +560,7 @@ ChatFeed.defaultProps = {
   bubbleStyles: {},
   messages: []
 };
-},{"../ChatBubble":2,"../ChatInput":6,"../Message":7,"./styles":5,"prop-types":36,"react":192}],5:[function(require,module,exports){
+},{"../ChatBubble":2,"../ChatInput":6,"./styles":5,"prop-types":36,"react":192}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

@@ -127,7 +127,7 @@ ChatFeed.propTypes = {
   hasInputField: PropTypes.bool,
   bubblesCentered: PropTypes.bool,
   bubbleStyles: PropTypes.object,
-  messages: PropTypes.arrayOf(Message),
+  messages: PropTypes.array,
 };
 
 ChatFeed.defaultProps = {

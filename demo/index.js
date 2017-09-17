@@ -63,7 +63,8 @@ class Chat extends React.Component {
 
   pushMessage(recipient, message) {
     const prevState = this.state;
-    prevState.messages.push(new Message({ id: recipient, message, senderName: users[recipient] }));
+    const newMessage = new Message({ id: recipient, message, senderName: users[recipient] });
+    prevState.messages.push(newMessage);
     this.setState(this.state);
   }
 
