@@ -5,14 +5,20 @@
   "repository": "brandonmowat/react-chat-ui",
   "main": "./lib/index.js",
   "scripts": {
-    "build-demo":
-      "babel --presets es2015,stage-0 ./demo/index.js -o ./demo/es5.js && browserify demo/es5.js -o demo/bundle.js",
+    "build-demo": "babel --presets es2015,stage-0 ./demo/index.js -o ./demo/es5.js && browserify demo/es5.js -o demo/bundle.js",
     "compile": "babel --presets es2015,stage-0,react -d lib/ src/",
     "prepublish": "npm run compile",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "gulp watch"
   },
-  "keywords": ["react", "chat", "chatfeed", "reactjs", "ui", "messenger"],
+  "keywords": [
+    "react",
+    "chat",
+    "chatfeed",
+    "reactjs",
+    "ui",
+    "messenger"
+  ],
   "author": "Brandon Mowat",
   "license": "ISC",
   "dependencies": {
@@ -34,6 +40,8 @@
     "eslint-plugin-react": "^7.3.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
-    "gulp-typescript": "^3.2.2"
+    "gulp-plumber": "^1.1.0",
+    "gulp-typescript": "^3.2.2",
+    "typescript": "^2.5.2"
   }
 }
