@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './styles';
 
 export default class ChatBubble extends Component {
-  componentDidMount() {}
-
   // Helper render method for redering a chat bubble
   renderBlueBubble() {
     const { message, bubbleStyles, bubblesCentered } = this.props;
