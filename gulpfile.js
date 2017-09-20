@@ -22,5 +22,5 @@ gulp.task('compileRCT', () => {
 // configure which files to watch and what tasks to use on file changes
 gulp.task('watch', () => {
   gulp.watch('src/**/*{ts,tsx}', ['compileTS']);
-  gulp.watch('lib/**/*.js', ['compileRCT']);
+  gulp.watch('temp/**/*js', ['compileRCT']);
 });

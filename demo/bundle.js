@@ -594,134 +594,59 @@ exports.default = {
   }
 };
 },{}],6:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var styles = {
-  chatInput: {
-    flex: 1
-  },
-  inputStyle: {
-    border: 'none',
-    borderTopWidth: '1',
-    borderTopStyle: 'solid',
-    borderTopColor: '#ddd',
-    fontSize: '16',
-    outline: 'none',
-    padding: '30',
-    width: '100%'
-  }
-};
-
-var ChatInput = function (_PureComponent) {
-  _inherits(ChatInput, _PureComponent);
-
-  function ChatInput() {
-    _classCallCheck(this, ChatInput);
-
-    return _possibleConstructorReturn(this, (ChatInput.__proto__ || Object.getPrototypeOf(ChatInput)).apply(this, arguments));
-  }
-
-  _createClass(ChatInput, [{
-    key: 'render',
-    value: function render() {
-      var _props = this.props,
-          inputStyles = _props.inputStyles,
-          inputPlaceholder = _props.inputPlaceholder;
-
-      return _react2.default.createElement(
-        'div',
-        { className: 'chat-input', style: styles.chatInput },
-        _react2.default.createElement('input', {
-          type: 'text',
-          style: inputStyles || styles.inputStyle,
-          placeholder: inputPlaceholder
-        })
-      );
-    }
-  }]);
-
-  return ChatInput;
-}(_react.PureComponent);
-
-exports.default = ChatInput;
-
-
-ChatInput.propTypes = {
-  inputStyles: _propTypes2.default.object,
-  inputPlaceholder: _propTypes2.default.string
-};
-
-ChatInput.defaultProps = {
-  inputStyles: {},
-  inputPlaceholder: 'Start typing...'
-};
-},{"prop-types":37,"react":193}],7:[function(require,module,exports){
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = require("react");
+var styles = {
+    chatInput: {
+        flex: 1
+    },
+    inputStyle: {
+        border: 'none',
+        borderTopWidth: '1',
+        borderTopStyle: 'solid',
+        borderTopColor: '#ddd',
+        fontSize: '16',
+        outline: 'none',
+        padding: '30',
+        width: '100%'
+    }
+};
+var ChatInput = function ChatInput(props) {
+    var inputStyles = props.inputStyles,
+        inputPlaceholder = props.inputPlaceholder;
+
+    return react_1.default.createElement("div", { className: "chat-input", style: styles.chatInput }, react_1.default.createElement("input", { type: "text", style: inputStyles || styles.inputStyle, placeholder: inputPlaceholder }));
+};
+exports.default = ChatInput;
+},{"react":193}],7:[function(require,module,exports){
+"use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/**
-* A statndardized message object for use
-* in rendering messages in the chat feed.
-*/
-var Message =
-/**
-  * Message object for organizing and storing current message data.
-  *
-  * @param {Object} messageData - a JSON object containing all the data for a message.
-  * @param {number} messageData.id - id for grouping messages (0 for blue)
-  * @param {(string|html)} messageData.message - the content of the message to
-  *   be rendered in the bubble
-  * @param {string} [messageData.senderName] - the name of the sender of the
-  *   message
-  */
-function Message(messageData) {
-  _classCallCheck(this, Message);
+Object.defineProperty(exports, "__esModule", { value: true });
 
-  this.id = messageData.id; // id of the sender (0 is reserved for "blue bubble")
-  this.message = messageData.message;
-  this.senderName = messageData.senderName || undefined;
+var Message = function Message(messageData) {
+    _classCallCheck(this, Message);
+
+    this.id = messageData.id;
+    this.senderName = messageData.senderName || undefined;
 };
 
 exports.default = Message;
 },{}],8:[function(require,module,exports){
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const _1 = require("./ChatBubble/");
-exports.ChatBubble = _1.default;
-const _2 = require("./ChatFeed/");
-exports.ChatFeed = _2.default;
-const _3 = require("./ChatInput/");
-exports.ChatInput = _3.default;
-const _4 = require("./Message/");
-exports.Message = _4.default;
 
+Object.defineProperty(exports, "__esModule", { value: true });
+var _1 = require("./ChatBubble/");
+exports.ChatBubble = _1.default;
+var _2 = require("./ChatFeed/");
+exports.ChatFeed = _2.default;
+var _3 = require("./ChatInput/");
+exports.ChatInput = _3.default;
+var _4 = require("./Message/");
+exports.Message = _4.default;
 },{"./ChatBubble/":2,"./ChatFeed/":4,"./ChatInput/":6,"./Message/":7}],9:[function(require,module,exports){
 (function (process){
 'use strict';
