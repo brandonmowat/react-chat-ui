@@ -174,29 +174,9 @@ var Chat = function (_React$Component) {
 (0, _reactDom.render)(_react2.default.createElement(Chat, null), document.getElementById('chat-ui'));
 
 },{"../lib":8,"react":193,"react-dom":42}],2:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _styles = require('./styles');
-
-var _styles2 = _interopRequireDefault(_styles);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -204,105 +184,50 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ChatBubble = function (_Component) {
-  _inherits(ChatBubble, _Component);
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = require("react");
+var styles_1 = require("./styles");
 
-  function ChatBubble() {
-    _classCallCheck(this, ChatBubble);
+var ChatBubble = function (_React$Component) {
+    _inherits(ChatBubble, _React$Component);
 
-    return _possibleConstructorReturn(this, (ChatBubble.__proto__ || Object.getPrototypeOf(ChatBubble)).apply(this, arguments));
-  }
+    function ChatBubble(props) {
+        _classCallCheck(this, ChatBubble);
 
-  _createClass(ChatBubble, [{
-    key: 'renderBlueBubble',
-
-    // Helper render method for redering a chat bubble
-    value: function renderBlueBubble() {
-      var _props = this.props,
-          message = _props.message,
-          bubbleStyles = _props.bubbleStyles,
-          bubblesCentered = _props.bubblesCentered;
-      var userBubble = bubbleStyles.userBubble,
-          chatbubble = bubbleStyles.chatbubble,
-          text = bubbleStyles.text;
-
-      return _react2.default.createElement(
-        'div',
-        {
-          style: _extends({}, _styles2.default.chatbubbleWrapper, bubblesCentered || _styles2.default.chatbubbleOrientationNormal)
-        },
-        _react2.default.createElement(
-          'div',
-          {
-            style: _extends({}, _styles2.default.chatbubble, chatbubble, userBubble)
-          },
-          _react2.default.createElement(
-            'p',
-            { style: _extends({}, _styles2.default.p, text) },
-            message.message
-          )
-        )
-      );
+        return _possibleConstructorReturn(this, (ChatBubble.__proto__ || Object.getPrototypeOf(ChatBubble)).call(this, props));
     }
 
-    // Helper render method for redering a chat bubble
+    _createClass(ChatBubble, [{
+        key: "renderBlueBubble",
+        value: function renderBlueBubble() {
+            var _props$bubbleStyles = this.props.bubbleStyles,
+                userBubble = _props$bubbleStyles.userBubble,
+                chatbubble = _props$bubbleStyles.chatbubble,
+                text = _props$bubbleStyles.text;
 
-  }, {
-    key: 'renderGrayBubble',
-    value: function renderGrayBubble() {
-      var _props2 = this.props,
-          message = _props2.message,
-          bubbleStyles = _props2.bubbleStyles,
-          bubblesCentered = _props2.bubblesCentered;
-      var chatbubble = bubbleStyles.chatbubble,
-          text = bubbleStyles.text;
+            return React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper, this.props.bubblesCentered ? {} : styles_1.default.chatbubbleOrientationNormal) }, React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubble, chatbubble, userBubble) }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, this.props.message.message)));
+        }
+    }, {
+        key: "renderGrayBubble",
+        value: function renderGrayBubble() {
+            var _props$bubbleStyles2 = this.props.bubbleStyles,
+                chatbubble = _props$bubbleStyles2.chatbubble,
+                text = _props$bubbleStyles2.text;
 
-      return _react2.default.createElement(
-        'div',
-        {
-          style: _extends({}, _styles2.default.chatbubbleWrapper, bubblesCentered || _styles2.default.recipientChatbubbleOrientationNormal)
-        },
-        _react2.default.createElement(
-          'div',
-          {
-            style: _extends({}, _styles2.default.chatbubble, _styles2.default.recipientChatbubble, chatbubble)
-          },
-          _react2.default.createElement(
-            'p',
-            { style: _extends({}, _styles2.default.p, text) },
-            message.message
-          )
-        )
-      );
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var message = this.props.message;
-      // message.id 0 is reserved for blue
+            return React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper, this.props.bubblesCentered ? {} : styles_1.default.recipientChatbubbleOrientationNormal) }, React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubble, styles_1.default.recipientChatbubble, chatbubble) }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, this.props.message.message)));
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            return this.props.message.id === 0 ? this.renderBlueBubble() : this.renderGrayBubble();
+        }
+    }]);
 
-      return message.id === 0 ? this.renderBlueBubble() : this.renderGrayBubble();
-    }
-  }]);
-
-  return ChatBubble;
-}(_react.Component);
+    return ChatBubble;
+}(React.Component);
 
 exports.default = ChatBubble;
-
-
-ChatBubble.propTypes = {
-  bubbleStyles: _propTypes2.default.object,
-  message: _propTypes2.default.object,
-  bubblesCentered: _propTypes2.default.bool
-};
-
-ChatBubble.defaultProps = {
-  bubbleStyles: {},
-  message: { id: 0, message: "I'm a chat message" },
-  bubblesCentered: false
-};
-},{"./styles":3,"prop-types":37,"react":193}],3:[function(require,module,exports){
+},{"./styles":3,"react":193}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -631,6 +556,7 @@ var Message = function Message(messageData) {
     _classCallCheck(this, Message);
 
     this.id = messageData.id;
+    this.message = messageData.message;
     this.senderName = messageData.senderName || undefined;
 };
 
