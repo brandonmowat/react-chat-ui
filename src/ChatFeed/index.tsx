@@ -29,7 +29,7 @@ export default class ChatFeed extends React.Component {
     this.scrollToBottom();
   }
 
-  public scrollToBottom() {
+  scrollToBottom() {
     const scrollHeight = this.chat.scrollHeight;
     const height = this.chat.clientHeight;
     const maxScrollTop = scrollHeight - height;
@@ -45,7 +45,7 @@ export default class ChatFeed extends React.Component {
     * @param {type} - the type of group (user or recipient)
     * @return {messageNodes} - a JSX wrapped group of messages
     */
-  public renderGroup(key: number, messages: [Message], index: number, id: number) {
+  renderGroup(key: number, messages: [Message], index: number, id: number) {
     const { bubblesCentered, bubbleStyles, showSenderName } = this.props;
     const group = [];
 
@@ -85,7 +85,7 @@ export default class ChatFeed extends React.Component {
     * @return {messageNodes} - a list of message JSX objects to be rendered in
     *   our UI.
     */
-  public renderMessages(messages: [Message]) {
+  renderMessages(messages: [Message]) {
     const { isTyping, bubbleStyles } = this.props;
 
     const messageNodes = messages.map((curr, index) => {
@@ -118,7 +118,7 @@ export default class ChatFeed extends React.Component {
   /**
   * render : renders our chatfeed
   */
-  public render() {
+  render() {
     const inputField = this.props.hasInputField && <ChatInput />;
 
     return (
