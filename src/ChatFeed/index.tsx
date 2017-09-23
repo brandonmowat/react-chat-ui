@@ -25,7 +25,7 @@ export default class ChatFeed extends React.Component {
     showSenderName: boolean;
   };
 
-  public componentDidUpdate() {
+  componentDidUpdate() {
     this.scrollToBottom();
   }
 
