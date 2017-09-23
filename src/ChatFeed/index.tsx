@@ -3,14 +3,28 @@
 // other developers make chat interfaces.
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
 import ChatBubble from '../ChatBubble';
 import ChatInput from '../ChatInput';
 import Message from '../Message';
 import styles from './styles';
 
+interface ChatFeedProps {}
+
 export default class ChatFeed extends Component {
+  chat: {
+    scrollHeight: number;
+    clientHeight: number;
+    scrollTop: number;
+  };
+  props: {
+    bubblesCentered: boolean;
+    bubbleStyles: object;
+    hasInputField: boolean;
+    isTyping: boolean;
+    messages: any;
+    showSenderName: boolean;
+  };
+
   componentDidUpdate() {
     this.scrollToBottom();
   }
@@ -41,14 +55,17 @@ export default class ChatFeed extends Component {
 
     const sampleMessage = group[0];
 
-    const messageNodes = group.reverse().map((curr, i) => (
-      <ChatBubble
-        key={i} // HACK: fix this pls
-        message={curr}
-        bubblesCentered={bubblesCentered}
-        bubbleStyles={bubbleStyles}
-      />
-    ));
+    const messageNodes = group.reverse().map((curr, i) => {
+      return (
+        <ChatBubble
+          key={i}
+          message={curr}
+          bubblesCentered={bubblesCentered}
+          bubbleStyles={bubbleStyles}
+        />
+      );
+    });
+
     return (
       <div key={key} style={styles.chatbubbleWrapper}>
         {showSenderName &&
@@ -87,7 +104,7 @@ export default class ChatFeed extends Component {
           style={{ ...styles.recipient, ...styles.chatbubbleWrapper }}
         >
           <ChatBubble
-            message={new Message({ id: 1, message: '...' })}
+            message={new Message({ id: 1, message: '...', senderName: '' })}
             bubbleStyles={bubbleStyles}
           />
         </div>,
@@ -107,7 +124,7 @@ export default class ChatFeed extends Component {
     return (
       <div id="chat-panel" style={styles.chatPanel}>
         <div
-          ref={(c) => {
+          ref={c => {
             this.chat = c;
           }}
           className="chat-history"
@@ -120,21 +137,3 @@ export default class ChatFeed extends Component {
     );
   }
 }
-
-ChatFeed.propTypes = {
-  isTyping: PropTypes.bool,
-  showSenderName: PropTypes.bool,
-  hasInputField: PropTypes.bool,
-  bubblesCentered: PropTypes.bool,
-  bubbleStyles: PropTypes.object,
-  messages: PropTypes.array,
-};
-
-ChatFeed.defaultProps = {
-  isTyping: false,
-  showSenderName: false,
-  hasInputField: false,
-  bubblesCentered: false,
-  bubbleStyles: {},
-  messages: [],
-};
