@@ -11,15 +11,8 @@ interface MessageData {
 
 export default class Message {
   /**
-    * Message object for organizing and storing current message data.
-    *
-    * @param {Object} messageData - a JSON object containing all the data for a message.
-    * @param {number} messageData.id - id for grouping messages (0 for blue)
-    * @param {(string|html)} messageData.message - the content of the message to
-    *   be rendered in the bubble
-    * @param {string} [messageData.senderName] - the name of the sender of the
-    *   message
-    */
+  * Message object for organizing and storing current message data.
+  */
   id: number;
   message: string;
   senderName: string;

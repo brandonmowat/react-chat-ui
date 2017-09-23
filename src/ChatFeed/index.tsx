@@ -37,14 +37,9 @@ export default class ChatFeed extends React.Component {
   }
 
   /**
-    * Parses and collects messages of one type to be grouped together.
-    *
-    * @param {key} - a unique key for the group
-    * @param {messages} - a list of Message objects
-    * @param {index} - the index of the end of the message group
-    * @param {type} - the type of group (user or recipient)
-    * @return {messageNodes} - a JSX wrapped group of messages
-    */
+  * Parses and collects messages of one type to be grouped together.
+  * @return {messageNodes} - a JSX wrapped group of messages
+  */
   renderGroup(key: number, messages: [Message], index: number, id: number) {
     const { bubblesCentered, bubbleStyles, showSenderName } = this.props;
     const group = [];
@@ -79,12 +74,8 @@ export default class ChatFeed extends React.Component {
   }
 
   /**
-    * Determines what type of message/messages to render.
-    *
-    * @param {messages} - a list of message objects
-    * @return {messageNodes} - a list of message JSX objects to be rendered in
-    *   our UI.
-    */
+  * Determines what type of message/messages to render.
+  */
   renderMessages(messages: [Message]) {
     const { isTyping, bubbleStyles } = this.props;
 
