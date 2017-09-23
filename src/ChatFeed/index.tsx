@@ -2,7 +2,7 @@
 // Written, developed, and designed by Brandon Mowat for the purpose of helping
 // other developers make chat interfaces.
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import ChatBubble from '../ChatBubble';
 import ChatInput from '../ChatInput';
 import Message from '../Message';
@@ -10,7 +10,7 @@ import styles from './styles';
 
 interface ChatFeedProps {}
 
-export default class ChatFeed extends Component {
+export default class ChatFeed extends React.Component {
   chat: {
     scrollHeight: number;
     clientHeight: number;
@@ -25,11 +25,11 @@ export default class ChatFeed extends Component {
     showSenderName: boolean;
   };
 
-  componentDidUpdate() {
+  public componentDidUpdate() {
     this.scrollToBottom();
   }
 
-  scrollToBottom() {
+  public scrollToBottom() {
     const scrollHeight = this.chat.scrollHeight;
     const height = this.chat.clientHeight;
     const maxScrollTop = scrollHeight - height;
@@ -45,7 +45,7 @@ export default class ChatFeed extends Component {
     * @param {type} - the type of group (user or recipient)
     * @return {messageNodes} - a JSX wrapped group of messages
     */
-  renderGroup(key, messages, index, id) {
+  public renderGroup(key: number, messages: [Message], index: number, id: number) {
     const { bubblesCentered, bubbleStyles, showSenderName } = this.props;
     const group = [];
 
@@ -85,7 +85,7 @@ export default class ChatFeed extends Component {
     * @return {messageNodes} - a list of message JSX objects to be rendered in
     *   our UI.
     */
-  renderMessages(messages) {
+  public renderMessages(messages: [Message]) {
     const { isTyping, bubbleStyles } = this.props;
 
     const messageNodes = messages.map((curr, index) => {
@@ -118,7 +118,7 @@ export default class ChatFeed extends Component {
   /**
   * render : renders our chatfeed
   */
-  render() {
+  public render() {
     const inputField = this.props.hasInputField && <ChatInput />;
 
     return (

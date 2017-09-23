@@ -279,14 +279,14 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var react_1 = require("react");
+var React = require("react");
 var ChatBubble_1 = require("../ChatBubble");
 var ChatInput_1 = require("../ChatInput");
 var Message_1 = require("../Message");
 var styles_1 = require("./styles");
 
-var ChatFeed = function (_react_1$Component) {
-    _inherits(ChatFeed, _react_1$Component);
+var ChatFeed = function (_React$Component) {
+    _inherits(ChatFeed, _React$Component);
 
     function ChatFeed() {
         _classCallCheck(this, ChatFeed);
@@ -321,9 +321,9 @@ var ChatFeed = function (_react_1$Component) {
             }
             var sampleMessage = group[0];
             var messageNodes = group.reverse().map(function (curr, i) {
-                return react_1.default.createElement(ChatBubble_1.default, { key: i, message: curr, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles });
+                return React.createElement(ChatBubble_1.default, { key: i, message: curr, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles });
             });
-            return react_1.default.createElement("div", { key: key, style: styles_1.default.chatbubbleWrapper }, showSenderName && sampleMessage.senderName !== '' && sampleMessage.id !== 0 && react_1.default.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, sampleMessage.senderName), messageNodes);
+            return React.createElement("div", { key: key, style: styles_1.default.chatbubbleWrapper }, showSenderName && sampleMessage.senderName !== '' && sampleMessage.id !== 0 && React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, sampleMessage.senderName), messageNodes);
         }
     }, {
         key: "renderMessages",
@@ -341,7 +341,7 @@ var ChatFeed = function (_react_1$Component) {
                 return null;
             });
             if (isTyping) {
-                messageNodes.push(react_1.default.createElement("div", { key: Math.random().toString(36), style: Object.assign({}, styles_1.default.recipient, styles_1.default.chatbubbleWrapper) }, react_1.default.createElement(ChatBubble_1.default, { message: new Message_1.default({ id: 1, message: '...', senderName: '' }), bubbleStyles: bubbleStyles })));
+                messageNodes.push(React.createElement("div", { key: Math.random().toString(36), style: Object.assign({}, styles_1.default.recipient, styles_1.default.chatbubbleWrapper) }, React.createElement(ChatBubble_1.default, { message: new Message_1.default({ id: 1, message: '...', senderName: '' }), bubbleStyles: bubbleStyles })));
             }
             return messageNodes;
         }
@@ -350,15 +350,15 @@ var ChatFeed = function (_react_1$Component) {
         value: function render() {
             var _this3 = this;
 
-            var inputField = this.props.hasInputField && react_1.default.createElement(ChatInput_1.default, null);
-            return react_1.default.createElement("div", { id: "chat-panel", style: styles_1.default.chatPanel }, react_1.default.createElement("div", { ref: function ref(c) {
+            var inputField = this.props.hasInputField && React.createElement(ChatInput_1.default, null);
+            return React.createElement("div", { id: "chat-panel", style: styles_1.default.chatPanel }, React.createElement("div", { ref: function ref(c) {
                     _this3.chat = c;
-                }, className: "chat-history", style: styles_1.default.chatHistory }, react_1.default.createElement("div", { className: "chat-messages" }, this.renderMessages(this.props.messages))), inputField);
+                }, className: "chat-history", style: styles_1.default.chatHistory }, React.createElement("div", { className: "chat-messages" }, this.renderMessages(this.props.messages))), inputField);
         }
     }]);
 
     return ChatFeed;
-}(react_1.Component);
+}(React.Component);
 
 exports.default = ChatFeed;
 },{"../ChatBubble":2,"../ChatInput":6,"../Message":7,"./styles":5,"react":185}],5:[function(require,module,exports){
