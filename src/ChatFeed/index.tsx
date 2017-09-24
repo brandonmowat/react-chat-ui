@@ -8,14 +8,7 @@ import ChatInput from '../ChatInput';
 import Message from '../Message';
 import styles from './styles';
 
-interface ChatFeedProps {}
-
-export default class ChatFeed extends React.Component {
-  chat: {
-    scrollHeight: number;
-    clientHeight: number;
-    scrollTop: number;
-  };
+interface ChatFeedInterface {
   props: {
     bubblesCentered: boolean;
     bubbleStyles: object;
@@ -24,6 +17,19 @@ export default class ChatFeed extends React.Component {
     messages: any;
     showSenderName: boolean;
   };
+}
+
+export default class ChatFeed extends React.Component {
+  props;
+  chat: {
+    scrollHeight: number;
+    clientHeight: number;
+    scrollTop: number;
+  };
+
+  constructor(props: ChatFeedInterface) {
+    super(props);
+  }
 
   componentDidUpdate() {
     this.scrollToBottom();

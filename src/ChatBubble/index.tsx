@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from './styles';
 
-interface chatBubbleProps {
+interface ChatBubbleProps {
   message: {
     message: string;
     id: number;
@@ -11,24 +11,13 @@ interface chatBubbleProps {
     chatbubble: object;
     text: object;
   };
-  bubblesCentered: object;
+  bubblesCentered: boolean;
 }
 
 export default class ChatBubble extends React.Component {
-  props: {
-    message: {
-      message: string;
-      id: number;
-    };
-    bubbleStyles: {
-      userBubble: object;
-      chatbubble: object;
-      text: object;
-    };
-    bubblesCentered: boolean;
-  };
+  props;
 
-  constructor(props: chatBubbleProps) {
+  constructor(props: ChatBubbleProps) {
     super(props);
   }
 

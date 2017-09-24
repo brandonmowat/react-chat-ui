@@ -286,10 +286,10 @@ var styles_1 = require("./styles");
 var ChatFeed = function (_React$Component) {
     _inherits(ChatFeed, _React$Component);
 
-    function ChatFeed() {
+    function ChatFeed(props) {
         _classCallCheck(this, ChatFeed);
 
-        return _possibleConstructorReturn(this, (ChatFeed.__proto__ || Object.getPrototypeOf(ChatFeed)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (ChatFeed.__proto__ || Object.getPrototypeOf(ChatFeed)).call(this, props));
     }
 
     _createClass(ChatFeed, [{
@@ -321,7 +321,7 @@ var ChatFeed = function (_React$Component) {
             var messageNodes = group.reverse().map(function (curr, i) {
                 return React.createElement(ChatBubble_1.default, { key: i, message: curr, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles });
             });
-            return React.createElement("div", { key: key, style: styles_1.default.chatbubbleWrapper }, showSenderName && sampleMessage.senderName !== '' && sampleMessage.id !== 0 && React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, sampleMessage.senderName), messageNodes);
+            return React.createElement("div", { key: key, style: styles_1.default.chatbubbleWrapper }, showSenderName && sampleMessage.senderName !== '' && sampleMessage.id !== 0 && React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, 'xxwqxwq'), messageNodes);
         }
     }, {
         key: "renderMessages",
