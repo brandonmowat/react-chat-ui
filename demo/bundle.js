@@ -228,44 +228,42 @@ var ChatBubble = function (_React$Component) {
 
 exports.default = ChatBubble;
 },{"./styles":3,"react":185}],3:[function(require,module,exports){
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
-  chatbubbleWrapper: {
-    clear: 'both'
-  },
-  chatbubble: {
-    backgroundColor: '#0084FF',
-    borderRadius: 20,
-    marginTop: 1,
-    marginRight: 'auto',
-    marginBottom: 1,
-    marginLeft: 'auto',
-    maxWidth: 425,
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingLeft: 14,
-    paddingRight: 14,
-    width: '-webkit-fit-content'
-  },
-  chatbubbleOrientationNormal: {
-    float: 'right'
-  },
-  recipientChatbubble: {
-    backgroundColor: '#ccc'
-  },
-  recipientChatbubbleOrientationNormal: {
-    float: 'left'
-  },
-  p: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '300',
-    margin: 0
-  }
+    chatbubbleWrapper: {
+        clear: 'both'
+    },
+    chatbubble: {
+        backgroundColor: '#0084FF',
+        borderRadius: 20,
+        marginTop: 1,
+        marginRight: 'auto',
+        marginBottom: 1,
+        marginLeft: 'auto',
+        maxWidth: 425,
+        paddingTop: 8,
+        paddingBottom: 8,
+        paddingLeft: 14,
+        paddingRight: 14,
+        width: '-webkit-fit-content'
+    },
+    chatbubbleOrientationNormal: {
+        float: 'right'
+    },
+    recipientChatbubble: {
+        backgroundColor: '#ccc'
+    },
+    recipientChatbubbleOrientationNormal: {
+        float: 'left'
+    },
+    p: {
+        color: '#FFFFFF',
+        fontSize: 16,
+        fontWeight: '300',
+        margin: 0
+    }
 };
 },{}],4:[function(require,module,exports){
 "use strict";
@@ -341,7 +339,7 @@ var ChatFeed = function (_React$Component) {
                 return null;
             });
             if (isTyping) {
-                messageNodes.push(React.createElement("div", { key: Math.random().toString(36), style: Object.assign({}, styles_1.default.recipient, styles_1.default.chatbubbleWrapper) }, React.createElement(ChatBubble_1.default, { message: new Message_1.default({ id: 1, message: '...', senderName: '' }), bubbleStyles: bubbleStyles })));
+                messageNodes.push(React.createElement("div", { key: Math.random().toString(36), style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, React.createElement(ChatBubble_1.default, { message: new Message_1.default({ id: 1, message: '...', senderName: '' }), bubbleStyles: bubbleStyles })));
             }
             return messageNodes;
         }
@@ -362,39 +360,37 @@ var ChatFeed = function (_React$Component) {
 
 exports.default = ChatFeed;
 },{"../ChatBubble":2,"../ChatInput":6,"../Message":7,"./styles":5,"react":185}],5:[function(require,module,exports){
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
-  chatPanel: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: 1,
-    overflow: 'hidden'
-  },
-  chatHistory: { overflow: 'auto' },
-  chatbubbleWrapper: {
-    marginTop: 10,
-    marginBottom: 10,
-    overflow: 'auto',
-    position: 'relative'
-  },
-  img: {
-    borderRadius: 100,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-    width: 36,
-    zIndex: 100
-  },
-  bubbleGroupHeader: {
-    margin: 0,
-    fontSize: 14,
-    fontWeight: '400',
-    color: '#999'
-  }
+    chatPanel: {
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 1,
+        overflow: 'hidden'
+    },
+    chatHistory: { overflow: 'auto' },
+    chatbubbleWrapper: {
+        marginTop: 10,
+        marginBottom: 10,
+        overflow: 'auto',
+        position: 'relative'
+    },
+    img: {
+        borderRadius: 100,
+        bottom: 0,
+        left: 0,
+        position: 'absolute',
+        width: 36,
+        zIndex: 100
+    },
+    bubbleGroupHeader: {
+        margin: 0,
+        fontSize: 14,
+        fontWeight: '400',
+        color: '#999'
+    }
 };
 },{}],6:[function(require,module,exports){
 "use strict";
