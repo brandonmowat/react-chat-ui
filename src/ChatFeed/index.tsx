@@ -2,15 +2,37 @@
 // Written, developed, and designed by Brandon Mowat for the purpose of helping
 // other developers make chat interfaces.
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
+import * as React from 'react';
 import ChatBubble from '../ChatBubble';
 import ChatInput from '../ChatInput';
 import Message from '../Message';
 import styles from './styles';
 
-export default class ChatFeed extends Component {
+// Model for ChatFeed props.
+interface ChatFeedInterface {
+  props: {
+    bubblesCentered: boolean;
+    bubbleStyles: object;
+    hasInputField: boolean;
+    isTyping: boolean;
+    messages: any;
+    showSenderName: boolean;
+  };
+}
+
+// React component to render a complete chat feed
+export default class ChatFeed extends React.Component {
+  props;
+  chat: {
+    scrollHeight: number;
+    clientHeight: number;
+    scrollTop: number;
+  };
+
+  constructor(props: ChatFeedInterface) {
+    super(props);
+  }
+
   componentDidUpdate() {
     this.scrollToBottom();
   }
@@ -23,15 +45,10 @@ export default class ChatFeed extends Component {
   }
 
   /**
-    * Parses and collects messages of one type to be grouped together.
-    *
-    * @param {key} - a unique key for the group
-    * @param {messages} - a list of Message objects
-    * @param {index} - the index of the end of the message group
-    * @param {type} - the type of group (user or recipient)
-    * @return {messageNodes} - a JSX wrapped group of messages
-    */
-  renderGroup(key, messages, index, id) {
+  * Parses and collects messages of one type to be grouped together.
+  * @return {messageNodes} - a JSX wrapped group of messages
+  */
+  renderGroup(key: number, messages: [Message], index: number, id: number) {
     const { bubblesCentered, bubbleStyles, showSenderName } = this.props;
     const group = [];
 
@@ -41,14 +58,17 @@ export default class ChatFeed extends Component {
 
     const sampleMessage = group[0];
 
-    const messageNodes = group.reverse().map((curr, i) => (
-      <ChatBubble
-        key={i} // HACK: fix this pls
-        message={curr}
-        bubblesCentered={bubblesCentered}
-        bubbleStyles={bubbleStyles}
-      />
-    ));
+    const messageNodes = group.reverse().map((curr, i) => {
+      return (
+        <ChatBubble
+          key={i}
+          message={curr}
+          bubblesCentered={bubblesCentered}
+          bubbleStyles={bubbleStyles}
+        />
+      );
+    });
+
     return (
       <div key={key} style={styles.chatbubbleWrapper}>
         {showSenderName &&
@@ -62,13 +82,9 @@ export default class ChatFeed extends Component {
   }
 
   /**
-    * Determines what type of message/messages to render.
-    *
-    * @param {messages} - a list of message objects
-    * @return {messageNodes} - a list of message JSX objects to be rendered in
-    *   our UI.
-    */
-  renderMessages(messages) {
+  * Determines what type of message/messages to render.
+  */
+  renderMessages(messages: [Message]) {
     const { isTyping, bubbleStyles } = this.props;
 
     const messageNodes = messages.map((curr, index) => {
@@ -82,12 +98,9 @@ export default class ChatFeed extends Component {
     // Other end is typing...
     if (isTyping) {
       messageNodes.push(
-        <div
-          key={Math.random().toString(36)}
-          style={{ ...styles.recipient, ...styles.chatbubbleWrapper }}
-        >
+        <div key={Math.random().toString(36)} style={{ ...styles.chatbubbleWrapper }}>
           <ChatBubble
-            message={new Message({ id: 1, message: '...' })}
+            message={new Message({ id: 1, message: '...', senderName: '' })}
             bubbleStyles={bubbleStyles}
           />
         </div>,
@@ -107,7 +120,7 @@ export default class ChatFeed extends Component {
     return (
       <div id="chat-panel" style={styles.chatPanel}>
         <div
-          ref={(c) => {
+          ref={c => {
             this.chat = c;
           }}
           className="chat-history"
@@ -120,21 +133,3 @@ export default class ChatFeed extends Component {
     );
   }
 }
-
-ChatFeed.propTypes = {
-  isTyping: PropTypes.bool,
-  showSenderName: PropTypes.bool,
-  hasInputField: PropTypes.bool,
-  bubblesCentered: PropTypes.bool,
-  bubbleStyles: PropTypes.object,
-  messages: PropTypes.array,
-};
-
-ChatFeed.defaultProps = {
-  isTyping: false,
-  showSenderName: false,
-  hasInputField: false,
-  bubblesCentered: false,
-  bubbleStyles: {},
-  messages: [],
-};
