@@ -98,7 +98,7 @@ export default class ChatFeed extends React.Component {
     // Other end is typing...
     if (isTyping) {
       messageNodes.push(
-        <div key={Math.random().toString(36)} style={{ ...styles.chatbubbleWrapper }}>
+        <div key="isTyping" style={{ ...styles.chatbubbleWrapper }}>
           <ChatBubble
             message={new Message({ id: 1, message: '...', senderName: '' })}
             bubbleStyles={bubbleStyles}
