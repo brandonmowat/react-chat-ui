@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { ChatFeed, Message } from '../lib';
+import { ChatFeed, Message, ChatBubble } from '../lib';
 
 const styles = {
   button: {

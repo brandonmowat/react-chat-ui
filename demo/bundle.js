@@ -321,7 +321,7 @@ var ChatFeed = function (_React$Component) {
             var messageNodes = group.reverse().map(function (curr, i) {
                 return React.createElement(ChatBubble_1.default, { key: i, message: curr, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles });
             });
-            return React.createElement("div", { key: key, style: styles_1.default.chatbubbleWrapper }, showSenderName && sampleMessage.senderName !== '' && sampleMessage.id !== 0 && React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, 'xxwqxwq'), messageNodes);
+            return React.createElement("div", { key: key, style: styles_1.default.chatbubbleWrapper }, showSenderName && sampleMessage.senderName !== '' && sampleMessage.id !== 0 && React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, sampleMessage.senderName), messageNodes);
         }
     }, {
         key: "renderMessages",

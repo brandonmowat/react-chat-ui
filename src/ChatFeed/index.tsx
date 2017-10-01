@@ -8,6 +8,7 @@ import ChatInput from '../ChatInput';
 import Message from '../Message';
 import styles from './styles';
 
+// Model for ChatFeed props.
 interface ChatFeedInterface {
   props: {
     bubblesCentered: boolean;
@@ -19,6 +20,7 @@ interface ChatFeedInterface {
   };
 }
 
+// React component to render a complete chat feed
 export default class ChatFeed extends React.Component {
   props;
   chat: {
