@@ -3,7 +3,7 @@
 // other developers make chat interfaces.
 
 import * as React from 'react';
-import ChatBubble from '../ChatBubble';
+import DefaultChatBubble from '../ChatBubble';
 import ChatInput from '../ChatInput';
 import Message from '../Message';
 import styles from './styles';
@@ -11,12 +11,13 @@ import styles from './styles';
 // Model for ChatFeed props.
 interface ChatFeedInterface {
   props: {
-    bubblesCentered: boolean;
-    bubbleStyles: object;
-    hasInputField: boolean;
-    isTyping: boolean;
+    bubblesCentered?: boolean;
+    bubbleStyles?: object;
+    hasInputField?: boolean;
+    isTyping?: boolean;
     messages: any;
-    showSenderName: boolean;
+    showSenderName?: boolean;
+    chatBubble?: React.Component;
   };
 }
 
@@ -49,7 +50,8 @@ export default class ChatFeed extends React.Component {
   * @return {messageNodes} - a JSX wrapped group of messages
   */
   renderGroup(key: number, messages: [Message], index: number, id: number) {
-    const { bubblesCentered, bubbleStyles, showSenderName } = this.props;
+    const { bubblesCentered, bubbleStyles, showSenderName, chatBubble } = this.props;
+    const ChatBubble = chatBubble || DefaultChatBubble;
     const group = [];
 
     for (let i = index; messages[i] ? messages[i].id === id : false; i -= 1) {

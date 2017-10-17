@@ -311,15 +311,17 @@ var ChatFeed = function (_React$Component) {
             var _props = this.props,
                 bubblesCentered = _props.bubblesCentered,
                 bubbleStyles = _props.bubbleStyles,
-                showSenderName = _props.showSenderName;
+                showSenderName = _props.showSenderName,
+                chatBubble = _props.chatBubble;
 
+            var ChatBubble = chatBubble || ChatBubble_1.default;
             var group = [];
             for (var i = index; messages[i] ? messages[i].id === id : false; i -= 1) {
                 group.push(messages[i]);
             }
             var sampleMessage = group[0];
             var messageNodes = group.reverse().map(function (curr, i) {
-                return React.createElement(ChatBubble_1.default, { key: i, message: curr, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles });
+                return React.createElement(ChatBubble, { key: i, message: curr, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles });
             });
             return React.createElement("div", { key: key, style: styles_1.default.chatbubbleWrapper }, showSenderName && sampleMessage.senderName !== '' && sampleMessage.id !== 0 && React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, sampleMessage.senderName), messageNodes);
         }
@@ -339,7 +341,7 @@ var ChatFeed = function (_React$Component) {
                 return null;
             });
             if (isTyping) {
-                messageNodes.push(React.createElement("div", { key: "isTyping", style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, React.createElement(ChatBubble_1.default, { message: new Message_1.default({ id: 1, message: '...', senderName: '' }), bubbleStyles: bubbleStyles })));
+                messageNodes.push(React.createElement("div", { key: "isTyping", style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, React.createElement(ChatBubble, { message: new Message_1.default({ id: 1, message: '...', senderName: '' }), bubbleStyles: bubbleStyles })));
             }
             return messageNodes;
         }
