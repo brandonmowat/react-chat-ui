@@ -48,6 +48,14 @@ var users = {
   2: 'Evan'
 };
 
+var customBubble = function customBubble(props) {
+  return _react2.default.createElement(
+    'div',
+    null,
+    props.message.message
+  );
+};
+
 var Chat = function (_React$Component) {
   _inherits(Chat, _React$Component);
 
@@ -100,8 +108,9 @@ var Chat = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_lib.ChatFeed, {
-          messages: this.state.messages // Boolean: list of message objects
+        _react2.default.createElement(_lib.ChatFeed
+        // chatBubble={customBubble}
+        , { messages: this.state.messages // Boolean: list of message objects
           , showSenderName: true,
           bubbleStyles: {
             // JSON: Custom bubble styles

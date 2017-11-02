@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { ChatFeed, Message, ChatBubble } from '../lib';
+import { ChatFeed, Message } from '../lib';
 
 const styles = {
   button: {
@@ -29,6 +29,8 @@ const users = {
   1: 'Mark',
   2: 'Evan',
 };
+
+const customBubble = props => <div>{props.message.message}</div>;
 
 class Chat extends React.Component {
   constructor() {
@@ -72,6 +74,7 @@ class Chat extends React.Component {
     return (
       <div>
         <ChatFeed
+          // chatBubble={customBubble}
           messages={this.state.messages} // Boolean: list of message objects
           showSenderName
           bubbleStyles={{
