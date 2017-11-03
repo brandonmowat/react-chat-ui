@@ -1,11 +1,9 @@
 import * as React from 'react';
+import Message from '../Message';
 import styles from './styles';
 
 interface ChatBubbleProps {
-  message: {
-    message: string;
-    id: number;
-  };
+  message: Message;
   bubbleStyles: {
     userBubble: object;
     chatbubble: object;
