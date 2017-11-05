@@ -52,7 +52,11 @@ var customBubble = function customBubble(props) {
   return _react2.default.createElement(
     'div',
     null,
-    props.message.message
+    _react2.default.createElement(
+      'p',
+      null,
+      props.message.senderName + ' ' + (props.message.id ? 'says' : 'said') + ': ' + props.message.message
+    )
   );
 };
 
@@ -70,6 +74,7 @@ var Chat = function (_React$Component) {
         message: 'Hey! Evan here. react-chat-ui is pretty dooope.',
         senderName: 'Evan'
       })],
+      useCustomBubble: false,
       curr_user: 0
     };
     return _this;
@@ -96,7 +101,11 @@ var Chat = function (_React$Component) {
     key: 'pushMessage',
     value: function pushMessage(recipient, message) {
       var prevState = this.state;
-      var newMessage = new _lib.Message({ id: recipient, message: message, senderName: users[recipient] });
+      var newMessage = new _lib.Message({
+        id: recipient,
+        message: message,
+        senderName: users[recipient]
+      });
       prevState.messages.push(newMessage);
       this.setState(this.state);
     }
@@ -108,9 +117,9 @@ var Chat = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_lib.ChatFeed
-        // chatBubble={customBubble}
-        , { messages: this.state.messages // Boolean: list of message objects
+        _react2.default.createElement(_lib.ChatFeed, {
+          chatBubble: this.state.useCustomBubble && customBubble,
+          messages: this.state.messages // Boolean: list of message objects
           , showSenderName: true,
           bubbleStyles: {
             // JSON: Custom bubble styles
@@ -170,6 +179,22 @@ var Chat = function (_React$Component) {
               }
             },
             'Evan'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          {
+            style: { display: 'flex', justifyContent: 'center', marginTop: 10 }
+          },
+          _react2.default.createElement(
+            'button',
+            {
+              style: _extends({}, styles.button, this.state.useCustomBubble ? styles.selected : {}),
+              onClick: function onClick() {
+                return _this2.setState({ useCustomBubble: !_this2.state.useCustomBubble });
+              }
+            },
+            'Custom Bubbles'
           )
         )
       );
