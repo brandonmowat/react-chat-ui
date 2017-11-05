@@ -460,6 +460,7 @@ var _3 = require("./ChatInput/");
 exports.ChatInput = _3.default;
 var _4 = require("./Message/");
 exports.Message = _4.default;
+exports.default = { ChatBubble: _1.default, ChatFeed: _2.default, ChatInput: _3.default, Message: _4.default };
 },{"./ChatBubble/":2,"./ChatFeed/":4,"./ChatInput/":6,"./Message/":7}],9:[function(require,module,exports){
 (function (process){
 'use strict';

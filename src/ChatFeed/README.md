@@ -4,6 +4,7 @@ The `ChatFeed` `Component` is probably the most important component in `react-ch
 #### Props
 * **bubblesCentered**: `Boolean` - should the bubbles be centered in the `ChatFeed`?
 * **bubbleStyles**: `Object` - some custom styles to be applied to the bubble div and/or text within the bubble.
+* **chatBubble** *new*: `React.Component` - A custom chat bubble that you can make yourself! (If you're using TypeScript for your project, you can `import` the `ChatBubbleProps` for your components `constructor`)
 * **isTyping**: `Boolean` - Should we append an ellipses to the end of the feed?
 * **messages**: `Array` - An array of `Message` objects. The `ChatFeed` will convert these to bubbles for you and handle all rendering logic.
 * **showSenderName**: `Boolean` - Should the bubbles show the name of the sender?
