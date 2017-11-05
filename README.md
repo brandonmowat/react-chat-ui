@@ -70,6 +70,10 @@ this.state = {
 
 ```
 
+### API
+* [Message](./src/Message)
+* [ChatFeed](./src/ChatFeed)
+
 ### TODO
 - documentation
 - documentation
