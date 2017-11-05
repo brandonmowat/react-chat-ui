@@ -49,6 +49,18 @@ var users = {
   2: 'Evan'
 };
 
+var customBubble = function customBubble(props) {
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'p',
+      null,
+      props.message.senderName + ' ' + (props.message.id ? 'says' : 'said') + ': ' + props.message.message
+    )
+  );
+};
+
 var Chat = function (_React$Component) {
   _inherits(Chat, _React$Component);
 
@@ -63,6 +75,7 @@ var Chat = function (_React$Component) {
         message: 'Hey! Evan here. react-chat-ui is pretty dooope.',
         senderName: 'Evan'
       })],
+      useCustomBubble: false,
       curr_user: 0
     };
     return _this;
@@ -89,7 +102,11 @@ var Chat = function (_React$Component) {
     key: 'pushMessage',
     value: function pushMessage(recipient, message) {
       var prevState = this.state;
-      var newMessage = new _lib.Message({ id: recipient, message: message, senderName: users[recipient] });
+      var newMessage = new _lib.Message({
+        id: recipient,
+        message: message,
+        senderName: users[recipient]
+      });
       prevState.messages.push(newMessage);
       this.setState(this.state);
     }
@@ -102,6 +119,7 @@ var Chat = function (_React$Component) {
         'div',
         null,
         _react2.default.createElement(_lib.ChatFeed, {
+          chatBubble: this.state.useCustomBubble && customBubble,
           messages: this.state.messages // Boolean: list of message objects
           , showSenderName: true,
           bubbleStyles: {
@@ -162,6 +180,22 @@ var Chat = function (_React$Component) {
               }
             },
             'Evan'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          {
+            style: { display: 'flex', justifyContent: 'center', marginTop: 10 }
+          },
+          _react2.default.createElement(
+            'button',
+            {
+              style: _extends({}, styles.button, this.state.useCustomBubble ? styles.selected : {}),
+              onClick: function onClick() {
+                return _this2.setState({ useCustomBubble: !_this2.state.useCustomBubble });
+              }
+            },
+            'Custom Bubbles'
           )
         )
       );
@@ -311,15 +345,17 @@ var ChatFeed = function (_React$Component) {
             var _props = this.props,
                 bubblesCentered = _props.bubblesCentered,
                 bubbleStyles = _props.bubbleStyles,
-                showSenderName = _props.showSenderName;
+                showSenderName = _props.showSenderName,
+                chatBubble = _props.chatBubble;
 
+            var ChatBubble = chatBubble || ChatBubble_1.default;
             var group = [];
             for (var i = index; messages[i] ? messages[i].id === id : false; i -= 1) {
                 group.push(messages[i]);
             }
             var sampleMessage = group[0];
             var messageNodes = group.reverse().map(function (curr, i) {
-                return React.createElement(ChatBubble_1.default, { key: i, message: curr, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles });
+                return React.createElement(ChatBubble, { key: i, message: curr, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles });
             });
             return React.createElement("div", { key: key, style: styles_1.default.chatbubbleWrapper }, showSenderName && sampleMessage.senderName !== '' && sampleMessage.id !== 0 && React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, sampleMessage.senderName), messageNodes);
         }
@@ -330,8 +366,10 @@ var ChatFeed = function (_React$Component) {
 
             var _props2 = this.props,
                 isTyping = _props2.isTyping,
-                bubbleStyles = _props2.bubbleStyles;
+                bubbleStyles = _props2.bubbleStyles,
+                chatBubble = _props2.chatBubble;
 
+            var ChatBubble = chatBubble || ChatBubble_1.default;
             var messageNodes = messages.map(function (curr, index) {
                 if (!messages[index + 1] || messages[index + 1].id !== curr.id) {
                     return _this2.renderGroup(index, messages, index, curr.id);
@@ -339,7 +377,7 @@ var ChatFeed = function (_React$Component) {
                 return null;
             });
             if (isTyping) {
-                messageNodes.push(React.createElement("div", { key: "isTyping", style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, React.createElement(ChatBubble_1.default, { message: new Message_1.default({ id: 1, message: '...', senderName: '' }), bubbleStyles: bubbleStyles })));
+                messageNodes.push(React.createElement("div", { key: "isTyping", style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, React.createElement(ChatBubble, { message: new Message_1.default({ id: 1, message: '...', senderName: '' }), bubbleStyles: bubbleStyles })));
             }
             return messageNodes;
         }
@@ -447,6 +485,7 @@ var _3 = require("./ChatInput/");
 exports.ChatInput = _3.default;
 var _4 = require("./Message/");
 exports.Message = _4.default;
+exports.default = { ChatBubble: _1.default, ChatFeed: _2.default, ChatInput: _3.default, Message: _4.default };
 },{"./ChatBubble/":2,"./ChatFeed/":4,"./ChatInput/":6,"./Message/":7}],9:[function(require,module,exports){
 (function (process){
 'use strict';

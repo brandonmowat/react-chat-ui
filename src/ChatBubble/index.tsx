@@ -1,34 +1,24 @@
-import * as React from 'react';
-import styles from './styles';
-
-interface ChatBubbleProps {
-  message: {
-    message: string;
-    id: number;
-  };
-  bubbleStyles: {
-    userBubble: object;
-    chatbubble: object;
-    text: object;
-  };
-  bubblesCentered: boolean;
-}
+import * as React from 'react'
+import ChatBubbleProps from './interface'
+import styles from './styles'
 
 export default class ChatBubble extends React.Component {
-  props;
+  props
 
   constructor(props: ChatBubbleProps) {
-    super(props);
+    super(props)
   }
 
   // Helper render method for redering a chat bubble
   public renderBlueBubble() {
-    const { userBubble, chatbubble, text } = this.props.bubbleStyles;
+    const { userBubble, chatbubble, text } = this.props.bubbleStyles
     return (
       <div
         style={{
           ...styles.chatbubbleWrapper,
-          ...this.props.bubblesCentered ? {} : styles.chatbubbleOrientationNormal,
+          ...this.props.bubblesCentered
+            ? {}
+            : styles.chatbubbleOrientationNormal,
         }}
       >
         <div
@@ -41,17 +31,19 @@ export default class ChatBubble extends React.Component {
           <p style={{ ...styles.p, ...text }}>{this.props.message.message}</p>
         </div>
       </div>
-    );
+    )
   }
 
   // Helper render method for redering a chat bubble
   public renderGrayBubble() {
-    const { chatbubble, text } = this.props.bubbleStyles;
+    const { chatbubble, text } = this.props.bubbleStyles
     return (
       <div
         style={{
           ...styles.chatbubbleWrapper,
-          ...this.props.bubblesCentered ? {} : styles.recipientChatbubbleOrientationNormal,
+          ...this.props.bubblesCentered
+            ? {}
+            : styles.recipientChatbubbleOrientationNormal,
         }}
       >
         <div
@@ -64,11 +56,15 @@ export default class ChatBubble extends React.Component {
           <p style={{ ...styles.p, ...text }}>{this.props.message.message}</p>
         </div>
       </div>
-    );
+    )
   }
 
   public render() {
     // message.id 0 is reserved for blue
-    return this.props.message.id === 0 ? this.renderBlueBubble() : this.renderGrayBubble();
+    return this.props.message.id === 0
+      ? this.renderBlueBubble()
+      : this.renderGrayBubble()
   }
 }
+
+export { ChatBubbleProps }

@@ -1,6 +1,6 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { ChatFeed, Message, ChatBubble } from '../lib';
+import React from 'react'
+import { render } from 'react-dom'
+import { ChatFeed, Message } from '../lib'
 
 const styles = {
   button: {
@@ -22,17 +22,25 @@ const styles = {
     backgroundColor: '#0084FF',
     borderColor: '#0084FF',
   },
-};
+}
 
 const users = {
   0: 'You',
   1: 'Mark',
   2: 'Evan',
-};
+}
+
+const customBubble = props => (
+  <div>
+    <p>{`${props.message.senderName} ${props.message.id
+      ? 'says'
+      : 'said'}: ${props.message.message}`}</p>
+  </div>
+)
 
 class Chat extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       messages: [
         new Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }),
@@ -42,36 +50,42 @@ class Chat extends React.Component {
           senderName: 'Evan',
         }),
       ],
+      useCustomBubble: false,
       curr_user: 0,
-    };
+    }
   }
 
   onPress(user) {
-    this.setState({ curr_user: user });
+    this.setState({ curr_user: user })
   }
 
   onMessageSubmit(e) {
-    const input = this.message;
-    e.preventDefault();
+    const input = this.message
+    e.preventDefault()
     if (!input.value) {
-      return false;
+      return false
     }
-    this.pushMessage(this.state.curr_user, input.value);
-    input.value = '';
-    return true;
+    this.pushMessage(this.state.curr_user, input.value)
+    input.value = ''
+    return true
   }
 
   pushMessage(recipient, message) {
-    const prevState = this.state;
-    const newMessage = new Message({ id: recipient, message, senderName: users[recipient] });
-    prevState.messages.push(newMessage);
-    this.setState(this.state);
+    const prevState = this.state
+    const newMessage = new Message({
+      id: recipient,
+      message,
+      senderName: users[recipient],
+    })
+    prevState.messages.push(newMessage)
+    this.setState(this.state)
   }
 
   render() {
     return (
       <div>
         <ChatFeed
+          chatBubble={this.state.useCustomBubble && customBubble}
           messages={this.state.messages} // Boolean: list of message objects
           showSenderName
           bubbleStyles={{
@@ -90,8 +104,8 @@ class Chat extends React.Component {
 
         <form onSubmit={e => this.onMessageSubmit(e)}>
           <input
-            ref={(m) => {
-              this.message = m;
+            ref={m => {
+              this.message = m
             }}
             placeholder="Type a message..."
             className="message-input"
@@ -100,27 +114,50 @@ class Chat extends React.Component {
 
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
           <button
-            style={{ ...styles.button, ...(this.state.curr_user === 0 ? styles.selected : {}) }}
+            style={{
+              ...styles.button,
+              ...(this.state.curr_user === 0 ? styles.selected : {}),
+            }}
             onClick={() => this.onPress(0)}
           >
             You
           </button>
           <button
-            style={{ ...styles.button, ...(this.state.curr_user === 1 ? styles.selected : {}) }}
+            style={{
+              ...styles.button,
+              ...(this.state.curr_user === 1 ? styles.selected : {}),
+            }}
             onClick={() => this.onPress(1)}
           >
             Mark
           </button>
           <button
-            style={{ ...styles.button, ...(this.state.curr_user === 2 ? styles.selected : {}) }}
+            style={{
+              ...styles.button,
+              ...(this.state.curr_user === 2 ? styles.selected : {}),
+            }}
             onClick={() => this.onPress(2)}
           >
             Evan
           </button>
         </div>
+        <div
+          style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}
+        >
+          <button
+            style={{
+              ...styles.button,
+              ...(this.state.useCustomBubble ? styles.selected : {}),
+            }}
+            onClick={() =>
+              this.setState({ useCustomBubble: !this.state.useCustomBubble })}
+          >
+            Custom Bubbles
+          </button>
+        </div>
       </div>
-    );
+    )
   }
 }
 
-render(<Chat />, document.getElementById('chat-ui'));
+render(<Chat />, document.getElementById('chat-ui'))
