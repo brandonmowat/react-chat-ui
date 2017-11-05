@@ -10,19 +10,28 @@ The `ChatFeed` `Component` is probably the most important component in `react-ch
 * **showSenderName**: `Boolean` - Should the bubbles show the name of the sender?
 
 ```javascript
-<ChatFeed
-  messages={this.state.messages}
-  showSenderName
-  bubbleStyles={
-    {
-      text: {
-        fontSize: 30
-      },
-      chatbubble: {
-        borderRadius: 70,
-        padding: 40
-      }
-    }
+import React from 'react'
+import { ChatFeed, Message, ChatBubbleProps } from 'react-chat-ui'
+import MyChatBubble from './MyChatBubble'
+
+class MyChat extends React.Component {
+  render() {
+    return (
+      <ChatFeed
+        chatBubble={MyChatBubble}
+        messages={this.state.messages}
+        showSenderName
+        bubbleStyles={{
+          text: {
+            fontSize: 30
+          },
+          chatbubble: {
+            borderRadius: 70,
+            padding: 40
+          }
+        }}
+      />
+    )
   }
-/>
+}
 ```
