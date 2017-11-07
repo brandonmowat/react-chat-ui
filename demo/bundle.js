@@ -215,18 +215,7 @@ var Chat = function (_React$Component) {
               'Custom Bubbles'
             )
           )
-        ),
-        _react2.default.createElement(
-          'h2',
-          { className: 'text-center' },
-          'Or just use the bubbles!'
-        ),
-        _react2.default.createElement(_lib.ChatBubble, {
-          message: new _lib.Message({ id: 1, message: 'I float to the left!' })
-        }),
-        _react2.default.createElement(_lib.ChatBubble, {
-          message: new _lib.Message({ id: 0, message: 'I float to the right!' })
-        })
+        )
       );
     }
   }]);
