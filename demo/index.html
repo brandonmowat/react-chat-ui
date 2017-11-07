@@ -8,6 +8,24 @@
       font-family: -apple-system;
       margin: 0;
     }
+    h1 {
+      font-size: 48px;
+    }
+    h2 {
+      font-size: 36px;
+    }
+    .container {
+      max-width: 850px;
+      margin: 0 auto;
+      margin-top: 100px;
+    }
+    .install {
+      text-align: center;
+      background-color: #eee;
+      padding: 10px 20px;
+      max-width: 200px;
+      margin: 20px auto;
+    }
     input {
       border: none;
       border-top: 1px solid #ddd;
@@ -18,10 +36,22 @@
     input:focus {
       outline: none;
     }
+    .chatfeed-wrapper {
+      box-shadow: 0 20px 20px rgba(0, 0, 0, .08);
+      border-radius: 4px;
+      max-width: 450px;
+      margin: 0 auto;
+      border: 1px solid #ddd;
+      padding-bottom: 20px;
+    }
+    #chat-panel {
+      padding: 10px 10px 0px 10px;
+    }
 
     .chat-history {
       display: block;
-      max-height: 400px;
+      max-height: 250px;
+      min-height: 250px;
     }
 
     .outer {
@@ -34,9 +64,8 @@
     .inner {
       margin: 0 auto;
     }
-
-    .inner > div {
-      overflow: auto;
+    .text-center {
+      text-align: center;
     }
   </style>
 </head>

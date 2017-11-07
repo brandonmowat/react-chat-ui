@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { ChatFeed, Message } from '../lib'
+import { ChatFeed, ChatBubble, Message } from '../lib'
 
 const styles = {
   button: {
@@ -83,78 +83,87 @@ class Chat extends React.Component {
 
   render() {
     return (
-      <div>
-        <ChatFeed
-          chatBubble={this.state.useCustomBubble && customBubble}
-          messages={this.state.messages} // Boolean: list of message objects
-          showSenderName
-          bubbleStyles={{
-            // JSON: Custom bubble styles
-            text: {
-              fontSize: 16,
-            },
-            chatbubble: {
-              maxWidth: 600,
-            },
-            userBubble: {
-              backgroundColor: '#0084FF',
-            },
-          }}
-        />
-
-        <form onSubmit={e => this.onMessageSubmit(e)}>
-          <input
-            ref={m => {
-              this.message = m
-            }}
-            placeholder="Type a message..."
-            className="message-input"
+      <div className="container">
+        <h1 className="text-center">react-chat-ui</h1>
+        <p className="text-center">
+          <a
+            href="https://github.com/brandonmowat/react-chat-ui"
+            target="_blank"
+          >
+            Github
+          </a>
+        </p>
+        <div className="install">
+          <code>npm i -S react-chat-ui</code>
+        </div>
+        <div className="chatfeed-wrapper">
+          <ChatFeed
+            chatBubble={this.state.useCustomBubble && customBubble}
+            messages={this.state.messages} // Boolean: list of message objects
+            showSenderName
           />
-        </form>
 
-        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-          <button
-            style={{
-              ...styles.button,
-              ...(this.state.curr_user === 0 ? styles.selected : {}),
-            }}
-            onClick={() => this.onPress(0)}
+          <form onSubmit={e => this.onMessageSubmit(e)}>
+            <input
+              ref={m => {
+                this.message = m
+              }}
+              placeholder="Type a message..."
+              className="message-input"
+            />
+          </form>
+
+          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <button
+              style={{
+                ...styles.button,
+                ...(this.state.curr_user === 0 ? styles.selected : {}),
+              }}
+              onClick={() => this.onPress(0)}
+            >
+              You
+            </button>
+            <button
+              style={{
+                ...styles.button,
+                ...(this.state.curr_user === 1 ? styles.selected : {}),
+              }}
+              onClick={() => this.onPress(1)}
+            >
+              Mark
+            </button>
+            <button
+              style={{
+                ...styles.button,
+                ...(this.state.curr_user === 2 ? styles.selected : {}),
+              }}
+              onClick={() => this.onPress(2)}
+            >
+              Evan
+            </button>
+          </div>
+          <div
+            style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}
           >
-            You
-          </button>
-          <button
-            style={{
-              ...styles.button,
-              ...(this.state.curr_user === 1 ? styles.selected : {}),
-            }}
-            onClick={() => this.onPress(1)}
-          >
-            Mark
-          </button>
-          <button
-            style={{
-              ...styles.button,
-              ...(this.state.curr_user === 2 ? styles.selected : {}),
-            }}
-            onClick={() => this.onPress(2)}
-          >
-            Evan
-          </button>
+            <button
+              style={{
+                ...styles.button,
+                ...(this.state.useCustomBubble ? styles.selected : {}),
+              }}
+              onClick={() =>
+                this.setState({ useCustomBubble: !this.state.useCustomBubble })}
+            >
+              Custom Bubbles
+            </button>
+          </div>
         </div>
-        <div
-          style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}
-        >
-          <button
-            style={{
-              ...styles.button,
-              ...(this.state.useCustomBubble ? styles.selected : {}),
-            }}
-            onClick={() =>
-              this.setState({ useCustomBubble: !this.state.useCustomBubble })}
-          >
-            Custom Bubbles
-          </button>
-        </div>
+        {/* <h2 className="text-center">Or just use the bubbles!</h2>
+        <ChatBubble
+          message={new Message({ id: 1, message: 'I float to the left!' })}
+        />
+        <ChatBubble
+          message={new Message({ id: 0, message: 'I float to the right!' })}
+        /> */}
       </div>
     )
   }

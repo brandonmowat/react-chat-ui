@@ -5,17 +5,17 @@ A library of React components for building chat UI's.
 
 [![NPM](https://nodei.co/npm/react-chat-ui.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/react-chat-ui/)
 
-### Features
+## Features
 - Auto scroll to bottom
 - SUPER easy to use
 - Multiple user grouping (try it out in the demo)
 
 Keep in mind that this project is still in the early stages of development. If you encounter a bug or have a feature request, please create an issue and/or tweet at me [here](http://twitter.com/brandonmowat).
 
-### Installation
+## Installation
 `npm install react-chat-ui --save`
 
-### Basic Usage
+## Basic Usage
 ```javascript
 import { ChatFeed, Message } from 'react-chat-ui'
 
@@ -70,16 +70,16 @@ this.state = {
 
 ```
 
-### API
+## API
 * [Message](./src/Message)
 * [ChatFeed](./src/ChatFeed)
 
-### TODO
+## TODO
 - documentation
 - documentation
 - documentation
 
-### Development
+## Development
 
 ```sh
 npm run dev

@@ -2,6 +2,12 @@ import * as React from 'react'
 import ChatBubbleProps from './interface'
 import styles from './styles'
 
+const defaultBubbleStyles = {
+  userBubble: {},
+  chatbubble: {},
+  text: {},
+}
+
 export default class ChatBubble extends React.Component {
   props
 
@@ -10,15 +16,14 @@ export default class ChatBubble extends React.Component {
   }
 
   // Helper render method for redering a chat bubble
-  public renderBlueBubble() {
-    const { userBubble, chatbubble, text } = this.props.bubbleStyles
+  public renderBlueBubble(bubbleStyles = defaultBubbleStyles) {
+    const { bubblesCentered } = this.props
+    const { userBubble, chatbubble, text } = bubbleStyles
     return (
       <div
         style={{
           ...styles.chatbubbleWrapper,
-          ...this.props.bubblesCentered
-            ? {}
-            : styles.chatbubbleOrientationNormal,
+          ...bubblesCentered ? {} : styles.chatbubbleOrientationNormal,
         }}
       >
         <div
@@ -35,15 +40,14 @@ export default class ChatBubble extends React.Component {
   }
 
   // Helper render method for redering a chat bubble
-  public renderGrayBubble() {
-    const { chatbubble, text } = this.props.bubbleStyles
+  public renderGrayBubble(bubbleStyles = defaultBubbleStyles) {
+    const { bubblesCentered } = this.props
+    const { chatbubble, text } = bubbleStyles
     return (
       <div
         style={{
           ...styles.chatbubbleWrapper,
-          ...this.props.bubblesCentered
-            ? {}
-            : styles.recipientChatbubbleOrientationNormal,
+          ...bubblesCentered ? {} : styles.recipientChatbubbleOrientationNormal,
         }}
       >
         <div
@@ -60,10 +64,11 @@ export default class ChatBubble extends React.Component {
   }
 
   public render() {
+    const bubbleStyles = this.props.bubbleStyles
     // message.id 0 is reserved for blue
     return this.props.message.id === 0
-      ? this.renderBlueBubble()
-      : this.renderGrayBubble()
+      ? this.renderBlueBubble(bubbleStyles)
+      : this.renderGrayBubble(bubbleStyles)
   }
 }
 
