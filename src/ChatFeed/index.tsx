@@ -34,6 +34,10 @@ export default class ChatFeed extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
   componentDidUpdate() {
     this.scrollToBottom();
   }
