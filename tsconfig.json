@@ -5,6 +5,7 @@
     "moduleResolution": "node",
     "noResolve": false,
     "noImplicitAny": false,
+    "outDir": "temp",
     "removeComments": true,
     "sourceMap": true,
     "allowJs": true,

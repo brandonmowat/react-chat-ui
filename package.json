@@ -6,7 +6,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "build-demo": "npx babel --presets es2015,stage-0 ./demo/index.js -o ./demo/es5.js && npx browserify demo/es5.js -o demo/bundle.js",
-    "compile": "./precompile.sh && npx babel --presets es2015,stage-0,react -d lib/ temp/",
+    "precompile": "./precompile.sh",
     "prepublish": "npm run compile",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "gulp watch"
