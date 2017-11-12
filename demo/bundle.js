@@ -70,7 +70,7 @@ var Chat = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this));
 
     _this.state = {
-      messages: [new _lib.Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({
+      messages: [new _lib.Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({
         id: 2,
         message: 'Hey! Evan here. react-chat-ui is pretty dooope.',
         senderName: 'Evan'
@@ -149,6 +149,7 @@ var Chat = function (_React$Component) {
           { className: 'chatfeed-wrapper' },
           _react2.default.createElement(_lib.ChatFeed, {
             chatBubble: this.state.useCustomBubble && customBubble,
+            maxHeight: 250,
             messages: this.state.messages // Boolean: list of message objects
             , showSenderName: true
           }),
@@ -353,6 +354,11 @@ var ChatFeed = function (_React$Component) {
     }
 
     _createClass(ChatFeed, [{
+        key: "componentDidMount",
+        value: function componentDidMount() {
+            this.scrollToBottom();
+        }
+    }, {
         key: "componentDidUpdate",
         value: function componentDidUpdate() {
             this.scrollToBottom();
@@ -413,9 +419,11 @@ var ChatFeed = function (_React$Component) {
             var _this3 = this;
 
             var inputField = this.props.hasInputField && React.createElement(ChatInput_1.default, null);
+            var maxHeight = this.props.maxHeight;
+
             return React.createElement("div", { id: "chat-panel", style: styles_1.default.chatPanel }, React.createElement("div", { ref: function ref(c) {
                     _this3.chat = c;
-                }, className: "chat-history", style: styles_1.default.chatHistory }, React.createElement("div", { className: "chat-messages" }, this.renderMessages(this.props.messages))), inputField);
+                }, className: "chat-history", style: Object.assign({}, styles_1.default.chatHistory, { maxHeight: maxHeight }) }, React.createElement("div", { className: "chat-messages" }, this.renderMessages(this.props.messages))), inputField);
         }
     }]);
 

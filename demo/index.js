@@ -44,6 +44,11 @@ class Chat extends React.Component {
     this.state = {
       messages: [
         new Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }),
+        new Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }),
+        new Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }),
+        new Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }),
+        new Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }),
+        new Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }),
         new Message({
           id: 2,
           message: 'Hey! Evan here. react-chat-ui is pretty dooope.',
@@ -99,6 +104,7 @@ class Chat extends React.Component {
         <div className="chatfeed-wrapper">
           <ChatFeed
             chatBubble={this.state.useCustomBubble && customBubble}
+            maxHeight={250}
             messages={this.state.messages} // Boolean: list of message objects
             showSenderName
           />
