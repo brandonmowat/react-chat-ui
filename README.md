@@ -1,21 +1,25 @@
 ![react-chat-ui logo](https://i.imgur.com/YhPrFWw.png)
 
-# 🙊  react-chat-ui
+# 🙊 react-chat-ui
+
 A library of React components for building chat UI's.
 
 [![NPM](https://nodei.co/npm/react-chat-ui.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/react-chat-ui/)
 
 ## Features
-- Auto scroll to bottom
-- SUPER easy to use
-- Multiple user grouping (try it out in the demo)
+
+* Auto scroll to bottom
+* SUPER easy to use
+* Multiple user grouping (try it out in the demo)
 
 Keep in mind that this project is still in the early stages of development. If you encounter a bug or have a feature request, please create an issue and/or tweet at me [here](http://twitter.com/brandonmowat).
 
 ## Installation
+
 `npm install react-chat-ui --save`
 
 ## Basic Usage
+
 ```javascript
 import { ChatFeed, Message } from 'react-chat-ui'
 
@@ -56,31 +60,43 @@ render() {
 
 Make sure to keep a list of proper message objects in your class state.
 Like so:
-```javascript
 
+```javascript
 //...
 this.state = {
-  messages : [
-    (new Message({ id: 1, message: "I'm the recipient! (The person you're talking to)" })), // Gray bubble
-    (new Message({ id: 0, message: "I'm you -- the blue bubble!" })) // Blue bubble
+  messages: [
+    new Message({
+      id: 1,
+      message: "I'm the recipient! (The person you're talking to)",
+    }), // Gray bubble
+    new Message({ id: 0, message: "I'm you -- the blue bubble!" }), // Blue bubble
   ],
   //...
-}
+};
 //...
-
 ```
 
 ## API
+
 * [Message](./src/Message)
 * [ChatFeed](./src/ChatFeed)
 
 ## Contributing!¡1 🔧
+
 Contributions are always welcomed and encouraged. If you don't want to write a feature request yourself, let ya boi know (either on [Twitter](http://twitter.com/brandonmowat) or by creating a Pull Request) and I'll get that shit coded right up.
 
+## Support
+
+If you'd like to support my development of `react-chat-ui`, you can donate via Litecoin or Etherium. But I also love when I get a shout-out on Twitter❤️
+
+* LTC: `LYExBx4bwSpAju6YpMXBLBCYVDvWV6n8fz`
+* ETH: `0xf9bf1a68732b1314f28050addd3ed13f2a187d9d`
+
 ## TODO
-- documentation
-- documentation
-- documentation
+
+* documentation
+* documentation
+* documentation
 
 ## Development
 
