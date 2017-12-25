@@ -1,6 +1,6 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { ChatFeed, ChatBubble, Message } from '../lib'
+import React from 'react';
+import { render } from 'react-dom';
+import { ChatFeed, ChatBubble, Message } from '../lib';
 
 const styles = {
   button: {
@@ -22,32 +22,27 @@ const styles = {
     backgroundColor: '#0084FF',
     borderColor: '#0084FF',
   },
-}
+};
 
 const users = {
   0: 'You',
   1: 'Mark',
   2: 'Evan',
-}
+};
 
 const customBubble = props => (
   <div>
-    <p>{`${props.message.senderName} ${props.message.id
-      ? 'says'
-      : 'said'}: ${props.message.message}`}</p>
+    <p>{`${props.message.senderName} ${props.message.id ? 'says' : 'said'}: ${
+      props.message.message
+    }`}</p>
   </div>
-)
+);
 
 class Chat extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       messages: [
-        new Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }),
-        new Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }),
-        new Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }),
-        new Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }),
-        new Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }),
         new Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }),
         new Message({
           id: 2,
@@ -57,33 +52,33 @@ class Chat extends React.Component {
       ],
       useCustomBubble: false,
       curr_user: 0,
-    }
+    };
   }
 
   onPress(user) {
-    this.setState({ curr_user: user })
+    this.setState({ curr_user: user });
   }
 
   onMessageSubmit(e) {
-    const input = this.message
-    e.preventDefault()
+    const input = this.message;
+    e.preventDefault();
     if (!input.value) {
-      return false
+      return false;
     }
-    this.pushMessage(this.state.curr_user, input.value)
-    input.value = ''
-    return true
+    this.pushMessage(this.state.curr_user, input.value);
+    input.value = '';
+    return true;
   }
 
   pushMessage(recipient, message) {
-    const prevState = this.state
+    const prevState = this.state;
     const newMessage = new Message({
       id: recipient,
       message,
       senderName: users[recipient],
-    })
-    prevState.messages.push(newMessage)
-    this.setState(this.state)
+    });
+    prevState.messages.push(newMessage);
+    this.setState(this.state);
   }
 
   render() {
@@ -112,7 +107,7 @@ class Chat extends React.Component {
           <form onSubmit={e => this.onMessageSubmit(e)}>
             <input
               ref={m => {
-                this.message = m
+                this.message = m;
               }}
               placeholder="Type a message..."
               className="message-input"
@@ -157,22 +152,23 @@ class Chat extends React.Component {
                 ...(this.state.useCustomBubble ? styles.selected : {}),
               }}
               onClick={() =>
-                this.setState({ useCustomBubble: !this.state.useCustomBubble })}
+                this.setState({ useCustomBubble: !this.state.useCustomBubble })
+              }
             >
               Custom Bubbles
             </button>
           </div>
         </div>
-        {/* <h2 className="text-center">Or just use the bubbles!</h2>
+        <h2 className="text-center">Or just use the bubbles!</h2>
         <ChatBubble
           message={new Message({ id: 1, message: 'I float to the left!' })}
         />
         <ChatBubble
           message={new Message({ id: 0, message: 'I float to the right!' })}
-        /> */}
+        />
       </div>
-    )
+    );
   }
 }
 
-render(<Chat />, document.getElementById('chat-ui'))
+render(<Chat />, document.getElementById('chat-ui'));

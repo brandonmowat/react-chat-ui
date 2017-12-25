@@ -70,7 +70,7 @@ var Chat = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this));
 
     _this.state = {
-      messages: [new _lib.Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({
+      messages: [new _lib.Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({
         id: 2,
         message: 'Hey! Evan here. react-chat-ui is pretty dooope.',
         senderName: 'Evan'
@@ -216,7 +216,18 @@ var Chat = function (_React$Component) {
               'Custom Bubbles'
             )
           )
-        )
+        ),
+        _react2.default.createElement(
+          'h2',
+          { className: 'text-center' },
+          'Or just use the bubbles!'
+        ),
+        _react2.default.createElement(_lib.ChatBubble, {
+          message: new _lib.Message({ id: 1, message: 'I float to the left!' })
+        }),
+        _react2.default.createElement(_lib.ChatBubble, {
+          message: new _lib.Message({ id: 0, message: 'I float to the right!' })
+        })
       );
     }
   }]);
@@ -264,7 +275,7 @@ var ChatBubble = function (_React$Component) {
                 chatbubble = bubbleStyles.chatbubble,
                 text = bubbleStyles.text;
 
-            return React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper, bubblesCentered ? {} : styles_1.default.chatbubbleOrientationNormal) }, React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubble, chatbubble, userBubble) }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, this.props.message.message)));
+            return React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubble, bubblesCentered ? {} : styles_1.default.chatbubbleOrientationNormal, chatbubble, userBubble) }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, this.props.message.message)));
         }
     }, {
         key: "renderGrayBubble",
@@ -274,7 +285,7 @@ var ChatBubble = function (_React$Component) {
             var chatbubble = bubbleStyles.chatbubble,
                 text = bubbleStyles.text;
 
-            return React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper, bubblesCentered ? {} : styles_1.default.recipientChatbubbleOrientationNormal) }, React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubble, styles_1.default.recipientChatbubble, chatbubble) }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, this.props.message.message)));
+            return React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubble, bubblesCentered ? {} : styles_1.default.recipientChatbubbleOrientationNormal, styles_1.default.recipientChatbubble, chatbubble) }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, this.props.message.message)));
         }
     }, {
         key: "render",
@@ -294,7 +305,7 @@ exports.default = ChatBubble;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     chatbubbleWrapper: {
-        clear: 'both'
+        overflow: 'auto'
     },
     chatbubble: {
         backgroundColor: '#0084FF',

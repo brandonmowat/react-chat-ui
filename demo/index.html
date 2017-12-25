@@ -1,4 +1,5 @@
 <html>
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
@@ -7,24 +8,32 @@
       font-family: -apple-system;
       margin: 0;
     }
+
     h1 {
       font-size: 48px;
     }
+
     h2 {
       font-size: 36px;
     }
+
     .container {
       max-width: 850px;
       margin: 0 auto;
       margin-top: 100px;
     }
+
     .install {
       text-align: center;
-      background-color: #eee;
-      padding: 10px 20px;
-      max-width: 200px;
       margin: 20px auto;
     }
+
+    code {
+      margin: 20px auto;
+      background-color: #eee;
+      padding: 10px 20px;
+    }
+
     input {
       border: none;
       border-top: 1px solid #ddd;
@@ -32,9 +41,11 @@
       padding: 30px;
       width: 100%;
     }
+
     input:focus {
       outline: none;
     }
+
     .chatfeed-wrapper {
       box-shadow: 0 20px 20px rgba(0, 0, 0, .08);
       border-radius: 4px;
@@ -43,22 +54,27 @@
       border: 1px solid #ddd;
       padding-bottom: 20px;
     }
+
     #chat-panel {
       padding: 0px 10px;
     }
+
     .chat-history {
       display: block;
       min-height: 250px;
     }
+
     .outer {
       display: block;
       height: 50%;
       overflow-y: scroll;
       position: relative;
     }
+
     .inner {
       margin: 0 auto;
     }
+
     .text-center {
       text-align: center;
     }
@@ -69,4 +85,5 @@
   <div id="chat-ui"></div>
   <script src="./bundle.js"></script>
 </body>
+
 </html>
