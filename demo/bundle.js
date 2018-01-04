@@ -264,7 +264,7 @@ var BubbleGroup = function (_React$Component) {
 
     _createClass(BubbleGroup, [{
         key: "renderGroup",
-        value: function renderGroup(messages, index, id) {
+        value: function renderGroup(messages, id) {
             var _props = this.props,
                 bubblesCentered = _props.bubblesCentered,
                 bubbleStyles = _props.bubbleStyles,
@@ -272,25 +272,20 @@ var BubbleGroup = function (_React$Component) {
                 chatBubble = _props.chatBubble;
 
             var ChatBubble = chatBubble || ChatBubble_1.default;
-            var group = [];
-            for (var i = index; messages[i] ? messages[i].id === id : false; i -= 1) {
-                group.push(messages[i]);
-            }
-            var sampleMessage = group[0];
-            var messageNodes = group.reverse().map(function (curr, i) {
-                return React.createElement(ChatBubble, { key: i, message: curr, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles });
+            var sampleMessage = messages[0];
+            var messageNodes = messages.reverse().map(function (message, i) {
+                return React.createElement(ChatBubble, { key: i, message: message, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles });
             });
-            return React.createElement("div", { key: index, style: styles_1.default.chatbubbleWrapper }, showSenderName && sampleMessage.senderName !== '' && sampleMessage.id !== 0 && React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, sampleMessage.senderName), messageNodes);
+            return React.createElement("div", { style: styles_1.default.chatbubbleWrapper }, showSenderName && sampleMessage.senderName !== '' && sampleMessage.id !== 0 && React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, sampleMessage.senderName), messageNodes);
         }
     }, {
         key: "render",
         value: function render() {
             var _props2 = this.props,
                 messages = _props2.messages,
-                index = _props2.index,
                 id = _props2.id;
 
-            return this.renderGroup(messages, index, id);
+            return this.renderGroup(messages, id);
         }
     }]);
 
@@ -346,31 +341,19 @@ var ChatBubble = function (_React$Component) {
     }
 
     _createClass(ChatBubble, [{
-        key: "renderBlueBubble",
-        value: function renderBlueBubble() {
-            var bubbleStyles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultBubbleStyles;
-            var bubblesCentered = this.props.bubblesCentered;
-            var userBubble = bubbleStyles.userBubble,
-                chatbubble = bubbleStyles.chatbubble,
-                text = bubbleStyles.text;
-
-            return React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubble, bubblesCentered ? {} : styles_1.default.chatbubbleOrientationNormal, chatbubble, userBubble) }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, this.props.message.message)));
-        }
-    }, {
-        key: "renderGrayBubble",
-        value: function renderGrayBubble() {
-            var bubbleStyles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultBubbleStyles;
-            var bubblesCentered = this.props.bubblesCentered;
-            var chatbubble = bubbleStyles.chatbubble,
-                text = bubbleStyles.text;
-
-            return React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubble, bubblesCentered ? {} : styles_1.default.recipientChatbubbleOrientationNormal, styles_1.default.recipientChatbubble, chatbubble) }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, this.props.message.message)));
-        }
-    }, {
         key: "render",
         value: function render() {
+            var bubblesCentered = this.props.bubblesCentered;
             var bubbleStyles = this.props.bubbleStyles;
-            return this.props.message.id === 0 ? this.renderBlueBubble(bubbleStyles) : this.renderGrayBubble(bubbleStyles);
+
+            bubbleStyles = bubbleStyles || defaultBubbleStyles;
+            var _bubbleStyles = bubbleStyles,
+                userBubble = _bubbleStyles.userBubble,
+                chatbubble = _bubbleStyles.chatbubble,
+                text = _bubbleStyles.text;
+
+            var chatBubbleStyles = this.props.message.id === 0 ? Object.assign({}, styles_1.default.chatbubble, bubblesCentered ? {} : styles_1.default.chatbubbleOrientationNormal, chatbubble, userBubble) : Object.assign({}, styles_1.default.chatbubble, styles_1.default.recipientChatbubble, bubblesCentered ? {} : styles_1.default.recipientChatbubbleOrientationNormal, chatbubble, userBubble);
+            return React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, React.createElement("div", { style: chatBubbleStyles }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, this.props.message.message)));
         }
     }]);
 
@@ -472,9 +455,13 @@ var ChatFeed = function (_React$Component) {
                 showSenderName = _props.showSenderName;
 
             var ChatBubble = chatBubble || ChatBubble_1.default;
-            var messageNodes = messages.map(function (curr, index) {
-                if (!messages[index + 1] || messages[index + 1].id !== curr.id) {
-                    return React.createElement(BubbleGroup_1.default, { key: index, messages: messages, index: index, id: curr.id, showSenderName: showSenderName });
+            var group = [];
+            var messageNodes = messages.map(function (message, index) {
+                group.push(message);
+                if (!messages[index + 1] || messages[index + 1].id !== message.id) {
+                    var messageGroup = group;
+                    group = [];
+                    return React.createElement(BubbleGroup_1.default, { key: index, messages: messageGroup, id: message.id, showSenderName: showSenderName, chatBubble: ChatBubble });
                 }
                 return null;
             });

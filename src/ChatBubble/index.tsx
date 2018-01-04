@@ -15,62 +15,42 @@ export default class ChatBubble extends React.Component {
     super(props);
   }
 
-  // Helper render method for redering a chat bubble
-  public renderBlueBubble(bubbleStyles = defaultBubbleStyles) {
+  public render() {
     const { bubblesCentered } = this.props;
+    let { bubbleStyles } = this.props;
+    bubbleStyles = bubbleStyles || defaultBubbleStyles;
     const { userBubble, chatbubble, text } = bubbleStyles;
-    return (
-      <div
-        style={{
-          ...styles.chatbubbleWrapper,
-        }}
-      >
-        <div
-          style={{
+
+    // message.id 0 is reserved for blue
+    const chatBubbleStyles =
+      this.props.message.id === 0
+        ? {
             ...styles.chatbubble,
             ...bubblesCentered ? {} : styles.chatbubbleOrientationNormal,
             ...chatbubble,
             ...userBubble,
-          }}
-        >
-          <p style={{ ...styles.p, ...text }}>{this.props.message.message}</p>
-        </div>
-      </div>
-    );
-  }
+          }
+        : {
+            ...styles.chatbubble,
+            ...styles.recipientChatbubble,
+            ...bubblesCentered
+              ? {}
+              : styles.recipientChatbubbleOrientationNormal,
+            ...chatbubble,
+            ...userBubble,
+          };
 
-  // Helper render method for redering a chat bubble
-  public renderGrayBubble(bubbleStyles = defaultBubbleStyles) {
-    const { bubblesCentered } = this.props;
-    const { chatbubble, text } = bubbleStyles;
     return (
       <div
         style={{
           ...styles.chatbubbleWrapper,
         }}
       >
-        <div
-          style={{
-            ...styles.chatbubble,
-            ...bubblesCentered
-              ? {}
-              : styles.recipientChatbubbleOrientationNormal,
-            ...styles.recipientChatbubble,
-            ...chatbubble,
-          }}
-        >
+        <div style={chatBubbleStyles}>
           <p style={{ ...styles.p, ...text }}>{this.props.message.message}</p>
         </div>
       </div>
     );
-  }
-
-  public render() {
-    const bubbleStyles = this.props.bubbleStyles;
-    // message.id 0 is reserved for blue
-    return this.props.message.id === 0
-      ? this.renderBlueBubble(bubbleStyles)
-      : this.renderGrayBubble(bubbleStyles);
   }
 }
 

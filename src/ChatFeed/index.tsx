@@ -59,19 +59,25 @@ export default class ChatFeed extends React.Component {
 
     const ChatBubble = chatBubble || DefaultChatBubble;
 
-    const messageNodes = messages.map((curr, index) => {
+    let group = [];
+
+    const messageNodes = messages.map((message, index) => {
+      group.push(message);
       // Find diff in message type or no more messages
-      if (!messages[index + 1] || messages[index + 1].id !== curr.id) {
+      if (!messages[index + 1] || messages[index + 1].id !== message.id) {
+        const messageGroup = group;
+        group = [];
         return (
           <BubbleGroup
             key={index}
-            messages={messages}
-            index={index}
-            id={curr.id}
+            messages={messageGroup}
+            id={message.id}
             showSenderName={showSenderName}
+            chatBubble={ChatBubble}
           />
         );
       }
+
       return null;
     });
 

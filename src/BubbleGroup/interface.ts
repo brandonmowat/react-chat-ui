@@ -1,4 +1,8 @@
-import { Children } from 'react';
+import { Message, ChatBubble } from '../';
 export default interface BubbleGroupInterface {
-  children: Children;
+  messages: [Message];
+  index: number;
+  id: number;
+  showSenderName: boolean;
+  chatBubble: ChatBubble;
 };
