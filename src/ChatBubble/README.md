@@ -1,5 +1,7 @@
 ## ChatBubble
 
+The `ChatBubble` component basically just turns a given string into chat bubble. And depending on the `id` you give it, it will render in the correct colour and alignment.
+
 #### Props
 
 **message**: This must be a valid [Message](../Message) object.
