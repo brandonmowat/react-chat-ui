@@ -13,9 +13,9 @@ A `BubbleGroup` renders a group of [ChatBubble](../ChatBubble)'s and can show th
 
 ```javascript
 <BubbleGroup
-  key={index}
   messages={messageGroup}
   id={message.id}
   showSenderName={showSenderName}
+  chatBubble={MyChatBubble}
 />
 ```
