@@ -24,15 +24,6 @@ class MyChat extends React.Component {
         chatBubble={MyChatBubble}
         messages={this.state.messages}
         showSenderName
-        bubbleStyles={{
-          text: {
-            fontSize: 30,
-          },
-          chatbubble: {
-            borderRadius: 70,
-            padding: 40,
-          },
-        }}
       />
     );
   }
