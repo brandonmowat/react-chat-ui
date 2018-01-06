@@ -220,13 +220,39 @@ var Chat = function (_React$Component) {
         _react2.default.createElement(
           'h2',
           { className: 'text-center' },
-          'Or just use the bubbles!'
+          'There are Bubbles!'
         ),
         _react2.default.createElement(_lib.ChatBubble, {
           message: new _lib.Message({ id: 1, message: 'I float to the left!' })
         }),
         _react2.default.createElement(_lib.ChatBubble, {
           message: new _lib.Message({ id: 0, message: 'I float to the right!' })
+        }),
+        _react2.default.createElement(
+          'h2',
+          { className: 'text-center' },
+          'And we have Bubble Groups!'
+        ),
+        _react2.default.createElement(_lib.BubbleGroup, {
+          messages: [new _lib.Message({ id: 1, message: 'Hey!' }), new _lib.Message({ id: 1, message: 'I forgot to mention...' }), new _lib.Message({
+            id: 1,
+            message: "Oh no, I forgot... I think I was going to say I'm a BubbleGroup"
+          })],
+          id: 1,
+          showSenderName: true,
+          senderName: 'Elon Musk'
+        }),
+        _react2.default.createElement(_lib.ChatBubble, {
+          message: new _lib.Message({ id: 2, message: "I 'm a single ChatBubble!" })
+        }),
+        _react2.default.createElement(_lib.BubbleGroup, {
+          messages: [new _lib.Message({ id: 0, message: 'How could you forget already?!' }), new _lib.Message({
+            id: 0,
+            message: "Oh well. I'm a BubbleGroup as well"
+          })],
+          id: 1,
+          showSenderName: true,
+          senderName: 'Elon Musk'
         })
       );
     }
@@ -237,7 +263,82 @@ var Chat = function (_React$Component) {
 
 (0, _reactDom.render)(_react2.default.createElement(Chat, null), document.getElementById('chat-ui'));
 
-},{"../lib":8,"react":34,"react-dom":28}],2:[function(require,module,exports){
+},{"../lib":10,"react":36,"react-dom":30}],2:[function(require,module,exports){
+"use strict";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = require("react");
+var ChatBubble_1 = require("../ChatBubble");
+var styles_1 = require("./styles");
+
+var BubbleGroup = function (_React$Component) {
+    _inherits(BubbleGroup, _React$Component);
+
+    function BubbleGroup(props) {
+        _classCallCheck(this, BubbleGroup);
+
+        return _possibleConstructorReturn(this, (BubbleGroup.__proto__ || Object.getPrototypeOf(BubbleGroup)).call(this, props));
+    }
+
+    _createClass(BubbleGroup, [{
+        key: "renderGroup",
+        value: function renderGroup(messages, id) {
+            var _props = this.props,
+                bubblesCentered = _props.bubblesCentered,
+                bubbleStyles = _props.bubbleStyles,
+                showSenderName = _props.showSenderName,
+                chatBubble = _props.chatBubble,
+                senderName = _props.senderName;
+
+            var ChatBubble = chatBubble || ChatBubble_1.default;
+            var sampleMessage = messages[0];
+            var messageNodes = messages.map(function (message, i) {
+                return React.createElement(ChatBubble, { key: i, message: message, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles });
+            });
+            return React.createElement("div", { style: styles_1.default.chatbubbleWrapper }, showSenderName && (senderName || sampleMessage.senderName) !== '' && sampleMessage.id !== 0 && React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, senderName || sampleMessage.senderName), messageNodes);
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            var _props2 = this.props,
+                messages = _props2.messages,
+                id = _props2.id;
+
+            return this.renderGroup(messages, id);
+        }
+    }]);
+
+    return BubbleGroup;
+}(React.Component);
+
+exports.default = BubbleGroup;
+},{"../ChatBubble":4,"./styles":3,"react":36}],3:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {
+    chatbubbleWrapper: {
+        marginTop: 10,
+        marginBottom: 10,
+        overflow: 'auto',
+        position: 'relative'
+    },
+    bubbleGroupHeader: {
+        margin: 0,
+        fontSize: 14,
+        fontWeight: '400',
+        color: '#999'
+    }
+};
+},{}],4:[function(require,module,exports){
 "use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -267,31 +368,19 @@ var ChatBubble = function (_React$Component) {
     }
 
     _createClass(ChatBubble, [{
-        key: "renderBlueBubble",
-        value: function renderBlueBubble() {
-            var bubbleStyles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultBubbleStyles;
-            var bubblesCentered = this.props.bubblesCentered;
-            var userBubble = bubbleStyles.userBubble,
-                chatbubble = bubbleStyles.chatbubble,
-                text = bubbleStyles.text;
-
-            return React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubble, bubblesCentered ? {} : styles_1.default.chatbubbleOrientationNormal, chatbubble, userBubble) }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, this.props.message.message)));
-        }
-    }, {
-        key: "renderGrayBubble",
-        value: function renderGrayBubble() {
-            var bubbleStyles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultBubbleStyles;
-            var bubblesCentered = this.props.bubblesCentered;
-            var chatbubble = bubbleStyles.chatbubble,
-                text = bubbleStyles.text;
-
-            return React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubble, bubblesCentered ? {} : styles_1.default.recipientChatbubbleOrientationNormal, styles_1.default.recipientChatbubble, chatbubble) }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, this.props.message.message)));
-        }
-    }, {
         key: "render",
         value: function render() {
+            var bubblesCentered = this.props.bubblesCentered;
             var bubbleStyles = this.props.bubbleStyles;
-            return this.props.message.id === 0 ? this.renderBlueBubble(bubbleStyles) : this.renderGrayBubble(bubbleStyles);
+
+            bubbleStyles = bubbleStyles || defaultBubbleStyles;
+            var _bubbleStyles = bubbleStyles,
+                userBubble = _bubbleStyles.userBubble,
+                chatbubble = _bubbleStyles.chatbubble,
+                text = _bubbleStyles.text;
+
+            var chatBubbleStyles = this.props.message.id === 0 ? Object.assign({}, styles_1.default.chatbubble, bubblesCentered ? {} : styles_1.default.chatbubbleOrientationNormal, chatbubble, userBubble) : Object.assign({}, styles_1.default.chatbubble, styles_1.default.recipientChatbubble, bubblesCentered ? {} : styles_1.default.recipientChatbubbleOrientationNormal, chatbubble, userBubble);
+            return React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, React.createElement("div", { style: chatBubbleStyles }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, this.props.message.message)));
         }
     }]);
 
@@ -299,7 +388,7 @@ var ChatBubble = function (_React$Component) {
 }(React.Component);
 
 exports.default = ChatBubble;
-},{"./styles":3,"react":34}],3:[function(require,module,exports){
+},{"./styles":5,"react":36}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -337,7 +426,7 @@ exports.default = {
         margin: 0
     }
 };
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -350,6 +439,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
+var BubbleGroup_1 = require("../BubbleGroup");
 var ChatBubble_1 = require("../ChatBubble");
 var ChatInput_1 = require("../ChatInput");
 var Message_1 = require("../Message");
@@ -383,39 +473,22 @@ var ChatFeed = function (_React$Component) {
             this.chat.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
         }
     }, {
-        key: "renderGroup",
-        value: function renderGroup(key, messages, index, id) {
+        key: "renderMessages",
+        value: function renderMessages(messages) {
             var _props = this.props,
-                bubblesCentered = _props.bubblesCentered,
+                isTyping = _props.isTyping,
                 bubbleStyles = _props.bubbleStyles,
-                showSenderName = _props.showSenderName,
-                chatBubble = _props.chatBubble;
+                chatBubble = _props.chatBubble,
+                showSenderName = _props.showSenderName;
 
             var ChatBubble = chatBubble || ChatBubble_1.default;
             var group = [];
-            for (var i = index; messages[i] ? messages[i].id === id : false; i -= 1) {
-                group.push(messages[i]);
-            }
-            var sampleMessage = group[0];
-            var messageNodes = group.reverse().map(function (curr, i) {
-                return React.createElement(ChatBubble, { key: i, message: curr, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles });
-            });
-            return React.createElement("div", { key: key, style: styles_1.default.chatbubbleWrapper }, showSenderName && sampleMessage.senderName !== '' && sampleMessage.id !== 0 && React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, sampleMessage.senderName), messageNodes);
-        }
-    }, {
-        key: "renderMessages",
-        value: function renderMessages(messages) {
-            var _this2 = this;
-
-            var _props2 = this.props,
-                isTyping = _props2.isTyping,
-                bubbleStyles = _props2.bubbleStyles,
-                chatBubble = _props2.chatBubble;
-
-            var ChatBubble = chatBubble || ChatBubble_1.default;
-            var messageNodes = messages.map(function (curr, index) {
-                if (!messages[index + 1] || messages[index + 1].id !== curr.id) {
-                    return _this2.renderGroup(index, messages, index, curr.id);
+            var messageNodes = messages.map(function (message, index) {
+                group.push(message);
+                if (!messages[index + 1] || messages[index + 1].id !== message.id) {
+                    var messageGroup = group;
+                    group = [];
+                    return React.createElement(BubbleGroup_1.default, { key: index, messages: messageGroup, id: message.id, showSenderName: showSenderName, chatBubble: ChatBubble });
                 }
                 return null;
             });
@@ -427,13 +500,13 @@ var ChatFeed = function (_React$Component) {
     }, {
         key: "render",
         value: function render() {
-            var _this3 = this;
+            var _this2 = this;
 
             var inputField = this.props.hasInputField && React.createElement(ChatInput_1.default, null);
             var maxHeight = this.props.maxHeight;
 
             return React.createElement("div", { id: "chat-panel", style: styles_1.default.chatPanel }, React.createElement("div", { ref: function ref(c) {
-                    _this3.chat = c;
+                    _this2.chat = c;
                 }, className: "chat-history", style: Object.assign({}, styles_1.default.chatHistory, { maxHeight: maxHeight }) }, React.createElement("div", { className: "chat-messages" }, this.renderMessages(this.props.messages))), inputField);
         }
     }]);
@@ -442,7 +515,7 @@ var ChatFeed = function (_React$Component) {
 }(React.Component);
 
 exports.default = ChatFeed;
-},{"../ChatBubble":2,"../ChatInput":6,"../Message":7,"./styles":5,"react":34}],5:[function(require,module,exports){
+},{"../BubbleGroup":2,"../ChatBubble":4,"../ChatInput":8,"../Message":9,"./styles":7,"react":36}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -467,15 +540,9 @@ exports.default = {
         position: 'absolute',
         width: 36,
         zIndex: 100
-    },
-    bubbleGroupHeader: {
-        margin: 0,
-        fontSize: 14,
-        fontWeight: '400',
-        color: '#999'
     }
 };
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -502,7 +569,7 @@ var ChatInput = function ChatInput(props) {
     return react_1.default.createElement("div", { className: "chat-input", style: styles.chatInput }, react_1.default.createElement("input", { type: "text", style: inputStyles || styles.inputStyle, placeholder: inputPlaceholder }));
 };
 exports.default = ChatInput;
-},{"react":34}],7:[function(require,module,exports){
+},{"react":36}],9:[function(require,module,exports){
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -518,20 +585,21 @@ var Message = function Message(messageData) {
 };
 
 exports.default = Message;
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var _1 = require("./ChatBubble/");
 exports.ChatBubble = _1.default;
+var BubbleGroup_1 = require("./BubbleGroup");
+exports.BubbleGroup = BubbleGroup_1.default;
 var _2 = require("./ChatFeed/");
 exports.ChatFeed = _2.default;
 var _3 = require("./ChatInput/");
 exports.ChatInput = _3.default;
 var _4 = require("./Message/");
 exports.Message = _4.default;
-exports.default = { ChatBubble: _1.default, ChatFeed: _2.default, ChatInput: _3.default, Message: _4.default };
-},{"./ChatBubble/":2,"./ChatFeed/":4,"./ChatInput/":6,"./Message/":7}],9:[function(require,module,exports){
+},{"./BubbleGroup":2,"./ChatBubble/":4,"./ChatFeed/":6,"./ChatInput/":8,"./Message/":9}],11:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -608,7 +676,7 @@ var EventListener = {
 
 module.exports = EventListener;
 }).call(this,require('_process'))
-},{"./emptyFunction":14,"_process":25}],10:[function(require,module,exports){
+},{"./emptyFunction":16,"_process":27}],12:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -642,7 +710,7 @@ var ExecutionEnvironment = {
 };
 
 module.exports = ExecutionEnvironment;
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 "use strict";
 
 /**
@@ -672,7 +740,7 @@ function camelize(string) {
 }
 
 module.exports = camelize;
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -710,7 +778,7 @@ function camelizeStyleName(string) {
 }
 
 module.exports = camelizeStyleName;
-},{"./camelize":11}],13:[function(require,module,exports){
+},{"./camelize":13}],15:[function(require,module,exports){
 'use strict';
 
 /**
@@ -748,7 +816,7 @@ function containsNode(outerNode, innerNode) {
 }
 
 module.exports = containsNode;
-},{"./isTextNode":22}],14:[function(require,module,exports){
+},{"./isTextNode":24}],16:[function(require,module,exports){
 "use strict";
 
 /**
@@ -785,7 +853,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-},{}],15:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -805,7 +873,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = emptyObject;
 }).call(this,require('_process'))
-},{"_process":25}],16:[function(require,module,exports){
+},{"_process":27}],18:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -830,7 +898,7 @@ function focusNode(node) {
 }
 
 module.exports = focusNode;
-},{}],17:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 /**
@@ -867,7 +935,7 @@ function getActiveElement(doc) /*?DOMElement*/{
 }
 
 module.exports = getActiveElement;
-},{}],18:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 'use strict';
 
 /**
@@ -898,7 +966,7 @@ function hyphenate(string) {
 }
 
 module.exports = hyphenate;
-},{}],19:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -935,7 +1003,7 @@ function hyphenateStyleName(string) {
 }
 
 module.exports = hyphenateStyleName;
-},{"./hyphenate":18}],20:[function(require,module,exports){
+},{"./hyphenate":20}],22:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -991,7 +1059,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":25}],21:[function(require,module,exports){
+},{"_process":27}],23:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1014,7 +1082,7 @@ function isNode(object) {
 }
 
 module.exports = isNode;
-},{}],22:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1037,7 +1105,7 @@ function isTextNode(object) {
 }
 
 module.exports = isTextNode;
-},{"./isNode":21}],23:[function(require,module,exports){
+},{"./isNode":23}],25:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -1103,7 +1171,7 @@ function shallowEqual(objA, objB) {
 }
 
 module.exports = shallowEqual;
-},{}],24:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -1168,7 +1236,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = warning;
 }).call(this,require('_process'))
-},{"./emptyFunction":14,"_process":25}],25:[function(require,module,exports){
+},{"./emptyFunction":16,"_process":27}],27:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -1354,7 +1422,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],26:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 (function (process){
 /** @license React v16.1.0
  * react-dom.development.js
@@ -16716,7 +16784,7 @@ module.exports = reactDom;
 }
 
 }).call(this,require('_process'))
-},{"_process":25,"fbjs/lib/EventListener":9,"fbjs/lib/ExecutionEnvironment":10,"fbjs/lib/camelizeStyleName":12,"fbjs/lib/containsNode":13,"fbjs/lib/emptyFunction":14,"fbjs/lib/emptyObject":15,"fbjs/lib/focusNode":16,"fbjs/lib/getActiveElement":17,"fbjs/lib/hyphenateStyleName":19,"fbjs/lib/invariant":20,"fbjs/lib/shallowEqual":23,"fbjs/lib/warning":24,"object-assign":29,"prop-types/checkPropTypes":30,"react":34}],27:[function(require,module,exports){
+},{"_process":27,"fbjs/lib/EventListener":11,"fbjs/lib/ExecutionEnvironment":12,"fbjs/lib/camelizeStyleName":14,"fbjs/lib/containsNode":15,"fbjs/lib/emptyFunction":16,"fbjs/lib/emptyObject":17,"fbjs/lib/focusNode":18,"fbjs/lib/getActiveElement":19,"fbjs/lib/hyphenateStyleName":21,"fbjs/lib/invariant":22,"fbjs/lib/shallowEqual":25,"fbjs/lib/warning":26,"object-assign":31,"prop-types/checkPropTypes":32,"react":36}],29:[function(require,module,exports){
 /** @license React v16.1.0
  * react-dom.production.min.js
  *
@@ -16945,7 +17013,7 @@ var Ng={createPortal:Lg,findDOMNode:function(a){if(null==a)return null;if(1===a.
 D("40");return a._reactRootContainer?(Z.unbatchedUpdates(function(){Kg(null,null,a,!1,function(){a._reactRootContainer=null})}),!0):!1},unstable_createPortal:Lg,unstable_batchedUpdates:sc,unstable_deferredUpdates:Z.deferredUpdates,flushSync:Z.flushSync,__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{EventPluginHub:mb,EventPluginRegistry:Ta,EventPropagators:Bb,ReactControlledComponent:pc,ReactDOMComponentTree:sb,ReactDOMEventListener:sd}};
 Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.1.0",rendererPackageName:"react-dom"});var Og=Object.freeze({default:Ng}),Pg=Og&&Ng||Og;module.exports=Pg["default"]?Pg["default"]:Pg;
 
-},{"fbjs/lib/EventListener":9,"fbjs/lib/ExecutionEnvironment":10,"fbjs/lib/containsNode":13,"fbjs/lib/emptyFunction":14,"fbjs/lib/emptyObject":15,"fbjs/lib/focusNode":16,"fbjs/lib/getActiveElement":17,"fbjs/lib/shallowEqual":23,"object-assign":29,"react":34}],28:[function(require,module,exports){
+},{"fbjs/lib/EventListener":11,"fbjs/lib/ExecutionEnvironment":12,"fbjs/lib/containsNode":15,"fbjs/lib/emptyFunction":16,"fbjs/lib/emptyObject":17,"fbjs/lib/focusNode":18,"fbjs/lib/getActiveElement":19,"fbjs/lib/shallowEqual":25,"object-assign":31,"react":36}],30:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -16987,7 +17055,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/react-dom.development.js":26,"./cjs/react-dom.production.min.js":27,"_process":25}],29:[function(require,module,exports){
+},{"./cjs/react-dom.development.js":28,"./cjs/react-dom.production.min.js":29,"_process":27}],31:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -17079,7 +17147,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],30:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -17142,7 +17210,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 module.exports = checkPropTypes;
 
 }).call(this,require('_process'))
-},{"./lib/ReactPropTypesSecret":31,"_process":25,"fbjs/lib/invariant":20,"fbjs/lib/warning":24}],31:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":33,"_process":27,"fbjs/lib/invariant":22,"fbjs/lib/warning":26}],33:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -17156,7 +17224,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}],32:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 (function (process){
 /** @license React v16.1.0
  * react.development.js
@@ -18503,7 +18571,7 @@ module.exports = react;
 }
 
 }).call(this,require('_process'))
-},{"_process":25,"fbjs/lib/emptyFunction":14,"fbjs/lib/emptyObject":15,"fbjs/lib/invariant":20,"fbjs/lib/warning":24,"object-assign":35,"prop-types/checkPropTypes":36}],33:[function(require,module,exports){
+},{"_process":27,"fbjs/lib/emptyFunction":16,"fbjs/lib/emptyObject":17,"fbjs/lib/invariant":22,"fbjs/lib/warning":26,"object-assign":37,"prop-types/checkPropTypes":38}],35:[function(require,module,exports){
 /** @license React v16.1.0
  * react.production.min.js
  *
@@ -18527,7 +18595,7 @@ var R={Children:{map:function(a,b,e){if(null==a)return a;var d=[];Q(a,d,null,b,e
 k=a._owner;if(null!=b){void 0!==b.ref&&(h=b.ref,k=z.current);void 0!==b.key&&(c=""+b.key);if(a.type&&a.type.defaultProps)var f=a.type.defaultProps;for(g in b)A.call(b,g)&&!C.hasOwnProperty(g)&&(d[g]=void 0===b[g]&&void 0!==f?f[g]:b[g])}var g=arguments.length-2;if(1===g)d.children=e;else if(1<g){f=Array(g);for(var l=0;l<g;l++)f[l]=arguments[l+2];d.children=f}return{$$typeof:B,type:a.type,key:c,ref:h,props:d,_owner:k}},createFactory:function(a){var b=D.bind(null,a);b.type=a;return b},isValidElement:E,
 version:"16.1.0",__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{ReactCurrentOwner:z,assign:m}},S=Object.freeze({default:R}),T=S&&R||S;module.exports=T["default"]?T["default"]:T;
 
-},{"fbjs/lib/emptyFunction":14,"fbjs/lib/emptyObject":15,"object-assign":35}],34:[function(require,module,exports){
+},{"fbjs/lib/emptyFunction":16,"fbjs/lib/emptyObject":17,"object-assign":37}],36:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -18538,10 +18606,10 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/react.development.js":32,"./cjs/react.production.min.js":33,"_process":25}],35:[function(require,module,exports){
-arguments[4][29][0].apply(exports,arguments)
-},{"dup":29}],36:[function(require,module,exports){
-arguments[4][30][0].apply(exports,arguments)
-},{"./lib/ReactPropTypesSecret":37,"_process":25,"dup":30,"fbjs/lib/invariant":20,"fbjs/lib/warning":24}],37:[function(require,module,exports){
+},{"./cjs/react.development.js":34,"./cjs/react.production.min.js":35,"_process":27}],37:[function(require,module,exports){
 arguments[4][31][0].apply(exports,arguments)
-},{"dup":31}]},{},[1]);
+},{"dup":31}],38:[function(require,module,exports){
+arguments[4][32][0].apply(exports,arguments)
+},{"./lib/ReactPropTypesSecret":39,"_process":27,"dup":32,"fbjs/lib/invariant":22,"fbjs/lib/warning":26}],39:[function(require,module,exports){
+arguments[4][33][0].apply(exports,arguments)
+},{"dup":33}]},{},[1]);

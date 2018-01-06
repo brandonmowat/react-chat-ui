@@ -78,8 +78,10 @@ this.state = {
 
 ## API
 
-* [Message](./src/Message)
 * [ChatFeed](./src/ChatFeed)
+* [Message](./src/Message)
+* [ChatBubble](./src/ChatBubble)
+* [BubbleGroup](./src/BubbleGroup)
 
 ## Contributing!¡1 🔧
 

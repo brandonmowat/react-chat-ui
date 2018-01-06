@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { ChatFeed, ChatBubble, Message } from '../lib';
+import { ChatFeed, ChatBubble, BubbleGroup, Message } from '../lib';
 
 const styles = {
   button: {
@@ -159,12 +159,43 @@ class Chat extends React.Component {
             </button>
           </div>
         </div>
-        <h2 className="text-center">Or just use the bubbles!</h2>
+        <h2 className="text-center">There are Bubbles!</h2>
         <ChatBubble
           message={new Message({ id: 1, message: 'I float to the left!' })}
         />
         <ChatBubble
           message={new Message({ id: 0, message: 'I float to the right!' })}
+        />
+
+        <h2 className="text-center">And we have Bubble Groups!</h2>
+        <BubbleGroup
+          messages={[
+            new Message({ id: 1, message: 'Hey!' }),
+            new Message({ id: 1, message: 'I forgot to mention...' }),
+            new Message({
+              id: 1,
+              message:
+                "Oh no, I forgot... I think I was going to say I'm a BubbleGroup",
+            }),
+          ]}
+          id={1}
+          showSenderName={true}
+          senderName={'Elon Musk'}
+        />
+        <ChatBubble
+          message={new Message({ id: 2, message: "I 'm a single ChatBubble!" })}
+        />
+        <BubbleGroup
+          messages={[
+            new Message({ id: 0, message: 'How could you forget already?!' }),
+            new Message({
+              id: 0,
+              message: "Oh well. I'm a BubbleGroup as well",
+            }),
+          ]}
+          id={1}
+          showSenderName={true}
+          senderName={'Elon Musk'}
         />
       </div>
     );
