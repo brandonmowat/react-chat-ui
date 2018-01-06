@@ -1,24 +1,18 @@
 {
   "name": "react-chat-ui",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "A library of React components for building chat UI's",
   "repository": "brandonmowat/react-chat-ui",
   "main": "./lib/index.js",
   "scripts": {
-    "build-demo": "npx babel --presets es2015,stage-0 ./demo/index.js -o ./demo/es5.js && npx browserify demo/es5.js -o demo/bundle.js",
+    "build-demo":
+      "npx babel --presets es2015,stage-0 ./demo/index.js -o ./demo/es5.js && npx browserify demo/es5.js -o demo/bundle.js",
     "compile": "./precompile.sh",
     "prepublish": "npm run compile",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "gulp watch"
   },
-  "keywords": [
-    "react",
-    "chat",
-    "chatfeed",
-    "reactjs",
-    "ui",
-    "messenger"
-  ],
+  "keywords": ["react", "chat", "chatfeed", "reactjs", "ui", "messenger"],
   "author": "Brandon Mowat",
   "license": "ISC",
   "dependencies": {

@@ -220,13 +220,24 @@ var Chat = function (_React$Component) {
         _react2.default.createElement(
           'h2',
           { className: 'text-center' },
-          'Or just use the bubbles!'
+          'There are Bubbles!'
         ),
         _react2.default.createElement(_lib.ChatBubble, {
           message: new _lib.Message({ id: 1, message: 'I float to the left!' })
         }),
         _react2.default.createElement(_lib.ChatBubble, {
           message: new _lib.Message({ id: 0, message: 'I float to the right!' })
+        }),
+        _react2.default.createElement(
+          'h2',
+          { className: 'text-center' },
+          'And we have Bubble Groups!'
+        ),
+        console.log(_lib.BubbleGroup),
+        _react2.default.createElement(_lib.BubbleGroup, {
+          messages: [new _lib.Message({ id: 1, message: 'Hey!' }), new _lib.Message({ id: 1, message: 'I forgot to mention...' }), new _lib.Message({ id: 1, message: 'Oh no, I forgot...' })],
+          id: 1,
+          showSenderName: true
         })
       );
     }
@@ -564,14 +575,15 @@ exports.default = Message;
 Object.defineProperty(exports, "__esModule", { value: true });
 var _1 = require("./ChatBubble/");
 exports.ChatBubble = _1.default;
+var BubbleGroup_1 = require("./BubbleGroup");
+exports.BubbleGroup = BubbleGroup_1.default;
 var _2 = require("./ChatFeed/");
 exports.ChatFeed = _2.default;
 var _3 = require("./ChatInput/");
 exports.ChatInput = _3.default;
 var _4 = require("./Message/");
 exports.Message = _4.default;
-exports.default = { ChatBubble: _1.default, ChatFeed: _2.default, ChatInput: _3.default, Message: _4.default };
-},{"./ChatBubble/":4,"./ChatFeed/":6,"./ChatInput/":8,"./Message/":9}],11:[function(require,module,exports){
+},{"./BubbleGroup":2,"./ChatBubble/":4,"./ChatFeed/":6,"./ChatInput/":8,"./Message/":9}],11:[function(require,module,exports){
 (function (process){
 'use strict';
 
