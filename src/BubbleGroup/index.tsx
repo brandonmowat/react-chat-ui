@@ -21,11 +21,12 @@ export default class BubbleGroup extends React.Component {
       bubbleStyles,
       showSenderName,
       chatBubble,
+      senderName,
     } = this.props;
     const ChatBubble = chatBubble || DefaultChatBubble;
     const sampleMessage = messages[0];
 
-    const messageNodes = messages.reverse().map((message, i) => {
+    const messageNodes = messages.map((message, i) => {
       return (
         <ChatBubble
           key={i}
@@ -39,10 +40,10 @@ export default class BubbleGroup extends React.Component {
     return (
       <div style={styles.chatbubbleWrapper}>
         {showSenderName &&
-          (sampleMessage.senderName !== '' &&
+          ((senderName || sampleMessage.senderName) !== '' &&
             (sampleMessage.id !== 0 && (
               <h5 style={styles.bubbleGroupHeader}>
-                {sampleMessage.senderName}
+                {senderName || sampleMessage.senderName}
               </h5>
             )))}
         {messageNodes}

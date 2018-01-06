@@ -232,11 +232,26 @@ var Chat = function (_React$Component) {
           { className: 'text-center' },
           'And we have Bubble Groups!'
         ),
-        console.log(_lib.BubbleGroup),
         _react2.default.createElement(_lib.BubbleGroup, {
-          messages: [new _lib.Message({ id: 1, message: 'Hey!' }), new _lib.Message({ id: 1, message: 'I forgot to mention...' }), new _lib.Message({ id: 1, message: 'Oh no, I forgot...' })],
+          messages: [new _lib.Message({ id: 1, message: 'Hey!' }), new _lib.Message({ id: 1, message: 'I forgot to mention...' }), new _lib.Message({
+            id: 1,
+            message: "Oh no, I forgot... I think I was going to say I'm a BubbleGroup"
+          })],
           id: 1,
-          showSenderName: true
+          showSenderName: true,
+          senderName: 'Elon Musk'
+        }),
+        _react2.default.createElement(_lib.ChatBubble, {
+          message: new _lib.Message({ id: 2, message: "I 'm a single ChatBubble!" })
+        }),
+        _react2.default.createElement(_lib.BubbleGroup, {
+          messages: [new _lib.Message({ id: 0, message: 'How could you forget already?!' }), new _lib.Message({
+            id: 0,
+            message: "Oh well. I'm a BubbleGroup as well"
+          })],
+          id: 1,
+          showSenderName: true,
+          senderName: 'Elon Musk'
         })
       );
     }
