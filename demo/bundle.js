@@ -320,6 +320,7 @@ var BubbleGroup = function (_React$Component) {
 }(React.Component);
 
 exports.default = BubbleGroup;
+
 },{"../ChatBubble":4,"./styles":3,"react":36}],3:[function(require,module,exports){
 "use strict";
 
@@ -338,6 +339,7 @@ exports.default = {
         color: '#999'
     }
 };
+
 },{}],4:[function(require,module,exports){
 "use strict";
 
@@ -388,6 +390,7 @@ var ChatBubble = function (_React$Component) {
 }(React.Component);
 
 exports.default = ChatBubble;
+
 },{"./styles":5,"react":36}],5:[function(require,module,exports){
 "use strict";
 
@@ -426,6 +429,7 @@ exports.default = {
         margin: 0
     }
 };
+
 },{}],6:[function(require,module,exports){
 "use strict";
 
@@ -515,6 +519,7 @@ var ChatFeed = function (_React$Component) {
 }(React.Component);
 
 exports.default = ChatFeed;
+
 },{"../BubbleGroup":2,"../ChatBubble":4,"../ChatInput":8,"../Message":9,"./styles":7,"react":36}],7:[function(require,module,exports){
 "use strict";
 
@@ -542,6 +547,7 @@ exports.default = {
         zIndex: 100
     }
 };
+
 },{}],8:[function(require,module,exports){
 "use strict";
 
@@ -569,6 +575,7 @@ var ChatInput = function ChatInput(props) {
     return react_1.default.createElement("div", { className: "chat-input", style: styles.chatInput }, react_1.default.createElement("input", { type: "text", style: inputStyles || styles.inputStyle, placeholder: inputPlaceholder }));
 };
 exports.default = ChatInput;
+
 },{"react":36}],9:[function(require,module,exports){
 "use strict";
 
@@ -585,6 +592,7 @@ var Message = function Message(messageData) {
 };
 
 exports.default = Message;
+
 },{}],10:[function(require,module,exports){
 "use strict";
 
@@ -599,6 +607,7 @@ var _3 = require("./ChatInput/");
 exports.ChatInput = _3.default;
 var _4 = require("./Message/");
 exports.Message = _4.default;
+
 },{"./BubbleGroup":2,"./ChatBubble/":4,"./ChatFeed/":6,"./ChatInput/":8,"./Message/":9}],11:[function(require,module,exports){
 (function (process){
 'use strict';
