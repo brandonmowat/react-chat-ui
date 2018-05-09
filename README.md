@@ -8,9 +8,9 @@ A library of React components for building chat UI's.
 
 ## Sponsor
 
-Sponsored by [Pusher Chatkit](https://pusher.com/chatkit):
+Sponsored by [Pusher Chatkit](https://pusher.com/chatkit?utm_source=github&utm_campaign=react-chat-ui-sponsorship):
 
-<a href="https://pusher.com/chatkit">
+<a href="https://pusher.com/chatkit?utm_source=github&utm_campaign=react-chat-ui-sponsorship">
     <img width="650" src="https://raw.githubusercontent.com/bookercodes/react-chat-ui/master/media/chatit-banner.png" alt="Pusher Chatkit"></a>
 
 ## Features
