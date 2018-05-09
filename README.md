@@ -6,6 +6,13 @@ A library of React components for building chat UI's.
 
 [![NPM](https://nodei.co/npm/react-chat-ui.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/react-chat-ui/)
 
+## Sponsor
+
+Sponsored by [Pusher Chatkit](https://pusher.com/chatkit):
+
+<a href="https://pusher.com/chatkit">
+    <img width="650" src="https://raw.githubusercontent.com/bookercodes/react-chat-ui/master/media/chatit-banner.png" alt="Pusher Chatkit"></a>
+
 ## Features
 
 * Auto scroll to bottom
