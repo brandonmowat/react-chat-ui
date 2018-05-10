@@ -1,6 +1,6 @@
 {
   "name": "react-chat-ui",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "A library of React components for building chat UI's",
   "repository": "https://github.com/brandonmowat/react-chat-ui",
   "main": "./lib/index.js",
