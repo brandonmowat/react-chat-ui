@@ -4,7 +4,7 @@
  */
 
 interface MessageData {
-  id: number;
+  id: number | string;
   message: string;
   senderName?: string;
 }
@@ -13,7 +13,7 @@ export default class Message {
   /**
    * Message object for organizing and storing current message data.
    */
-  id: number;
+  id: number | string;
   message: string;
   senderName?: string;
   constructor(messageData: MessageData) {

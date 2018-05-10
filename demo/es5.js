@@ -44,7 +44,7 @@ var styles = {
 
 var users = {
   0: 'You',
-  1: 'Mark',
+  Mark: 'Mark',
   2: 'Evan'
 };
 
@@ -69,7 +69,7 @@ var Chat = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this));
 
     _this.state = {
-      messages: [new _lib.Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({
+      messages: [new _lib.Message({ id: 'Mark', message: 'Hey guys!', senderName: 'Mark' }), new _lib.Message({
         id: 2,
         message: 'Hey! Evan here. react-chat-ui is pretty dooope.',
         senderName: 'Evan'
@@ -181,9 +181,9 @@ var Chat = function (_React$Component) {
             _react2.default.createElement(
               'button',
               {
-                style: _extends({}, styles.button, this.state.curr_user === 1 ? styles.selected : {}),
+                style: _extends({}, styles.button, this.state.curr_user === 'Mark' ? styles.selected : {}),
                 onClick: function onClick() {
-                  return _this2.onPress(1);
+                  return _this2.onPress('Mark');
                 }
               },
               'Mark'

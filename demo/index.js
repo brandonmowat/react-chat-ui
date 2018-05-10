@@ -26,7 +26,7 @@ const styles = {
 
 const users = {
   0: 'You',
-  1: 'Mark',
+  Mark: 'Mark',
   2: 'Evan',
 };
 
@@ -43,7 +43,7 @@ class Chat extends React.Component {
     super();
     this.state = {
       messages: [
-        new Message({ id: 1, message: 'Hey guys!', senderName: 'Mark' }),
+        new Message({ id: 'Mark', message: 'Hey guys!', senderName: 'Mark' }),
         new Message({
           id: 2,
           message: 'Hey! Evan here. react-chat-ui is pretty dooope.',
@@ -127,9 +127,9 @@ class Chat extends React.Component {
             <button
               style={{
                 ...styles.button,
-                ...(this.state.curr_user === 1 ? styles.selected : {}),
+                ...(this.state.curr_user === 'Mark' ? styles.selected : {}),
               }}
-              onClick={() => this.onPress(1)}
+              onClick={() => this.onPress('Mark')}
             >
               Mark
             </button>
