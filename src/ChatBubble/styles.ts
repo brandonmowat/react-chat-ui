@@ -20,7 +20,7 @@ export default {
     float: 'right',
   },
   recipientChatbubble: {
-    backgroundColor: '#ccc',
+    backgroundColor: '#f0f0f0',
   },
   recipientChatbubbleOrientationNormal: {
     float: 'left',
