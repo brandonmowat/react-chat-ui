@@ -22,6 +22,7 @@
   "author": "Brandon Mowat",
   "license": "ISC",
   "dependencies": {
+    "anchorme": "^1.1.2",
     "prop-types": "^15.5.10",
     "react": "^16.1.0",
     "react-dom": "^16.1.0"

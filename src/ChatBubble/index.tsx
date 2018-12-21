@@ -1,4 +1,5 @@
 import * as React from 'react';
+import anchorme from 'anchorme';
 import ChatBubbleProps from './interface';
 import styles from './styles';
 
@@ -14,6 +15,21 @@ export default class ChatBubble extends React.Component {
   constructor(props: ChatBubbleProps) {
     super(props);
   }
+
+  renderMessageString = text => (
+    <p style={{ ...styles.p, ...text }} dangerouslySetInnerHTML={{
+      __html: anchorme(text, {
+        attributes: [{
+          name: 'target',
+          value: '_blank'
+        },
+        {
+          name: 'class',
+          value: 'message-link'
+        }]
+      })
+    }} />
+  );
 
   public render() {
     const { bubblesCentered } = this.props;
@@ -47,7 +63,7 @@ export default class ChatBubble extends React.Component {
         }}
       >
         <div style={chatBubbleStyles}>
-          <p style={{ ...styles.p, ...text }}>{this.props.message.message}</p>
+         {this.renderMessageString(this.props.message.message)}
         </div>
       </div>
     );
