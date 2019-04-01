@@ -22,9 +22,7 @@
   "author": "Brandon Mowat",
   "license": "ISC",
   "dependencies": {
-    "prop-types": "^15.5.10",
-    "react": "^16.1.0",
-    "react-dom": "^16.1.0"
+    "prop-types": "^15.5.10"
   },
   "peerDependencies": {
     "react": "^15.3.1",
@@ -41,6 +39,8 @@
     "gulp-babel": "^6.1.2",
     "gulp-plumber": "^1.1.0",
     "gulp-typescript": "^3.2.2",
-    "typescript": "^2.5.2"
+    "typescript": "^2.5.2",
+    "react": "^16.1.0",
+    "react-dom": "^16.1.0"
   }
 }
