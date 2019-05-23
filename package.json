@@ -40,7 +40,7 @@
     "gulp-plumber": "^1.1.0",
     "gulp-typescript": "^3.2.2",
     "typescript": "^2.5.2",
-     "react": "^16.1.0",
-    "react-dom": "^16.1.0"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }
