@@ -265,139 +265,129 @@ var Chat = function (_React$Component) {
 
 },{"../lib":10,"react":20,"react-dom":17}],2:[function(require,module,exports){
 "use strict";
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var ChatBubble_1 = require("../ChatBubble");
 var styles_1 = require("./styles");
-
-var BubbleGroup = function (_React$Component) {
-    _inherits(BubbleGroup, _React$Component);
-
+var BubbleGroup = (function (_super) {
+    __extends(BubbleGroup, _super);
     function BubbleGroup(props) {
-        _classCallCheck(this, BubbleGroup);
-
-        return _possibleConstructorReturn(this, (BubbleGroup.__proto__ || Object.getPrototypeOf(BubbleGroup)).call(this, props));
+        return _super.call(this, props) || this;
     }
-
-    _createClass(BubbleGroup, [{
-        key: "renderGroup",
-        value: function renderGroup(messages, id) {
-            var _props = this.props,
-                bubblesCentered = _props.bubblesCentered,
-                bubbleStyles = _props.bubbleStyles,
-                showSenderName = _props.showSenderName,
-                chatBubble = _props.chatBubble,
-                senderName = _props.senderName;
-
-            var ChatBubble = chatBubble || ChatBubble_1.default;
-            var sampleMessage = messages[0];
-            var messageNodes = messages.map(function (message, i) {
-                return React.createElement(ChatBubble, { key: i, message: message, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles });
-            });
-            return React.createElement("div", { style: styles_1.default.chatbubbleWrapper }, showSenderName && (senderName || sampleMessage.senderName) !== '' && sampleMessage.id !== 0 && React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, senderName || sampleMessage.senderName), messageNodes);
-        }
-    }, {
-        key: "render",
-        value: function render() {
-            var _props2 = this.props,
-                messages = _props2.messages,
-                id = _props2.id;
-
-            return this.renderGroup(messages, id);
-        }
-    }]);
-
+    BubbleGroup.prototype.renderGroup = function (messages, id) {
+        var _a = this.props, bubblesCentered = _a.bubblesCentered, bubbleStyles = _a.bubbleStyles, showSenderName = _a.showSenderName, chatBubble = _a.chatBubble, senderName = _a.senderName;
+        var ChatBubble = chatBubble || ChatBubble_1.default;
+        var sampleMessage = messages[0];
+        var messageNodes = messages.map(function (message, i) {
+            return (React.createElement(ChatBubble, { key: i, message: message, bubblesCentered: bubblesCentered, bubbleStyles: bubbleStyles }));
+        });
+        return (React.createElement("div", { style: styles_1.default.chatbubbleWrapper },
+            showSenderName &&
+                ((senderName || sampleMessage.senderName) !== '' &&
+                    (sampleMessage.id !== 0 && (React.createElement("h5", { style: styles_1.default.bubbleGroupHeader }, senderName || sampleMessage.senderName)))),
+            messageNodes));
+    };
+    BubbleGroup.prototype.render = function () {
+        var _a = this.props, messages = _a.messages, id = _a.id;
+        return this.renderGroup(messages, id);
+    };
     return BubbleGroup;
-}(React.Component);
-
+}(React.Component));
 exports.default = BubbleGroup;
 
 },{"../ChatBubble":4,"./styles":3,"react":20}],3:[function(require,module,exports){
 "use strict";
-
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     chatbubbleWrapper: {
         marginTop: 10,
         marginBottom: 10,
         overflow: 'auto',
-        position: 'relative'
+        position: 'relative',
     },
     bubbleGroupHeader: {
         margin: 0,
         fontSize: 14,
         fontWeight: '400',
-        color: '#999'
-    }
+        color: '#999',
+    },
 };
 
 },{}],4:[function(require,module,exports){
 "use strict";
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var styles_1 = require("./styles");
 var defaultBubbleStyles = {
     userBubble: {},
     chatbubble: {},
-    text: {}
+    text: {},
 };
-
-var ChatBubble = function (_React$Component) {
-    _inherits(ChatBubble, _React$Component);
-
+var ChatBubble = (function (_super) {
+    __extends(ChatBubble, _super);
     function ChatBubble(props) {
-        _classCallCheck(this, ChatBubble);
-
-        return _possibleConstructorReturn(this, (ChatBubble.__proto__ || Object.getPrototypeOf(ChatBubble)).call(this, props));
+        return _super.call(this, props) || this;
     }
-
-    _createClass(ChatBubble, [{
-        key: "render",
-        value: function render() {
-            var bubblesCentered = this.props.bubblesCentered;
-            var bubbleStyles = this.props.bubbleStyles;
-
-            bubbleStyles = bubbleStyles || defaultBubbleStyles;
-            var _bubbleStyles = bubbleStyles,
-                userBubble = _bubbleStyles.userBubble,
-                chatbubble = _bubbleStyles.chatbubble,
-                text = _bubbleStyles.text;
-
-            var chatBubbleStyles = this.props.message.id === 0 ? Object.assign({}, styles_1.default.chatbubble, bubblesCentered ? {} : styles_1.default.chatbubbleOrientationNormal, chatbubble, userBubble) : Object.assign({}, styles_1.default.chatbubble, styles_1.default.recipientChatbubble, bubblesCentered ? {} : styles_1.default.recipientChatbubbleOrientationNormal, chatbubble, userBubble);
-            return React.createElement("div", { style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, React.createElement("div", { style: chatBubbleStyles }, React.createElement("p", { style: Object.assign({}, styles_1.default.p, text) }, this.props.message.message)));
-        }
-    }]);
-
+    ChatBubble.prototype.render = function () {
+        var bubblesCentered = this.props.bubblesCentered;
+        var bubbleStyles = this.props.bubbleStyles;
+        bubbleStyles = bubbleStyles || defaultBubbleStyles;
+        var userBubble = bubbleStyles.userBubble, chatbubble = bubbleStyles.chatbubble, text = bubbleStyles.text;
+        var chatBubbleStyles = this.props.message.id === 0
+            ? __assign({}, styles_1.default.chatbubble, bubblesCentered ? {} : styles_1.default.chatbubbleOrientationNormal, chatbubble, userBubble) : __assign({}, styles_1.default.chatbubble, styles_1.default.recipientChatbubble, bubblesCentered
+            ? {}
+            : styles_1.default.recipientChatbubbleOrientationNormal, chatbubble, userBubble);
+        return (React.createElement("div", { style: __assign({}, styles_1.default.chatbubbleWrapper) },
+            React.createElement("div", { style: chatBubbleStyles },
+                React.createElement("p", { style: __assign({}, styles_1.default.p, text) }, this.props.message.message))));
+    };
     return ChatBubble;
-}(React.Component);
-
+}(React.Component));
 exports.default = ChatBubble;
 
 },{"./styles":5,"react":20}],5:[function(require,module,exports){
 "use strict";
-
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     chatbubbleWrapper: {
-        overflow: 'auto'
+        overflow: 'auto',
     },
     chatbubble: {
         backgroundColor: '#0084FF',
@@ -411,36 +401,51 @@ exports.default = {
         paddingBottom: 8,
         paddingLeft: 14,
         paddingRight: 14,
-        width: '-webkit-fit-content'
+        width: '-webkit-fit-content',
     },
     chatbubbleOrientationNormal: {
-        float: 'right'
+        float: 'right',
     },
     recipientChatbubble: {
-        backgroundColor: '#ccc'
+        backgroundColor: '#ccc',
     },
     recipientChatbubbleOrientationNormal: {
-        float: 'left'
+        float: 'left',
     },
     p: {
         color: '#FFFFFF',
         fontSize: 16,
         fontWeight: '300',
-        margin: 0
-    }
+        margin: 0,
+    },
 };
 
 },{}],6:[function(require,module,exports){
 "use strict";
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var BubbleGroup_1 = require("../BubbleGroup");
@@ -448,95 +453,73 @@ var ChatBubble_1 = require("../ChatBubble");
 var ChatInput_1 = require("../ChatInput");
 var Message_1 = require("../Message");
 var styles_1 = require("./styles");
-
-var ChatFeed = function (_React$Component) {
-    _inherits(ChatFeed, _React$Component);
-
+var ChatFeed = (function (_super) {
+    __extends(ChatFeed, _super);
     function ChatFeed(props) {
-        _classCallCheck(this, ChatFeed);
-
-        return _possibleConstructorReturn(this, (ChatFeed.__proto__ || Object.getPrototypeOf(ChatFeed)).call(this, props));
+        return _super.call(this, props) || this;
     }
-
-    _createClass(ChatFeed, [{
-        key: "componentDidMount",
-        value: function componentDidMount() {
-            this.scrollToBottom();
-        }
-    }, {
-        key: "componentDidUpdate",
-        value: function componentDidUpdate() {
-            this.scrollToBottom();
-        }
-    }, {
-        key: "scrollToBottom",
-        value: function scrollToBottom() {
-            var scrollHeight = this.chat.scrollHeight;
-            var height = this.chat.clientHeight;
-            var maxScrollTop = scrollHeight - height;
-            this.chat.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
-        }
-    }, {
-        key: "renderMessages",
-        value: function renderMessages(messages) {
-            var _props = this.props,
-                isTyping = _props.isTyping,
-                bubbleStyles = _props.bubbleStyles,
-                chatBubble = _props.chatBubble,
-                showSenderName = _props.showSenderName;
-
-            var ChatBubble = chatBubble || ChatBubble_1.default;
-            var group = [];
-            var messageNodes = messages.map(function (message, index) {
-                group.push(message);
-                if (!messages[index + 1] || messages[index + 1].id !== message.id) {
-                    var messageGroup = group;
-                    group = [];
-                    return React.createElement(BubbleGroup_1.default, { key: index, messages: messageGroup, id: message.id, showSenderName: showSenderName, chatBubble: ChatBubble, bubbleStyles: bubbleStyles });
-                }
-                return null;
-            });
-            if (isTyping) {
-                messageNodes.push(React.createElement("div", { key: "isTyping", style: Object.assign({}, styles_1.default.chatbubbleWrapper) }, React.createElement(ChatBubble, { message: new Message_1.default({ id: 1, message: '...', senderName: '' }), bubbleStyles: bubbleStyles })));
+    ChatFeed.prototype.componentDidMount = function () {
+        this.scrollToBottom();
+    };
+    ChatFeed.prototype.componentDidUpdate = function () {
+        this.scrollToBottom();
+    };
+    ChatFeed.prototype.scrollToBottom = function () {
+        var scrollHeight = this.chat.scrollHeight;
+        var height = this.chat.clientHeight;
+        var maxScrollTop = scrollHeight - height;
+        this.chat.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+    };
+    ChatFeed.prototype.renderMessages = function (messages) {
+        var _a = this.props, isTyping = _a.isTyping, bubbleStyles = _a.bubbleStyles, chatBubble = _a.chatBubble, showSenderName = _a.showSenderName;
+        var ChatBubble = chatBubble || ChatBubble_1.default;
+        var group = [];
+        var messageNodes = messages.map(function (message, index) {
+            group.push(message);
+            if (!messages[index + 1] || messages[index + 1].id !== message.id) {
+                var messageGroup = group;
+                group = [];
+                return (React.createElement(BubbleGroup_1.default, { key: index, messages: messageGroup, id: message.id, showSenderName: showSenderName, chatBubble: ChatBubble, bubbleStyles: bubbleStyles }));
             }
-            return messageNodes;
+            return null;
+        });
+        if (isTyping) {
+            messageNodes.push(React.createElement("div", { key: "isTyping", style: __assign({}, styles_1.default.chatbubbleWrapper) },
+                React.createElement(ChatBubble, { message: new Message_1.default({ id: 1, message: '...', senderName: '' }), bubbleStyles: bubbleStyles })));
         }
-    }, {
-        key: "render",
-        value: function render() {
-            var _this2 = this;
-
-            var inputField = this.props.hasInputField && React.createElement(ChatInput_1.default, null);
-            var maxHeight = this.props.maxHeight;
-
-            return React.createElement("div", { id: "chat-panel", style: styles_1.default.chatPanel }, React.createElement("div", { ref: function ref(c) {
-                    _this2.chat = c;
-                }, className: "chat-history", style: Object.assign({}, styles_1.default.chatHistory, { maxHeight: maxHeight }) }, React.createElement("div", { className: "chat-messages" }, this.renderMessages(this.props.messages))), inputField);
-        }
-    }]);
-
+        return messageNodes;
+    };
+    ChatFeed.prototype.render = function () {
+        var _this = this;
+        var inputField = this.props.hasInputField && React.createElement(ChatInput_1.default, null);
+        var maxHeight = this.props.maxHeight;
+        return (React.createElement("div", { id: "chat-panel", style: styles_1.default.chatPanel },
+            React.createElement("div", { ref: function (c) {
+                    _this.chat = c;
+                }, className: "chat-history", style: __assign({}, styles_1.default.chatHistory, { maxHeight: maxHeight }) },
+                React.createElement("div", { className: "chat-messages" }, this.renderMessages(this.props.messages))),
+            inputField));
+    };
     return ChatFeed;
-}(React.Component);
-
+}(React.Component));
 exports.default = ChatFeed;
 
 },{"../BubbleGroup":2,"../ChatBubble":4,"../ChatInput":8,"../Message":9,"./styles":7,"react":20}],7:[function(require,module,exports){
 "use strict";
-
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     chatPanel: {
         display: 'flex',
         flexDirection: 'column',
         flex: 1,
-        overflow: 'hidden'
+        overflow: 'hidden',
     },
     chatHistory: { overflow: 'auto' },
     chatbubbleWrapper: {
         marginTop: 10,
         marginBottom: 10,
         overflow: 'auto',
-        position: 'relative'
+        position: 'relative',
     },
     img: {
         borderRadius: 100,
@@ -544,18 +527,17 @@ exports.default = {
         left: 0,
         position: 'absolute',
         width: 36,
-        zIndex: 100
-    }
+        zIndex: 100,
+    },
 };
 
 },{}],8:[function(require,module,exports){
 "use strict";
-
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = require("react");
 var styles = {
     chatInput: {
-        flex: 1
+        flex: 1,
     },
     inputStyle: {
         border: 'none',
@@ -565,37 +547,31 @@ var styles = {
         fontSize: '16',
         outline: 'none',
         padding: '30',
-        width: '100%'
-    }
+        width: '100%',
+    },
 };
-var ChatInput = function ChatInput(props) {
-    var inputStyles = props.inputStyles,
-        inputPlaceholder = props.inputPlaceholder;
-
-    return react_1.default.createElement("div", { className: "chat-input", style: styles.chatInput }, react_1.default.createElement("input", { type: "text", style: inputStyles || styles.inputStyle, placeholder: inputPlaceholder }));
+var ChatInput = function (props) {
+    var inputStyles = props.inputStyles, inputPlaceholder = props.inputPlaceholder;
+    return (react_1.default.createElement("div", { className: "chat-input", style: styles.chatInput },
+        react_1.default.createElement("input", { type: "text", style: inputStyles || styles.inputStyle, placeholder: inputPlaceholder })));
 };
 exports.default = ChatInput;
 
 },{"react":20}],9:[function(require,module,exports){
 "use strict";
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 Object.defineProperty(exports, "__esModule", { value: true });
-
-var Message = function Message(messageData) {
-    _classCallCheck(this, Message);
-
-    this.id = messageData.id;
-    this.message = messageData.message;
-    this.senderName = messageData.senderName || undefined;
-};
-
+var Message = (function () {
+    function Message(messageData) {
+        this.id = messageData.id;
+        this.message = messageData.message;
+        this.senderName = messageData.senderName || undefined;
+    }
+    return Message;
+}());
 exports.default = Message;
 
 },{}],10:[function(require,module,exports){
 "use strict";
-
 Object.defineProperty(exports, "__esModule", { value: true });
 var ChatBubble_1 = require("./ChatBubble/");
 exports.ChatBubble = ChatBubble_1.default;

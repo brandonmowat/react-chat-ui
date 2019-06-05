@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
     "noResolve": false,
     "noImplicitAny": false,
-    "outDir": "temp",
+    "outDir": "./lib",
     "removeComments": true,
     "sourceMap": true,
-    "allowJs": true,
+    "declaration": true,
     "jsx": "react"
   },
   "include": ["src/**/*.ts"],
