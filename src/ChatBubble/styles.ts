@@ -1,9 +1,15 @@
 export default {
   chatbubbleWrapper: {
     overflow: 'auto',
+    color: '#FFFFFF'
+  },
+  p: {
+    fontSize: 17,
+    fontWeight: '500',
+    margin: 0
   },
   chatbubble: {
-    backgroundColor: '#0084FF',
+    backgroundColor: '#9691ca',
     borderRadius: 20,
     marginTop: 1,
     marginRight: 'auto',
@@ -14,21 +20,18 @@ export default {
     paddingBottom: 8,
     paddingLeft: 14,
     paddingRight: 14,
+    fontWeight: '500',
     width: '-webkit-fit-content',
   },
   chatbubbleOrientationNormal: {
     float: 'right',
   },
   recipientChatbubble: {
-    backgroundColor: '#ccc',
+    color: '#6B4E84',
+    backgroundColor: '#FFFFFF',
+    fontWeight: '500'
   },
   recipientChatbubbleOrientationNormal: {
     float: 'left',
-  },
-  p: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '300',
-    margin: 0,
   },
 };
