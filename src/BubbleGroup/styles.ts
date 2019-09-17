@@ -3,12 +3,12 @@ export default {
     marginTop: 10,
     marginBottom: 10,
     overflow: 'auto',
-    position: 'relative',
+    position: 'relative' as 'relative',
   },
   bubbleGroupHeader: {
     margin: 0,
     fontSize: 14,
-    fontWeight: '400',
+    fontWeight: 400,
     color: '#999',
   },
 };
