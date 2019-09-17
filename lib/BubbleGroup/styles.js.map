@@ -1,0 +1,1 @@
+{"version":3,"file":"styles.js","sourceRoot":"","sources":["../../src/BubbleGroup/styles.ts"],"names":[],"mappings":";;AAAA,kBAAe;IACb,iBAAiB,EAAE;QACjB,SAAS,EAAE,EAAE;QACb,YAAY,EAAE,EAAE;QAChB,QAAQ,EAAE,MAAM;QAChB,QAAQ,EAAE,UAAwB;KACnC;IACD,iBAAiB,EAAE;QACjB,MAAM,EAAE,CAAC;QACT,QAAQ,EAAE,EAAE;QACZ,UAAU,EAAE,GAAG;QACf,KAAK,EAAE,MAAM;KACd;CACF,CAAC"}
