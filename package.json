@@ -38,6 +38,6 @@
     "browserify": "^14.4.0",
     "react": "^16.9.0",
     "react-dom": "^16.8.6",
-    "typescript": "^3.2.4"
+    "typescript": "^3.6.3"
   }
 }
