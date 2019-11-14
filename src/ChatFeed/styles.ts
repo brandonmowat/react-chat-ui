@@ -5,7 +5,10 @@ export default {
     flex: 1,
     overflow: 'hidden',
   },
-  chatHistory: { overflow: 'auto' },
+  chatHistory: {
+    overflow: 'auto',
+    scrollBehavior: 'smooth' as 'smooth',
+  },
   chatbubbleWrapper: {
     marginTop: 10,
     marginBottom: 10,

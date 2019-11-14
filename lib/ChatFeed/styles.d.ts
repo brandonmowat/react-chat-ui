@@ -7,6 +7,7 @@ declare const _default: {
     };
     chatHistory: {
         overflow: string;
+        scrollBehavior: "smooth";
     };
     chatbubbleWrapper: {
         marginTop: number;

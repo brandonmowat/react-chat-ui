@@ -25,6 +25,7 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
         scrollTop: number;
         addEventListener: Function;
         removeEventListener: Function;
+        querySelectorAll: Function;
     };
     _hasUserScrolledUp: boolean;
     constructor(props: ChatFeedInterface);
@@ -34,6 +35,7 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
     scrollToBottom(): void;
     componentWillUnmount(): void;
     private handleScrollEvent;
+    scrollToIntent(intent: string, className?: string): void;
     renderMessages(messages: [Message]): JSX.Element[];
     render(): JSX.Element;
 }

@@ -39,6 +39,7 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
     scrollTop: number;
     addEventListener: Function;
     removeEventListener: Function;
+    querySelectorAll: Function;
   };
   _hasUserScrolledUp: boolean = false;
 
@@ -53,7 +54,7 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
   }
 
   componentDidUpdate() {
-    const {preventConflictingAutoScroll} = this.props;
+    const { preventConflictingAutoScroll } = this.props;
     if (preventConflictingAutoScroll && this._hasUserScrolledUp) {
       return;
     }
@@ -83,6 +84,24 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
       this._hasUserScrolledUp = true;
     } else {
       this._hasUserScrolledUp = false;
+    }
+  }
+
+  scrollToIntent(intent: string, className?: string) {
+    try {
+      const viewPortHeight = this.chat.clientHeight;
+      const scrollTopAdjustment = viewPortHeight / 2;
+      const matchingNodes = this.chat.querySelectorAll(`[data-intent="${intent}"]`);
+      const chatBubbleNode = matchingNodes[matchingNodes.length - 1];
+      const parentElement = chatBubbleNode.parentElement;
+      this.chat.scrollTop = parentElement.offsetTop - scrollTopAdjustment;
+      if (className) {
+        parentElement.classList.remove(className);
+        // Trigger a reflow
+        void chatBubbleNode.offsetWidth;
+        parentElement.classList.add(className);
+      }
+    } catch {
     }
   }
 
