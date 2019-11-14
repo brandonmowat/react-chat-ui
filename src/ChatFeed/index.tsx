@@ -95,6 +95,7 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
       const chatBubbleNode = matchingNodes[matchingNodes.length - 1];
       const parentElement = chatBubbleNode.parentElement;
       this.chat.scrollTop = parentElement.offsetTop - scrollTopAdjustment;
+      chatBubbleNode.click();
       if (className) {
         parentElement.classList.remove(className);
         // Trigger a reflow
