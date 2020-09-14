@@ -39,7 +39,7 @@ render() {
     // Your JSX...
 
     <ChatFeed
-      messages={this.state.messages} // Boolean: list of message objects
+      messages={this.state.messages} // Array: list of message objects
       isTyping={this.state.is_typing} // Boolean: is the recipient typing
       hasInputField={false} // Boolean: use our input, or use your own
       showSenderName // show the name of the user who sent the message
