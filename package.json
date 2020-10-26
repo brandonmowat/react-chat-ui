@@ -9,7 +9,7 @@
     "compile": "./precompile.sh",
     "prepublish": "yarn compile",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "gulp watch"
+    "dev": "tsc --watch"
   },
   "keywords": [
     "react",

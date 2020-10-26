@@ -103,5 +103,5 @@ Contributions are always welcomed and encouraged. If you don't want to write a f
 ## Development
 
 ```sh
-npm run dev
+yarn dev
 ```
