@@ -39,7 +39,7 @@ render() {
     // Your JSX...
 
     <ChatFeed
-      messages={this.state.messages} // Boolean: list of message objects
+      messages={this.state.messages} // Array: list of message objects
       isTyping={this.state.is_typing} // Boolean: is the recipient typing
       hasInputField={false} // Boolean: use our input, or use your own
       showSenderName // show the name of the user who sent the message
@@ -94,13 +94,6 @@ this.state = {
 
 Contributions are always welcomed and encouraged. If you don't want to write a feature request yourself, let ya boi know (either on [Twitter](http://twitter.com/brandonmowat) or by creating a Pull Request) and I'll get that shit coded right up.
 
-## Support
-
-If you'd like to support my development of `react-chat-ui`, you can donate via Litecoin or Etherium. But I also love when I get a shout-out on Twitter❤️
-
-* LTC: `LYExBx4bwSpAju6YpMXBLBCYVDvWV6n8fz`
-* ETH: `0xf9bf1a68732b1314f28050addd3ed13f2a187d9d`
-
 ## TODO
 
 * documentation
@@ -110,5 +103,5 @@ If you'd like to support my development of `react-chat-ui`, you can donate via L
 ## Development
 
 ```sh
-npm run dev
+yarn dev
 ```
