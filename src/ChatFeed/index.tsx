@@ -3,6 +3,7 @@
 // other developers make chat interfaces.
 
 import * as React from 'react';
+import { debounce } from 'ts-debounce';
 import BubbleGroup from '../BubbleGroup';
 import DefaultChatBubble from '../ChatBubble';
 import ChatInput from '../ChatInput';
@@ -20,28 +21,72 @@ interface ChatFeedInterface {
     messages: any;
     showSenderName?: boolean;
     chatBubble?: React.Component;
+    disableScrollDistance?: number;
+    onScrollUp?:()=>void;
+    onScrollDown?:()=>void;
   };
 }
 
+type ChatFeedState = {
+  autoScrollDisabled: boolean
+}
+
+type ChatView = {
+  scrollHeight: number;
+  clientHeight: number;
+  scrollTop: number;
+} & HTMLDivElement
+
 // React component to render a complete chat feed
-export default class ChatFeed extends React.Component {
+export default class ChatFeed extends React.PureComponent {
   props;
-  chat: {
-    scrollHeight: number;
-    clientHeight: number;
-    scrollTop: number;
+  chat: ChatView;
+  setState: <K extends keyof ChatFeedState>(state: Pick<ChatFeedState, K>, callback?: () => any)=>void;
+  state : ChatFeedState= {
+    autoScrollDisabled: false
   };
 
   constructor(props: ChatFeedInterface) {
     super(props);
   }
 
-  componentDidMount() {
-    this.scrollToBottom();
+  scrollListener(e){
+    const target = e.target as HTMLDivElement;
+      if(this.props.disableScrollDistance ){
+        const scrollUp = this.chat.scrollHeight - this.chat.clientHeight - target.scrollTop;
+        if(scrollUp >= this.props.disableScrollDistance){
+          // disable auto scroll to bottom
+          this.props.onScrollUp && !this.state.autoScrollDisabled && this.props.onScrollUp();
+          this.setState({autoScrollDisabled: true});
+        }else{
+          // enable auto scroll to bottom
+          this.props.onScrollDown && this.state.autoScrollDisabled && this.props.onScrollDown();
+          this.setState({autoScrollDisabled: false})
+        }
+      }
+    
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     this.scrollToBottom();
+    this.chat.addEventListener("scroll", debounce((e)=>{
+      this.scrollListener(e)
+    }, 300))
+  }
+
+  componentWillUnmount(){
+    this.chat.removeEventListener("scroll", this.scrollListener)
+  }
+  
+  componentDidUpdate(prevProps={messages:[]}) {
+    if (
+      !this.state.autoScrollDisabled &&
+      this.props.messages &&
+      prevProps.messages &&
+      this.props.messages.length !== prevProps.messages.length
+    ) {
+      setTimeout(() => this.scrollToBottom(), 200);
+    }
   }
 
   scrollToBottom() {
