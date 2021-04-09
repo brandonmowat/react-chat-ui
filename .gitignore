@@ -3,3 +3,4 @@ lib
 temp
 .DS_Store
 .idea
+yarn-error.log
