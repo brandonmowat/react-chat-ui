@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 
 const styles = {
   chatInput: {
@@ -17,8 +17,8 @@ const styles = {
 };
 
 interface ChatInputProps {
-  inputStyles: object;
-  inputPlaceholder: string;
+  inputStyles?: object;
+  inputPlaceholder?: string;
 }
 
 const ChatInput = (props: ChatInputProps) => {
