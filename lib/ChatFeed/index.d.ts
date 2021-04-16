@@ -1,5 +1,5 @@
-import * as React from 'react';
-import Message from '../Message';
+import * as React from "react";
+import Message from "../Message";
 interface ChatFeedInterface {
     props: {
         bubblesCentered?: boolean;
@@ -35,7 +35,7 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
     scrollToBottom(): void;
     componentWillUnmount(): void;
     private handleScrollEvent;
-    scrollToIntent(intent: string, className?: string): void;
+    scrollToSuggestionId(suggestionId: string, className?: string): void;
     renderMessages(messages: [Message]): JSX.Element[];
     render(): JSX.Element;
 }

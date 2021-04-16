@@ -2,12 +2,12 @@
 // Written, developed, and designed by Brandon Mowat for the purpose of helping
 // other developers make chat interfaces.
 
-import * as React from 'react';
-import BubbleGroup from '../BubbleGroup';
-import DefaultChatBubble from '../ChatBubble';
-import ChatInput from '../ChatInput';
-import Message from '../Message';
-import styles from './styles';
+import * as React from "react";
+import BubbleGroup from "../BubbleGroup";
+import DefaultChatBubble from "../ChatBubble";
+import ChatInput from "../ChatInput";
+import Message from "../Message";
+import styles from "./styles";
 
 // Model for ChatFeed props.
 interface ChatFeedInterface {
@@ -50,7 +50,7 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
 
   componentDidMount() {
     this.scrollToBottom();
-    this.chat.addEventListener('scroll', this.handleScrollEvent);
+    this.chat.addEventListener("scroll", this.handleScrollEvent);
   }
 
   componentDidUpdate() {
@@ -74,24 +74,29 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
   }
 
   componentWillUnmount(): void {
-    this.chat.removeEventListener('scroll', this.handleScrollEvent);
+    this.chat.removeEventListener("scroll", this.handleScrollEvent);
   }
 
   private handleScrollEvent(event: Event) {
     if (!this.chat) return;
     const maxScrollTop = this.getMaxScrollTop();
-    if (this.chat.scrollTop < maxScrollTop - ChatFeed.MANUAL_SCROLL_BOTTOM_MARGIN) {
+    if (
+      this.chat.scrollTop <
+      maxScrollTop - ChatFeed.MANUAL_SCROLL_BOTTOM_MARGIN
+    ) {
       this._hasUserScrolledUp = true;
     } else {
       this._hasUserScrolledUp = false;
     }
   }
 
-  scrollToIntent(intent: string, className?: string) {
+  scrollToSuggestionId(suggestionId: string, className?: string) {
     try {
       const viewPortHeight = this.chat.clientHeight;
       const scrollTopAdjustment = viewPortHeight / 2;
-      const matchingNodes = this.chat.querySelectorAll(`[data-intent="${intent}"]`);
+      const matchingNodes = this.chat.querySelectorAll(
+        `[data-suggestion-id="${suggestionId}"]`
+      );
       const chatBubbleNode = matchingNodes[matchingNodes.length - 1];
       const parentElement = chatBubbleNode.parentElement;
       this.chat.scrollTop = parentElement.offsetTop - scrollTopAdjustment;
@@ -102,8 +107,7 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
         void chatBubbleNode.offsetWidth;
         parentElement.classList.add(className);
       }
-    } catch {
-    }
+    } catch {}
   }
 
   /**
@@ -119,7 +123,10 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
     const messageNodes = messages.map((message, index) => {
       group.push(message);
       // Find diff in message type or no more messages
-      if (index === messages.length - 1 || messages[index + 1].id !== message.id) {
+      if (
+        index === messages.length - 1 ||
+        messages[index + 1].id !== message.id
+      ) {
         const messageGroup = group;
         group = [];
         return (
@@ -142,7 +149,7 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
       messageNodes.push(
         <div key="isTyping" style={{ ...styles.chatbubbleWrapper }}>
           <ChatBubble
-            message={new Message({ id: 1, message: '...', senderName: '' })}
+            message={new Message({ id: 1, message: "...", senderName: "" })}
             bubbleStyles={bubbleStyles}
           />
         </div>
@@ -163,7 +170,7 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
     return (
       <div id="chat-panel" style={styles.chatPanel}>
         <div
-          ref={c => {
+          ref={(c) => {
             this.chat = c;
           }}
           className="chat-history"
