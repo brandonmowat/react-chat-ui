@@ -35,7 +35,7 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
     scrollToBottom(): void;
     componentWillUnmount(): void;
     private handleScrollEvent;
-    scrollToSuggestionId(suggestionId: string, className?: string): void;
+    scrollToChatLogId(chatLogId: string, className?: string): void;
     renderMessages(messages: [Message]): JSX.Element[];
     render(): JSX.Element;
 }

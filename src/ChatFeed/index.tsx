@@ -90,17 +90,16 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
     }
   }
 
-  scrollToSuggestionId(suggestionId: string, className?: string) {
+  scrollToChatLogId(chatLogId: string, className?: string) {
     try {
       const viewPortHeight = this.chat.clientHeight;
       const scrollTopAdjustment = viewPortHeight / 2;
       const matchingNodes = this.chat.querySelectorAll(
-        `[data-suggestion-id="${suggestionId}"]`
+        `[data-chat-log-id="${chatLogId}"]`
       );
       const chatBubbleNode = matchingNodes[matchingNodes.length - 1];
       const parentElement = chatBubbleNode.parentElement;
       this.chat.scrollTop = parentElement.offsetTop - scrollTopAdjustment;
-      chatBubbleNode.click();
       if (className) {
         parentElement.classList.remove(className);
         // Trigger a reflow
