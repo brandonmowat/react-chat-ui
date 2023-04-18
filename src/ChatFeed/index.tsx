@@ -14,13 +14,13 @@ interface ChatFeedInterface {
   props: {
     bubblesCentered?: boolean;
     bubbleStyles?: object;
+    chatBubble?: React.Component;
     hasInputField?: boolean;
     isTyping?: boolean;
     maxHeight?: number;
     messages: any;
-    showSenderName?: boolean;
-    chatBubble?: React.Component;
     preventConflictingAutoScroll?: boolean;
+    showSenderName?: boolean;
   };
 }
 
@@ -42,6 +42,8 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
     querySelectorAll: Function;
   };
   _hasUserScrolledUp: boolean = false;
+  _scrollOnLoadChatLogId: string;
+  _scrollOnLoadClassName: string;
 
   constructor(props: ChatFeedInterface) {
     super(props);
@@ -49,7 +51,15 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
   }
 
   componentDidMount() {
-    this.scrollToBottom();
+    if (this._scrollOnLoadChatLogId) {
+      this.scrollToChatLogId(
+        this._scrollOnLoadChatLogId,
+        this._scrollOnLoadClassName
+      );
+    } else {
+      this.scrollToBottom();
+    }
+
     this.chat.addEventListener("scroll", this.handleScrollEvent);
   }
 
@@ -58,7 +68,15 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
     if (preventConflictingAutoScroll && this._hasUserScrolledUp) {
       return;
     }
-    this.scrollToBottom();
+
+    if (this._scrollOnLoadChatLogId) {
+      this.scrollToChatLogId(
+        this._scrollOnLoadChatLogId,
+        this._scrollOnLoadClassName
+      );
+    } else {
+      this.scrollToBottom();
+    }
   }
 
   private getMaxScrollTop(): number {
@@ -97,8 +115,21 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
       const matchingNodes = this.chat.querySelectorAll(
         `[data-chat-log-id="${chatLogId}"]`
       );
+
+      // Store ID to trigger scroll once message loads
+      if (matchingNodes.length === 0) {
+        this._scrollOnLoadChatLogId = chatLogId;
+        this._scrollOnLoadClassName = className;
+        return;
+      }
+
+      this._scrollOnLoadChatLogId = undefined;
+      this._scrollOnLoadClassName = undefined;
+      this._hasUserScrolledUp = true;
+
       const chatBubbleNode = matchingNodes[matchingNodes.length - 1];
       const parentElement = chatBubbleNode.parentElement;
+
       this.chat.scrollTop = parentElement.offsetTop - scrollTopAdjustment;
       if (className) {
         parentElement.classList.remove(className);
