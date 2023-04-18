@@ -4,13 +4,13 @@ interface ChatFeedInterface {
     props: {
         bubblesCentered?: boolean;
         bubbleStyles?: object;
+        chatBubble?: React.Component;
         hasInputField?: boolean;
         isTyping?: boolean;
         maxHeight?: number;
         messages: any;
-        showSenderName?: boolean;
-        chatBubble?: React.Component;
         preventConflictingAutoScroll?: boolean;
+        showSenderName?: boolean;
     };
 }
 export default class ChatFeed extends React.Component<ChatFeedInterface> {
@@ -28,6 +28,7 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
         querySelectorAll: Function;
     };
     _hasUserScrolledUp: boolean;
+    _scrollOnLoadChatLogId: string;
     constructor(props: ChatFeedInterface);
     componentDidMount(): void;
     componentDidUpdate(): void;
