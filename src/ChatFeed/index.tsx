@@ -14,13 +14,13 @@ interface ChatFeedInterface {
   props: {
     bubblesCentered?: boolean;
     bubbleStyles?: object;
+    chatBubble?: React.Component;
     hasInputField?: boolean;
     isTyping?: boolean;
     maxHeight?: number;
     messages: any;
-    showSenderName?: boolean;
-    chatBubble?: React.Component;
     preventConflictingAutoScroll?: boolean;
+    showSenderName?: boolean;
   };
 }
 
