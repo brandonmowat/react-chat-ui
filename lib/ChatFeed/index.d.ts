@@ -29,6 +29,7 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
     };
     _hasUserScrolledUp: boolean;
     _scrollOnLoadChatLogId: string;
+    _scrollOnLoadClassName: string;
     constructor(props: ChatFeedInterface);
     componentDidMount(): void;
     componentDidUpdate(): void;

@@ -43,6 +43,7 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
   };
   _hasUserScrolledUp: boolean = false;
   _scrollOnLoadChatLogId: string;
+  _scrollOnLoadClassName: string;
 
   constructor(props: ChatFeedInterface) {
     super(props);
@@ -51,7 +52,10 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
 
   componentDidMount() {
     if (this._scrollOnLoadChatLogId) {
-      this.scrollToChatLogId(this._scrollOnLoadChatLogId);
+      this.scrollToChatLogId(
+        this._scrollOnLoadChatLogId,
+        this._scrollOnLoadClassName
+      );
     } else {
       this.scrollToBottom();
     }
@@ -66,7 +70,10 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
     }
 
     if (this._scrollOnLoadChatLogId) {
-      this.scrollToChatLogId(this._scrollOnLoadChatLogId);
+      this.scrollToChatLogId(
+        this._scrollOnLoadChatLogId,
+        this._scrollOnLoadClassName
+      );
     } else {
       this.scrollToBottom();
     }
@@ -112,14 +119,17 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
       // Store ID to trigger scroll once message loads
       if (matchingNodes.length === 0) {
         this._scrollOnLoadChatLogId = chatLogId;
+        this._scrollOnLoadClassName = className;
         return;
       }
 
       this._scrollOnLoadChatLogId = undefined;
+      this._scrollOnLoadClassName = undefined;
       this._hasUserScrolledUp = true;
 
       const chatBubbleNode = matchingNodes[matchingNodes.length - 1];
       const parentElement = chatBubbleNode.parentElement;
+
       this.chat.scrollTop = parentElement.offsetTop - scrollTopAdjustment;
       if (className) {
         parentElement.classList.remove(className);
