@@ -144,34 +144,16 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
    * Determines what type of message/messages to render.
    */
   renderMessages(messages: [Message]) {
-    const { isTyping, bubbleStyles, chatBubble, showSenderName } = this.props;
+    const { isTyping, bubbleStyles, chatBubble } = this.props;
 
     const ChatBubble = chatBubble || DefaultChatBubble;
 
-    let group = [];
-
     const messageNodes = messages.map((message, index) => {
-      group.push(message);
-      // Find diff in message type or no more messages
-      if (
-        index === messages.length - 1 ||
-        messages[index + 1].id !== message.id
-      ) {
-        const messageGroup = group;
-        group = [];
-        return (
-          <BubbleGroup
-            key={index}
-            messages={messageGroup}
-            id={message.id}
-            showSenderName={showSenderName}
-            chatBubble={ChatBubble}
-            bubbleStyles={bubbleStyles}
-          />
-        );
-      }
-
-      return null;
+      return (
+        <div key={message.id || index} style={styles.chatbubbleWrapper}>
+          <ChatBubble bubbleStyles={bubbleStyles} message={message} />
+        </div>
+      );
     });
 
     // Other end is typing...
