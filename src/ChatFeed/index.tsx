@@ -150,9 +150,11 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
 
     const messageNodes = messages.map((message, index) => {
       return (
-        <div key={message.id || index} style={styles.chatbubbleWrapper}>
-          <ChatBubble bubbleStyles={bubbleStyles} message={message} />
-        </div>
+        <ChatBubble
+          bubbleStyles={bubbleStyles}
+          key={message.id || index}
+          message={message}
+        />
       );
     });
 
@@ -169,7 +171,7 @@ export default class ChatFeed extends React.Component<ChatFeedInterface> {
     }
 
     // return nodes
-    return messageNodes;
+    return <div style={styles.chatbubbleWrapper}>{messageNodes}</div>;
   }
 
   /**
