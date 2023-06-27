@@ -20,35 +20,70 @@ interface ChatFeedInterface {
     messages: any;
     showSenderName?: boolean;
     chatBubble?: React.Component;
+    preventConflictingAutoScroll?: boolean;
   };
 }
 
 // React component to render a complete chat feed
-export default class ChatFeed extends React.Component {
+export default class ChatFeed extends React.Component<ChatFeedInterface> {
+  static defaultProps = {
+    preventConflictingAutoScroll: true,
+  };
+  // If the user scrolls this close to the bottom of the feed, we will re-enable autoscroll
+  static MANUAL_SCROLL_BOTTOM_MARGIN = 20;
+
   props;
   chat: {
     scrollHeight: number;
     clientHeight: number;
     scrollTop: number;
+    addEventListener: Function;
+    removeEventListener: Function;
   };
+  _hasUserScrolledUp: boolean = false;
 
   constructor(props: ChatFeedInterface) {
     super(props);
+    this.handleScrollEvent = this.handleScrollEvent.bind(this);
   }
 
   componentDidMount() {
     this.scrollToBottom();
+    this.chat.addEventListener('scroll', this.handleScrollEvent);
   }
 
   componentDidUpdate() {
+    const {preventConflictingAutoScroll} = this.props;
+    if (preventConflictingAutoScroll && this._hasUserScrolledUp) {
+      return;
+    }
     this.scrollToBottom();
   }
 
-  scrollToBottom() {
+  private getMaxScrollTop(): number {
+    if (!this.chat) return 0;
     const scrollHeight = this.chat.scrollHeight;
     const height = this.chat.clientHeight;
-    const maxScrollTop = scrollHeight - height;
+    return scrollHeight - height;
+  }
+
+  scrollToBottom() {
+    const maxScrollTop = this.getMaxScrollTop();
     this.chat.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+  }
+
+  componentWillUnmount(): void {
+    this.chat.removeEventListener('scroll', this.handleScrollEvent);
+  }
+
+  private handleScrollEvent(event: Event) {
+    if (!this.chat) return;
+    const maxScrollTop = this.getMaxScrollTop();
+    if (this.chat.scrollTop < maxScrollTop - ChatFeed.MANUAL_SCROLL_BOTTOM_MARGIN) {
+      this._hasUserScrolledUp = true;
+    } else {
+      this._hasUserScrolledUp = false;
+    }
   }
 
   /**

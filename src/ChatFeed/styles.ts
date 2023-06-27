@@ -1,7 +1,7 @@
 export default {
   chatPanel: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column' as 'column',
     flex: 1,
     overflow: 'hidden',
   },
@@ -10,7 +10,7 @@ export default {
     marginTop: 10,
     marginBottom: 10,
     overflow: 'auto',
-    position: 'relative',
+    position: 'relative' as 'relative',
   },
   img: {
     borderRadius: 100,
